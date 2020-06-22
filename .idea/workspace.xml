@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="126ada05-0c3c-46c8-8e2a-5ce301b1deff" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/build/built-jar.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/built-jar.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controlador/CtrlClientes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controlador/CtrlClientes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controlador/CtrlCreditos.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controlador/CtrlCreditos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/controlador/CtrlReportes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/controlador/CtrlReportes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/modelo/Reportes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/modelo/Reportes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$100.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$100.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$101.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$101.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$102.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$102.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$103.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$103.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$104.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$104.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$105.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$105.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$106.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$106.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$107.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$107.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$108.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$108.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$109.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$109.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$110.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$110.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$111.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$111.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$112.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$112.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$113.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$113.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$114.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$114.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$115.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$115.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$116.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$116.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$117.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$117.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$118.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$118.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$119.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$119.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$36.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$36.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$69.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$69.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$70.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$70.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$71.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$71.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$72.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$72.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$73.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$73.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$74.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$74.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$75.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$75.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$76.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$76.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$77.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$77.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$78.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$78.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$79.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$79.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$80.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$80.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$81.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$81.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$82.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$82.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$83.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$83.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$84.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$84.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$85.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$85.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$86.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$86.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$87.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$87.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$88.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$88.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$89.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$89.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$90.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$90.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$91.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$91.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$92.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$92.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$93.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$93.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$94.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$94.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$95.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$95.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$96.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$96.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$97.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$97.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$98.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$98.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu$99.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu$99.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/vista/IMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/vista/IMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controlador/CtrlClientes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlador/CtrlClientes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controlador/CtrlCreditos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlador/CtrlCreditos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controlador/CtrlReportes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlador/CtrlReportes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modelo/Reportes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modelo/Reportes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vista/IMenu.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/IMenu.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vista/IMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/IMenu.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="CtrlClientes.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/controlador/CtrlClientes.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="414">
+              <caret line="34" column="25" lean-forward="true" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#8523#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="76" />
+    <option name="y" value="20" />
+    <option name="width" value="1280" />
+    <option name="height" value="728" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="SistemaFarmacia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SistemaFarmacia" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SistemaFarmacia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SistemaFarmacia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Course" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="126ada05-0c3c-46c8-8e2a-5ce301b1deff" name="Default" comment="" />
+      <created>1577638267532</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1577638267532</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-4" y="-4" width="1374" height="746" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info id="Image Layers" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info id="Capture Tool" />
+      <window_info id="Designer" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1669107" />
+      <window_info anchor="bottom" id="Educational.CheckDetails" show_stripe_button="false" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/controlador/CtrlClientes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="34" column="25" lean-forward="true" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#8523#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
