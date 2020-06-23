@@ -130,6 +130,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                 reportes.ReporteGlobal();
                 reportes.SumaTotalFiltroReporte(this.fecha, this.fecha);
                 reportes.inversion();
+                reportes.mostrarProductosMasVendidios(this.fecha, this.fecha);
                 creditos.MostrarCreditos("");
                 creditos.MostrarCreditosAddFactura("");
                 Imprimir(factura, comprador, cliente, tipoVenta, formaPago, ArregloImprimir, subtotal, iva, totalFactura, fechaFactura.toString());

@@ -91,6 +91,7 @@ public class InfoFactura extends Conexiondb{
             {
                 JOptionPane.showMessageDialog(null, "Datos de factura Actualizados Correctamente.");
             }
+            this.cn.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -112,6 +113,7 @@ public class InfoFactura extends Conexiondb{
                 this.rfc = rs.getString("RFC");
                 this.rango = rs.getString("rangoPermitido");
             }
+            this.cn.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
