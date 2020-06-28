@@ -17,10 +17,28 @@ public class Facturacion extends Conexiondb {
     PreparedStatement pst;
     DefaultComboBoxModel combo;
     int banderin;
+    private String[] producto;
+    private float stock, precioDolar;
+    private String monedaVenta;
 
     public Facturacion() {
         this.cn = null;
         this.pst = null;
+    }
+    public String[] getProducto() {
+        return producto;
+    }
+    public float getStock()
+    {
+        return stock;
+    }
+    public String getMonedaVenta()
+    {
+        return monedaVenta;
+    }
+    public void setPrecioDolar(float precio)
+    {
+        this.precioDolar = precio;
     }
 //Guardar Factura
     public void GuardarFactura(int caja ,Date fecha, String nombreComprador, String credito, String pago, String iva, String total) {
@@ -329,6 +347,38 @@ public class Facturacion extends Conexiondb {
             JOptionPane.showMessageDialog(null, e);
         }
 
+    }
+    
+    public void obtenerPorCodBarra(String codBarra, String Cantidad)
+    {
+        this.producto = new String[6];
+        float importe;
+        this.cn = Conexion();
+        this.consulta = "SELECT id,codigoBarra, nombre, precioVenta, monedaVenta, stock FROM productos WHERE codigoBarra = ?";
+        try {
+            this.pst = this.cn.prepareStatement(this.consulta);
+            this.pst.setString(1, codBarra);
+            ResultSet rs = this.pst.executeQuery();
+            while(rs.next())
+            {
+                producto[0] = rs.getString("id");
+                producto[1] = rs.getString("codigoBarra");
+                producto[3] = rs.getString("nombre");
+                producto[4] = rs.getString("precioVenta");
+                this.stock = rs.getFloat("stock");
+                this.monedaVenta = rs.getString("monedaVenta");
+            }
+            producto[2] = Cantidad;
+            importe = Float.parseFloat(producto[2]) * Float.parseFloat(producto[4]);
+            if(this.monedaVenta.equals("Dolar")) 
+            {
+                importe = importe * precioDolar;
+            }
+            producto[5] = String.valueOf(importe);
+            System.out.println(this.monedaVenta);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e+" en lafuncion obtenerPorCodBarra");
+        }
     }
 
 }

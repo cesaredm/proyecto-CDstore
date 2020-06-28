@@ -314,6 +314,7 @@ public class CtrlReportes implements ActionListener, MouseListener {
         menu.tblReporte.getTableHeader().setOpaque(false);
         menu.tblReporte.getTableHeader().setBackground(new Color(100, 100, 100));
         menu.tblReporte.getTableHeader().setForeground(new Color(255, 255, 255));
+        menu.tblReporte.getTableHeader().setPreferredSize(new java.awt.Dimension(0,35));
         try {
             menu.tblReporte.setModel(reportes.ReporteDiario(fechaInicio));
             /*menu.lblTotalCreditosFiltroReporte.setText(String.valueOf(creditosPendiente));//lleno el lblTotalCreditoFiltroRepote con el  total creditos 

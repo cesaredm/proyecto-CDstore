@@ -4,6 +4,8 @@ import modelo.*;
 import vista.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.BufferedWriter;
@@ -22,7 +24,7 @@ import javax.swing.JOptionPane;
  *
  * @author CESAR DIAZ MARADIAGA
  */
-public class CtrlLogin implements ActionListener {
+public class CtrlLogin implements ActionListener, KeyListener {
 
     private ILogin login;
     private Login modelLogin;
@@ -39,6 +41,8 @@ public class CtrlLogin implements ActionListener {
         modelLogin.validarExist();//validamos la existencia de fecha de actualizacion
         modelLogin.fechaIntalacion(this.fecha.getTime());//si no existe una fecha de instalacion se guardara la fecha si no no hara nada 
         this.login.btnAceptar.addActionListener(this);
+        this.login.btnAceptar.addKeyListener(this);
+        this.login.txtNombreUsuario.selectAll();
     }
 
     public void iniciar() {
@@ -52,36 +56,41 @@ public class CtrlLogin implements ActionListener {
         if (e.getSource() == login.btnAceptar) {
             String nombre = login.txtNombreUsuario.getText(), pass = login.txtPassUsuario.getText();
             //switch para metodo de prueba de 20 dias
-            switch (ValidarLicencia()) {
-                case "noValido":{
+            /*switch (ValidarLicencia()) {
+                case "noValido": {
                     JOptionPane.showMessageDialog(null, "Su licencia de prueba finalizó..! \n para adquirir su licencia llama al : +505 85361324");
-                }break;
+                }
+                break;
                 case "valido": {
-                     if (!nombre.equals("") && !pass.equals("")) {
+                    if (!nombre.equals("") && !pass.equals("")) {
                         modelLogin.setNombreUsuario(nombre);
                         modelLogin.setPassUsuario(pass);
-                        switch(modelLogin.ValidacionAdmin()){
-                            case 1:{
+                        switch (modelLogin.ValidacionAdmin()) {
+                            case 1: {
                                 this.menu = new CtrlMenuOpciones(m, 1);
                                 menu.iniciarMenu();
                                 this.login.dispose();
-                            }break;
-                            case 2:{
+                            }
+                            break;
+                            case 2: {
                                 this.menu = new CtrlMenuOpciones(m, 2);
                                 menu.iniciarMenu();
                                 this.login.dispose();
-                            }break;
-                            case 0: JOptionPane.showMessageDialog(null, "Nombre o contraseña invalida");
+                            }
                             break;
+                            case 0:
+                                JOptionPane.showMessageDialog(null, "Nombre o contraseña invalida");
+                                break;
                         }
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(null, "Complete los campos usuario y password");
                     }
-                }break;
-            }
-            
+                }
+                break;
+            }*/
+
             //metodo sin validacion de metodo de prueba osea licencia de por vida ..
-            /*if (!nombre.equals("") && !pass.equals("")) {
+            if (!nombre.equals("") && !pass.equals("")) {
                 modelLogin.setNombreUsuario(nombre);
                 modelLogin.setPassUsuario(pass);
                 switch(modelLogin.ValidacionAdmin()){
@@ -100,10 +109,10 @@ public class CtrlLogin implements ActionListener {
                 }
             }else{
                 JOptionPane.showMessageDialog(null, "Complete los campos usuario y password");
-            }*/
+            }
         }
     }
-    
+
     //metodo para la licencia de prueba de 20 dias
     public String ValidarLicencia() {
         String response = "";
@@ -117,5 +126,74 @@ public class CtrlLogin implements ActionListener {
             response = "noValido";
         }
         return response;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (e.VK_ENTER == e.getKeyCode()) {
+            String nombre = login.txtNombreUsuario.getText(), pass = login.txtPassUsuario.getText();
+            //switch para metodo de prueba de 20 dias
+            /*switch (ValidarLicencia()) {
+                case "noValido": {
+                    JOptionPane.showMessageDialog(null, "Su licencia de prueba finalizó..! \n para adquirir su licencia llama al : +505 85361324");
+                }
+                break;
+                case "valido": {
+                    if (!nombre.equals("") && !pass.equals("")) {
+                        modelLogin.setNombreUsuario(nombre);
+                        modelLogin.setPassUsuario(pass);
+                        switch (modelLogin.ValidacionAdmin()) {
+                            case 1: {
+                                this.menu = new CtrlMenuOpciones(m, 1);
+                                menu.iniciarMenu();
+                                this.login.dispose();
+                            }
+                            break;
+                            case 2: {
+                                this.menu = new CtrlMenuOpciones(m, 2);
+                                menu.iniciarMenu();
+                                this.login.dispose();
+                            }
+                            break;
+                            case 0:
+                                JOptionPane.showMessageDialog(null, "Nombre o contraseña invalida");
+                                break;
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Complete los campos usuario y password");
+                    }
+                }
+                break;
+            }*/
+            if (!nombre.equals("") && !pass.equals("")) {
+                modelLogin.setNombreUsuario(nombre);
+                modelLogin.setPassUsuario(pass);
+                switch(modelLogin.ValidacionAdmin()){
+                    case 1:{
+                        this.menu = new CtrlMenuOpciones(m, 1);
+                        menu.iniciarMenu();
+                        this.login.dispose();
+                    }break;
+                    case 2:{
+                        this.menu = new CtrlMenuOpciones(m, 2);
+                        menu.iniciarMenu();
+                        this.login.dispose();
+                    }break;
+                    case 0: JOptionPane.showMessageDialog(null, "Nombre o contraseña invalida");
+                    break;
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Complete los campos usuario y password");
+            }
+        }
     }
 }

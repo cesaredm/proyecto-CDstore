@@ -37,12 +37,15 @@ public class CtrlCreditos implements ActionListener, CaretListener, MouseListene
         this.modelo = new DefaultTableModel();
         this.fecha = new Date();
         this.menu.btnCrearCredito.addActionListener(this);
+        this.menu.btnCrearCredito.setActionCommand("CREAR-CREDITO");
         this.menu.btnNuevoCredito.addActionListener(this);
+        this.menu.btnNuevoCredito.setActionCommand("NUEVO-CREDITO");
         this.menu.btnActualizarCredito.addActionListener(this);
         this.menu.EditarCredito.addActionListener(this);
         this.menu.EliminarCredito.addActionListener(this);
         this.menu.GenerarPago.addActionListener(this);
         this.menu.btnAddClienteCredito.addActionListener(this);
+        this.menu.btnAddClienteCredito.setActionCommand("AGREGAR-CLIENTE");
         this.menu.txtBuscarCreditosCreados.addCaretListener(this);
         this.menu.txtBuscarCredito.addCaretListener(this);
         this.menu.txtBuscarCreditoFactura.addCaretListener(this);
@@ -55,6 +58,7 @@ public class CtrlCreditos implements ActionListener, CaretListener, MouseListene
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String comando = e.getActionCommand();
         if (e.getSource() == menu.btnCrearCredito) {
             crearCredito();
         }
@@ -288,18 +292,17 @@ public class CtrlCreditos implements ActionListener, CaretListener, MouseListene
             menu.tblFacturasCreditos.setModel(creditos.MostrarFacturasPorCreditdos(idC));
         }
     }
-    public void crearCredito()
-    {
+
+    public void crearCredito() {
         Date fechaCredito = menu.jcFechaCredito.getDate();
-            int c;
-            String Cliente = menu.txtClienteCredito.getText();
-            String estado = menu.cmbEstadoCredito.getSelectedItem().toString();
-            long f = fechaCredito.getTime();
-            java.sql.Date fCredito = new java.sql.Date(f);
-            if (!Cliente.equals("")) {
-                if(!creditos.VerificarExistenciaDeCredito(Cliente))
-                {
-                    if (isNumeric(Cliente)) {
+        int c;
+        String Cliente = menu.txtClienteCredito.getText();
+        String estado = menu.cmbEstadoCredito.getSelectedItem().toString();
+        long f = fechaCredito.getTime();
+        java.sql.Date fCredito = new java.sql.Date(f);
+        if (!Cliente.equals("")) {
+            if (!creditos.VerificarExistenciaDeCredito(Cliente)) {
+                if (isNumeric(Cliente)) {
                     c = Integer.parseInt(menu.txtClienteCredito.getText());
                     creditos.GuardarCredito(c, fCredito, estado);
                     MostrarCreditosCreados("");
@@ -309,24 +312,23 @@ public class CtrlCreditos implements ActionListener, CaretListener, MouseListene
                     menu.btnActualizarCredito.setEnabled(false);
                     menu.btnCrearCredito.setEnabled(true);
                 }
-                }else
-                {
-                    JOptionPane.showMessageDialog(null, "Ya existe un credito para el cliente "+Cliente);
-                }
             } else {
-
+                JOptionPane.showMessageDialog(null, "Ya existe un credito para el cliente " + Cliente);
             }
+        } else {
+
+        }
     }
-    public void eliminarCredito()
-    {
+
+    public void eliminarCredito() {
         int filaseleccionada = 0, id = 0, confirmacion = 0;
 
-            try {
-                filaseleccionada = menu.tblCreditosCreados.getSelectedRow();
-                if (filaseleccionada == -1) {
+        try {
+            filaseleccionada = menu.tblCreditosCreados.getSelectedRow();
+            if (filaseleccionada == -1) {
 
-                } else {
-                    /*confirmacion = JOptionPane.showConfirmDialog(null, "Seguro que Quieres Borrar Este Credito", "Advertencia", JOptionPane.OK_CANCEL_OPTION);
+            } else {
+                /*confirmacion = JOptionPane.showConfirmDialog(null, "Seguro que Quieres Borrar Este Credito", "Advertencia", JOptionPane.OK_CANCEL_OPTION);
                     if(confirmacion == JOptionPane.YES_OPTION)
                     {
                     modelo = (DefaultTableModel) menu.tblCreditosCreados.getModel();
@@ -334,119 +336,117 @@ public class CtrlCreditos implements ActionListener, CaretListener, MouseListene
                     creditos.Eliminar(id);
                     MostrarCreditosCreados("");
                     }*/
-                    menu.ConfimarEliminarCredito.setSize(272, 98);
-                    menu.ConfimarEliminarCredito.setVisible(true);
-                    menu.ConfimarEliminarCredito.setLocationRelativeTo(null);
-                }
-            } catch (Exception err) {
-                JOptionPane.showMessageDialog(null, err + "en la funcion eliminar Credito");
+                menu.ConfimarEliminarCredito.setSize(272, 98);
+                menu.ConfimarEliminarCredito.setVisible(true);
+                menu.ConfimarEliminarCredito.setLocationRelativeTo(null);
             }
+        } catch (Exception err) {
+            JOptionPane.showMessageDialog(null, err + "en la funcion eliminar Credito");
+        }
     }
-    public void confirmarBorarCredito()
-    {
+
+    public void confirmarBorarCredito() {
         int filaseleccionada = 0, id = 0, confirmacion = 0;
-            try {
-                filaseleccionada = menu.tblCreditosCreados.getSelectedRow();
-                if (filaseleccionada == -1) {
+        try {
+            filaseleccionada = menu.tblCreditosCreados.getSelectedRow();
+            if (filaseleccionada == -1) {
 
-                } else {
-                    //confirmacion = JOptionPane.showConfirmDialog(null, "Seguro que Quieres Borrar Este Credito", "Advertencia", JOptionPane.OK_CANCEL_OPTION);
-                    //if(confirmacion == JOptionPane.YES_OPTION)
-                    //{
-                    modelo = (DefaultTableModel) menu.tblCreditosCreados.getModel();
-                    id = Integer.parseInt(modelo.getValueAt(filaseleccionada, 0).toString());
-                    String estado = (String) modelo.getValueAt(filaseleccionada, 5);
-                    if(estado.equals("Abierto") || estado.equals("Cancelado"))
-                    {
-                        creditos.Eliminar(id);
-                        MostrarCreditosCreados("");
-                        menu.ConfimarEliminarCredito.setVisible(false);
-                    }else{
-                        JOptionPane.showMessageDialog(null, "El crédito no se puede eliminar por que esta pendiente","Advertencia",JOptionPane.WARNING_MESSAGE);
-                    }
-                    //}
-                }
-            } catch (Exception err) {
-                JOptionPane.showMessageDialog(null, err + "en la funcion eliminar Credito");
-            }
-    }
-    public void actualizarCredito()
-    {
-        Date fechaCredito = menu.jcFechaCredito.getDate();
-            int c, id = Integer.parseInt(this.id);
-            String Cliente = menu.txtClienteCredito.getText();
-            String estado = menu.cmbEstadoCredito.getSelectedItem().toString();
-            long f = fechaCredito.getTime();
-            java.sql.Date fCredito = new java.sql.Date(f);
-            if (!Cliente.equals("")) {
-                if (isNumeric(Cliente)) {
-                    c = Integer.parseInt(menu.txtClienteCredito.getText());
-                    this.creditos.Actualizar(id, c, fCredito, estado);
-                    MostrarCreditosCreados("");
-                    MostrarCreditosAddFactura("");
-                    LimpiarCreditos();
-                    menu.btnActualizarCredito.setEnabled(false);
-                    menu.btnCrearCredito.setEnabled(true);
-                }
             } else {
-
+                //confirmacion = JOptionPane.showConfirmDialog(null, "Seguro que Quieres Borrar Este Credito", "Advertencia", JOptionPane.OK_CANCEL_OPTION);
+                //if(confirmacion == JOptionPane.YES_OPTION)
+                //{
+                modelo = (DefaultTableModel) menu.tblCreditosCreados.getModel();
+                id = Integer.parseInt(modelo.getValueAt(filaseleccionada, 0).toString());
+                String estado = (String) modelo.getValueAt(filaseleccionada, 5);
+                if (estado.equals("Abierto") || estado.equals("Cancelado")) {
+                    creditos.Eliminar(id);
+                    MostrarCreditosCreados("");
+                    menu.ConfimarEliminarCredito.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "El crédito no se puede eliminar por que esta pendiente", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                }
+                //}
             }
+        } catch (Exception err) {
+            JOptionPane.showMessageDialog(null, err + "en la funcion eliminar Credito");
+        }
     }
-    public void editarCredito()
-    {
+
+    public void actualizarCredito() {
+        Date fechaCredito = menu.jcFechaCredito.getDate();
+        int c, id = Integer.parseInt(this.id);
+        String Cliente = menu.txtClienteCredito.getText();
+        String estado = menu.cmbEstadoCredito.getSelectedItem().toString();
+        long f = fechaCredito.getTime();
+        java.sql.Date fCredito = new java.sql.Date(f);
+        if (!Cliente.equals("")) {
+            if (isNumeric(Cliente)) {
+                c = Integer.parseInt(menu.txtClienteCredito.getText());
+                this.creditos.Actualizar(id, c, fCredito, estado);
+                MostrarCreditosCreados("");
+                MostrarCreditosAddFactura("");
+                LimpiarCreditos();
+                menu.btnActualizarCredito.setEnabled(false);
+                menu.btnCrearCredito.setEnabled(true);
+            }
+        } else {
+
+        }
+    }
+
+    public void editarCredito() {
         int filaseleccionada = menu.tblCreditosCreados.getSelectedRow();
-            String id, estado, cliente;
-            Date fecha;
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                if (filaseleccionada == -1) {
+        String id, estado, cliente;
+        Date fecha;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            if (filaseleccionada == -1) {
 
+            } else {
+                this.modelo = (DefaultTableModel) menu.tblCreditosCreados.getModel();
+                id = (String) this.modelo.getValueAt(filaseleccionada, 0);
+                cliente = (String) this.modelo.getValueAt(filaseleccionada, 1);
+                estado = (String) this.modelo.getValueAt(filaseleccionada, 5);
+                fecha = sdf.parse(this.modelo.getValueAt(filaseleccionada, 4).toString());
+                if (estado.equals("Abierto") || estado.equals("Cancelado")) {
+                    HabilitarCreditos();
+                    menu.txtClienteCredito.setText(cliente);
+                    menu.jcFechaCredito.setDate(fecha);
+                    menu.cmbEstadoCredito.setSelectedItem(estado);
+                    this.id = id;
+                    menu.btnActualizarCredito.setEnabled(true);
+                    menu.btnCrearCredito.setEnabled(false);
                 } else {
-                    this.modelo = (DefaultTableModel) menu.tblCreditosCreados.getModel();
-                    id = (String) this.modelo.getValueAt(filaseleccionada, 0);
-                    cliente = (String) this.modelo.getValueAt(filaseleccionada, 1);
-                    estado = (String) this.modelo.getValueAt(filaseleccionada, 5);
-                    fecha = sdf.parse(this.modelo.getValueAt(filaseleccionada, 4).toString());
-                    if(estado.equals("Abierto") || estado.equals("Cancelado"))
-                    {
-                        HabilitarCreditos();
-                        menu.txtClienteCredito.setText(cliente);
-                        menu.jcFechaCredito.setDate(fecha);
-                        menu.cmbEstadoCredito.setSelectedItem(estado);
-                        this.id = id;
-                        menu.btnActualizarCredito.setEnabled(true);
-                        menu.btnCrearCredito.setEnabled(false);
-                    }else{
-                        JOptionPane.showMessageDialog(null, "El crédito no se puede editar porque esta pendiente");
-                    }
+                    JOptionPane.showMessageDialog(null, "El crédito no se puede editar porque esta pendiente");
                 }
-            } catch (Exception err) {
-                JOptionPane.showMessageDialog(null, err + "en la funcion editar Credito");
             }
+        } catch (Exception err) {
+            JOptionPane.showMessageDialog(null, err + "en la funcion editar Credito");
+        }
     }
-    public void generarPago()
-    {
+
+    public void generarPago() {
         int filaseleccionada = menu.tblCreditos.getSelectedRow();
-            String credito, totalCredito;
+        String credito, totalCredito;
 
-            try {
-                if (filaseleccionada == -1) {
+        try {
+            if (filaseleccionada == -1) {
 
-                } else {
-                    this.modelo = (DefaultTableModel) menu.tblCreditos.getModel();
-                    credito = (String) this.modelo.getValueAt(filaseleccionada, 0);
-                    totalCredito = (String) this.modelo.getValueAt(filaseleccionada, 1);
-                    menu.txtCreditoPago.setText(credito);
-                    menu.txtMontoPago.setText("0.0");
-                    menu.txtMontoPago.requestFocus();
-                    menu.lblCredito.setText(totalCredito);
-                    menu.pagosAcreditos.setSize(860, 400);
-                    menu.pagosAcreditos.setVisible(true);
-                    menu.pagosAcreditos.setLocationRelativeTo(null);
+            } else {
+                this.modelo = (DefaultTableModel) menu.tblCreditos.getModel();
+                credito = (String) this.modelo.getValueAt(filaseleccionada, 0);
+                totalCredito = (String) this.modelo.getValueAt(filaseleccionada, 1);
+                menu.txtCreditoPago.setText(credito);
+                menu.txtMontoPago.setText("0.0");
+                menu.txtMontoPago.requestFocus();
+                menu.lblCredito.setText(totalCredito);
+                menu.pagosAcreditos.setSize(860, 400);
+                menu.pagosAcreditos.setVisible(true);
+                menu.pagosAcreditos.setLocationRelativeTo(null);
 
-                }
-            } catch (Exception err) {
-                JOptionPane.showMessageDialog(null, err+"BTN GENERAR PAGO");
             }
+        } catch (Exception err) {
+            JOptionPane.showMessageDialog(null, err + "BTN GENERAR PAGO");
+        }
     }
 }
