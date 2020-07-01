@@ -7,6 +7,10 @@ package CDstore;
 
 import modelo.*;
 import controlador.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import vista.ILogin;
 
 /**
@@ -18,9 +22,9 @@ public class CDstore {
         
     }
     public static void main(String[] args) {
-        ILogin login = new ILogin();
-        Login modelLogin = new Login();
-        CtrlLogin ctrl = new CtrlLogin(login, modelLogin);
-        ctrl.iniciar();
+            ILogin login = new ILogin();
+            Login modelLogin = new Login();
+            CtrlLogin ctrl = new CtrlLogin(login, modelLogin);
+            ctrl.iniciar();
     }
 }

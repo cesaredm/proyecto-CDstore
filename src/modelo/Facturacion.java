@@ -25,23 +25,25 @@ public class Facturacion extends Conexiondb {
         this.cn = null;
         this.pst = null;
     }
+
     public String[] getProducto() {
         return producto;
     }
-    public float getStock()
-    {
+
+    public float getStock() {
         return stock;
     }
-    public String getMonedaVenta()
-    {
+
+    public String getMonedaVenta() {
         return monedaVenta;
     }
-    public void setPrecioDolar(float precio)
-    {
+
+    public void setPrecioDolar(float precio) {
         this.precioDolar = precio;
     }
 //Guardar Factura
-    public void GuardarFactura(int caja ,Date fecha, String nombreComprador, String credito, String pago, String iva, String total) {
+
+    public void GuardarFactura(int caja, Date fecha, String nombreComprador, String credito, String pago, String iva, String total) {
         cn = Conexion();
         this.consulta = "INSERT INTO facturas(caja ,fecha, nombre_comprador, credito, tipoVenta, impuestoISV, totalFactura) VALUES(?,?,?,?,?,?,?)";
         int idCredito = 0, formaPago = Integer.parseInt(pago);
@@ -300,7 +302,7 @@ public class Facturacion extends Conexiondb {
         }
     }
 
-    public void ActualizarFactura(int caja ,String id, Date fecha, String nombreComprador, String credito, String pago, String iva, String total) {
+    public void ActualizarFactura(int caja, String id, Date fecha, String nombreComprador, String credito, String pago, String iva, String total) {
         cn = Conexion();
         if (credito.equals("")) {
             credito = null;
@@ -348,9 +350,8 @@ public class Facturacion extends Conexiondb {
         }
 
     }
-    
-    public void obtenerPorCodBarra(String codBarra, String Cantidad)
-    {
+
+    public void obtenerPorCodBarra(String codBarra) {
         this.producto = new String[6];
         float importe;
         this.cn = Conexion();
@@ -359,25 +360,42 @@ public class Facturacion extends Conexiondb {
             this.pst = this.cn.prepareStatement(this.consulta);
             this.pst.setString(1, codBarra);
             ResultSet rs = this.pst.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 producto[0] = rs.getString("id");
                 producto[1] = rs.getString("codigoBarra");
+                producto[2] = "1.0";
                 producto[3] = rs.getString("nombre");
                 producto[4] = rs.getString("precioVenta");
                 this.stock = rs.getFloat("stock");
                 this.monedaVenta = rs.getString("monedaVenta");
             }
-            producto[2] = Cantidad;
-            importe = Float.parseFloat(producto[2]) * Float.parseFloat(producto[4]);
-            if(this.monedaVenta.equals("Dolar")) 
-            {
-                importe = importe * precioDolar;
+            //producto[2] = Cantidad;
+            if (producto[2] == null || producto[4] == null) {
+                
+            }else{
+                importe = Float.parseFloat(producto[2]) * Float.parseFloat(producto[4]);
+                if (this.monedaVenta.equals("Dolar")) {
+                    importe = importe * precioDolar;
+                }
+                producto[5] = String.valueOf(importe);
             }
-            producto[5] = String.valueOf(importe);
-            System.out.println(this.monedaVenta);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+" en lafuncion obtenerPorCodBarra");
+            JOptionPane.showMessageDialog(null, e + " en lafuncion obtenerPorCodBarra");
+        }
+    }
+
+    public void monedaVentaProducto(String id) {
+        this.cn = Conexion();
+        this.consulta = "SELECT monedaVenta FROM productos WHERE id = ?";
+
+        try {
+            this.pst = this.cn.prepareStatement(this.consulta);
+            this.pst.setString(1, id);
+            ResultSet rs = this.pst.executeQuery();
+            while (rs.next()) {
+                this.monedaVenta = rs.getString("monedaVenta");
+            }
+        } catch (Exception e) {
         }
     }
 

@@ -79,6 +79,8 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
         this.menu.btnAgregar.addKeyListener(this);
         this.menu.txtCodBarraFactura.addKeyListener(this);
         this.menu.btnAgregarProductoFactura.addKeyListener(this);
+        this.menu.addDescuento.addActionListener(this);
+        this.menu.addMasProducto.addActionListener(this);
         this.menu.tblFactura.addKeyListener(this);
         EstiloTablaFacturacion();
         editarISV("");
@@ -401,6 +403,119 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
         if (e.getSource() == menu.btnAgregar) {
             JOptionPane.showMessageDialog(null, "enter");
         }
+        if (e.getSource() == menu.addDescuento) {
+            //variables para el nombre e id de producto
+            String nombre = "", id = "";
+            //variable para el numero de filas de la tabla factura
+            int filaseleccionada = 0, filas = 0;
+            //variables para las operaciones
+            float cantidad = 0, precioUpdate = 0, precio = 0, importeUpdate = 0, totalImports = 0, sacarImpuesto = 0, porcentajeImp, precioDolar = 0;
+            //variable para obtener la filaseleccionada de la tabla factura
+            filaseleccionada = menu.tblFactura.getSelectedRow();
+            try {
+                //modelo va a ser igual al modelo de la tabla factura
+                this.modelo = (DefaultTableModel) menu.tblFactura.getModel();
+                //obtener el nuemero de filas de la tabla factura
+                filas = this.modelo.getRowCount();
+                //validar si hay una fila seleccionada
+                if (filaseleccionada == -1) {
+                    JOptionPane.showMessageDialog(null, "Seleccione un producto.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    //obtengo los valores de la tabla factura para las operaciones
+                    precioDolar = Float.parseFloat(menu.txtPrecioDolar.getText());
+                    cantidad = Float.parseFloat(this.modelo.getValueAt(filaseleccionada, 2).toString());
+                    nombre = (String) this.modelo.getValueAt(filaseleccionada, 3);
+                    precio = Float.parseFloat(this.modelo.getValueAt(filaseleccionada, 4).toString());
+                    id = (String) this.modelo.getValueAt(filaseleccionada, 0);
+                    //obtengo el descuento
+                    float descuento = Float.parseFloat(JOptionPane.showInputDialog(null, "Agregar descuento a " + nombre));
+                    //realiza el escuento
+                    precioUpdate = precio - descuento;
+                    //obtengo desde el modelo facturta la moneda de venta de el producto na aplicarle el descuento
+                    this.factura.monedaVentaProducto(id);
+                    //validar que moneda de venta tiene el producto a aplicarse el descuento
+                    if (this.factura.getMonedaVenta().equals("Dolar")) {
+                        importeUpdate = (precioUpdate * cantidad) * precioDolar;
+                    } else if (this.factura.getMonedaVenta().equals("Córdobas")) {
+                        importeUpdate = precioUpdate * cantidad;
+                    }
+                    //actualizar el importe y el precio
+                    this.modelo.setValueAt(String.valueOf(precioUpdate), filaseleccionada, 4);
+                    this.modelo.setValueAt(String.valueOf(importeUpdate), filaseleccionada, 5);
+                    //recorrer la colummna importe para sacar el total de factura
+                    for (int i = 0; i < filas; i++) {
+                        totalImports += Float.parseFloat(this.modelo.getValueAt(i, 5).toString());
+                    }
+                    //fromato para los totales
+                    DecimalFormat formato = new DecimalFormat("#############.##");
+                    //formatreo de le inpuesto IVA
+                    sacarImpuesto = Float.parseFloat(1 + "." + menu.lblImpuestoISV.getText());//concatenacion para sacar el valor 1.xx para sacar el iva
+                    //TOTAL DE FACTURA
+                    this.total = totalImports;
+                    //obtengo el IVA en entero "15" o cualquier que sea el impuesto
+                    porcentajeImp = Float.parseFloat(menu.lblImpuestoISV.getText());// "descProduct = descuento de producto"
+                    this.isv = (float) ((this.total / sacarImpuesto) * porcentajeImp) / 100;
+                    //calcular el subtotal de la factura
+                    this.subTotal = this.total - this.isv;
+                    //setear los campos total, subtotal, IVA
+                    menu.txtSubTotal.setText("" + formato.format(this.subTotal));
+                    menu.txtImpuesto.setText("" + formato.format(this.isv));
+                    menu.txtTotal.setText("" + this.total);
+
+                }
+            } catch (Exception err) {
+                JOptionPane.showMessageDialog(null, e + " en Agregar descuento al producto en factura");
+            }
+        }
+        if (e.getSource() == menu.addMasProducto) {
+            String nombre = "", id = "";
+            float cantidadIngresar = 0, cantidadActual = 0, precio = 0, cantidadUpdate = 0, importeUpdate = 0, totalImports = 0, precioDolar = 0, sacarImpuesto = 0, porcentajeImp = 0;
+            int filas = 0, filaseleccionada = 0;
+            try {
+                this.modelo = (DefaultTableModel) menu.tblFactura.getModel();
+                filaseleccionada = menu.tblFactura.getSelectedRow();
+                filas = this.modelo.getRowCount();
+                if (filaseleccionada == -1) {
+                    JOptionPane.showMessageDialog(null, "Seleccione un producto", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    precioDolar = Float.parseFloat(menu.txtPrecioDolar.getText());
+                    id = (String) this.modelo.getValueAt(filaseleccionada, 0);
+                    nombre = (String) this.modelo.getValueAt(filaseleccionada, 3);
+                    cantidadIngresar = Float.parseFloat(JOptionPane.showInputDialog("Cantidad de " + nombre + " a agregar:"));
+                    cantidadActual = Float.parseFloat(this.modelo.getValueAt(filaseleccionada, 2).toString());
+                    precio = Float.parseFloat(this.modelo.getValueAt(filaseleccionada, 4).toString());
+                    this.factura.monedaVentaProducto(id);
+                    cantidadUpdate = cantidadActual + cantidadIngresar;
+                    if (this.factura.getMonedaVenta().equalsIgnoreCase("Dolar")) {
+                        importeUpdate = (cantidadUpdate * precio) * precioDolar;
+                    } else if (this.factura.getMonedaVenta().equalsIgnoreCase("Córdobas")) {
+                        importeUpdate = (cantidadUpdate * precio);
+                    }
+                    this.modelo.setValueAt(String.valueOf(cantidadUpdate), filaseleccionada, 2);
+                    this.modelo.setValueAt(String.valueOf(importeUpdate), filaseleccionada, 5);
+                    for (int i = 0; i < filas; i++) {
+                        totalImports += Float.parseFloat(this.modelo.getValueAt(i, 5).toString());
+                    }
+                    //fromato para los totales
+                    DecimalFormat formato = new DecimalFormat("#############.##");
+                    //formatreo de le inpuesto IVA
+                    sacarImpuesto = Float.parseFloat(1 + "." + menu.lblImpuestoISV.getText());//concatenacion para sacar el valor 1.xx para sacar el iva
+                    //TOTAL DE FACTURA
+                    this.total = totalImports;
+                    //obtengo el IVA en entero "15" o cualquier que sea el impuesto
+                    porcentajeImp = Float.parseFloat(menu.lblImpuestoISV.getText());// "descProduct = descuento de producto"
+                    this.isv = (float) ((this.total / sacarImpuesto) * porcentajeImp) / 100;
+                    //calcular el subtotal de la factura
+                    this.subTotal = this.total - this.isv;
+                    //setear los campos total, subtotal, IVA
+                    menu.txtSubTotal.setText("" + formato.format(this.subTotal));
+                    menu.txtImpuesto.setText("" + formato.format(this.isv));
+                    menu.txtTotal.setText("" + this.total);
+
+                }
+            } catch (Exception err) {
+            }
+        }
     }
 
     @Override
@@ -426,63 +541,63 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
 
                     } else {
 //                        if (this.descuento == 0) {   //no se aplica descuento
-                            //capturar los datos de la tabla producto para mandarlos a tabla factura
-                            this.modelo = (DefaultTableModel) menu.tblAddProductoFactura.getModel();
-                            id = modelo.getValueAt(filaseleccionada, 0).toString();
-                            codigo = modelo.getValueAt(filaseleccionada, 1).toString();
-                            nombre = modelo.getValueAt(filaseleccionada, 2).toString();
-                            precio = modelo.getValueAt(filaseleccionada, 3).toString();
-                            monedaVenta = (String) modelo.getValueAt(filaseleccionada, 4);
-                            stock = Float.parseFloat(modelo.getValueAt(filaseleccionada, 6).toString());
-                            cantidad = JOptionPane.showInputDialog(null, "Cantidad:");
-                            //si cantidad no recibe la cantidad se le va asignar 0
-                            if (cantidad.equals("")) {
-                                cantidad = "0";
-                            }
-                            //convertir a flota la variable cantidad
-                            cantidadPVender = Float.parseFloat(cantidad);
-                            //validacion para la venta sugun lo que hay en stock osea no se pueda vender mas de lo que hay en stock
-                            if (cantidadPVender <= stock) {
-                                //si cantidadPVender es igual a 0 no realizar ninguna accion
-                                if (cantidadPVender == 0) {
-
-                                } else {
-                                    if (monedaVenta.equals("Córdobas")) {
-                                        imp = (Float.parseFloat(precio) * cantidadPVender);//importe total de compra de producto
-                                    } else if (monedaVenta.equals("Dolar")) {
-                                        imp = (Float.parseFloat(precio) * cantidadPVender) * precioDolar;//importe total de compra de producto
-                                    }
-                                    //formato para los totales
-                                    DecimalFormat formato = new DecimalFormat("#############.##");
-                                    importe = String.valueOf(imp);
-                                    //realizando los calculos de importe
-                                    this.modelo = (DefaultTableModel) menu.tblFactura.getModel();
-                                    //pasar producto de tabla productos a tabla de factura
-                                    String[] FilaElementos = {id, codigo, cantidad, nombre, precio, importe};
-                                    this.modelo.addRow(FilaElementos);
-//                                    calcula = (Float.parseFloat(importe));//convertir importe a float
-                                    int filas = this.modelo.getRowCount();
-                                    float totalImports = 0;
-                                    for (int i = 0; i < filas; i++) {
-                                        totalImports += Float.parseFloat(this.modelo.getValueAt(i, 5).toString());//calcular el total de factura
-                                    }
-                                    this.total = totalImports;
-                                    impuesto = ((this.total / sacarImpuesto) * porcentajeImp) / 100;//calcular el impuesto
-                                    this.isv = impuesto;//impuesto
-                                    this.subTotal = this.total - this.isv;//clacular subtotal de factura
-
-                                    menu.txtImpuesto.setText("" + formato.format(this.isv));//establecer el valor impuesto en el campo impuesto de factura
-                                    menu.txtSubTotal.setText("" + formato.format(this.subTotal));//establecer el valor impuesto en el campo sub total de factura
-                                    menu.txtTotal.setText("" + this.total);//establecer el valor impuesto en el campo Total de factura
-                                    this.factura.Vender(id, cantidad);//llamar procedimiento sql para vender
-                                    productos.MostrarProductosVender("");
-                                    menu.txtBuscarPorNombre.selectAll();
-                                    DeshabilitarBtnGuardarFactura();
-                                }
+                        //capturar los datos de la tabla producto para mandarlos a tabla factura
+                        this.modelo = (DefaultTableModel) menu.tblAddProductoFactura.getModel();
+                        id = modelo.getValueAt(filaseleccionada, 0).toString();
+                        codigo = modelo.getValueAt(filaseleccionada, 1).toString();
+                        nombre = modelo.getValueAt(filaseleccionada, 2).toString();
+                        precio = modelo.getValueAt(filaseleccionada, 3).toString();
+                        monedaVenta = (String) modelo.getValueAt(filaseleccionada, 4);
+                        stock = Float.parseFloat(modelo.getValueAt(filaseleccionada, 6).toString());
+                        cantidad = JOptionPane.showInputDialog(null, "Cantidad:");
+                        //si cantidad no recibe la cantidad se le va asignar 0
+                        if (cantidad.equals("")) {
+                            cantidad = "0";
+                        }
+                        //convertir a flota la variable cantidad
+                        cantidadPVender = Float.parseFloat(cantidad);
+                        //validacion para la venta sugun lo que hay en stock osea no se pueda vender mas de lo que hay en stock
+                        if (cantidadPVender <= stock) {
+                            //si cantidadPVender es igual a 0 no realizar ninguna accion
+                            if (cantidadPVender == 0) {
 
                             } else {
-                                JOptionPane.showMessageDialog(null, "No hay suficiente producto en stock para realizar esta venta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                                if (monedaVenta.equals("Córdobas")) {
+                                    imp = (Float.parseFloat(precio) * cantidadPVender);//importe total de compra de producto
+                                } else if (monedaVenta.equals("Dolar")) {
+                                    imp = (Float.parseFloat(precio) * cantidadPVender) * precioDolar;//importe total de compra de producto
+                                }
+                                //formato para los totales
+                                DecimalFormat formato = new DecimalFormat("#############.##");
+                                importe = String.valueOf(imp);
+                                //realizando los calculos de importe
+                                this.modelo = (DefaultTableModel) menu.tblFactura.getModel();
+                                //pasar producto de tabla productos a tabla de factura
+                                String[] FilaElementos = {id, codigo, cantidad, nombre, precio, importe};
+                                this.modelo.addRow(FilaElementos);
+//                                    calcula = (Float.parseFloat(importe));//convertir importe a float
+                                int filas = this.modelo.getRowCount();
+                                float totalImports = 0;
+                                for (int i = 0; i < filas; i++) {
+                                    totalImports += Float.parseFloat(this.modelo.getValueAt(i, 5).toString());//calcular el total de factura
+                                }
+                                this.total = totalImports;
+                                impuesto = ((this.total / sacarImpuesto) * porcentajeImp) / 100;//calcular el impuesto
+                                this.isv = impuesto;//impuesto
+                                this.subTotal = this.total - this.isv;//clacular subtotal de factura
+
+                                menu.txtImpuesto.setText("" + formato.format(this.isv));//establecer el valor impuesto en el campo impuesto de factura
+                                menu.txtSubTotal.setText("" + formato.format(this.subTotal));//establecer el valor impuesto en el campo sub total de factura
+                                menu.txtTotal.setText("" + this.total);//establecer el valor impuesto en el campo Total de factura
+                                this.factura.Vender(id, cantidad);//llamar procedimiento sql para vender
+                                productos.MostrarProductosVender("");
+                                menu.txtBuscarPorNombre.selectAll();
+                                DeshabilitarBtnGuardarFactura();
                             }
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No hay suficiente producto en stock para realizar esta venta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                        }
 
 //                        } else if (this.descuento > 0) {   //aplicar descuento
 //                            //capturar los datos de la tabla producto para mandarlos a tabla factura
@@ -545,7 +660,6 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
 //                            }
 //
 //                        }
-
                     }
                 } catch (Exception err) {
                     //JOptionPane.showMessageDialog(null, e);
@@ -643,7 +757,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
         menu.tblFactura.getTableHeader().setOpaque(false);
         menu.tblFactura.getTableHeader().setBackground(new Color(100, 100, 100));
         menu.tblFactura.getTableHeader().setForeground(new Color(255, 255, 255));
-        menu.tblFactura.getTableHeader().setPreferredSize(new java.awt.Dimension(0,35));
+        menu.tblFactura.getTableHeader().setPreferredSize(new java.awt.Dimension(0, 35));
     }
 
     //metodo para editar el impuesto de la factura
@@ -702,118 +816,40 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.VK_ENTER == e.getKeyCode()) {
-
-            //variables para calculos
-            float precio = 0, importe = 0, cantidad = 0, sacarImpuesto = 0, porcentajeImp = 0, setImporte = 0, precioDolar = 0;
-            //obtengo el precio del Dolar
-            precioDolar = Float.parseFloat(menu.txtPrecioDolar.getText());
-            //seteo el precio de dolar en modelo facturacion para que me devuelva la fila con todo el resultado
-            this.factura.setPrecioDolar(precioDolar);
-            //variables para la bandera y para las filas de la tabla de factura
-            int filas, bandera = 0;
-            //obtengo el codigoBarra del producto
-            String codigo = menu.txtCodBarraFactura.getText(), cantidadI = "";
-            //obtengo la cantidad de producto a agregar la factura
-            cantidadI = JOptionPane.showInputDialog("Cantidad:", "1");
-            //llamar el metodo obtener el producto por cod de barra 
-            this.factura.obtenerPorCodBarra(codigo, cantidadI);
-            if (this.factura.getStock() >= Float.parseFloat(cantidadI)) {
-                //validar que que estos campos esten bien llenados
-                if (codigo.equals("") || cantidadI.equals("") || cantidadI.equals("0")) {
-
-                } else {
-                    //formato de los totales
-                    DecimalFormat formato = new DecimalFormat("#############.##");
+            String codBarra = menu.txtCodBarraFactura.getText();
+            String precioDolar = menu.txtPrecioDolar.getText(), id = "";
+            int filas = 0;
+            float totalImports = 0, sacarImpuesto = 0, porcentajeImp = 0, cantidadUpdate = 0, importeUpdate = 0, cantidadActual = 0, precio = 0;
+            if(precioDolar.equals("") || precioDolar.equals("0"))
+            {
+                precioDolar = "1";
+            }else{
+                this.factura.setPrecioDolar(Float.parseFloat(precioDolar));
+                this.factura.obtenerPorCodBarra(codBarra);
+                if(this.factura.getProducto()[0] != null)
+                {
                     this.modelo = (DefaultTableModel) menu.tblFactura.getModel();
-                    //obtener las filas de la tabla factura
+                    this.modelo.addRow(this.factura.getProducto());
                     filas = this.modelo.getRowCount();
-                    //variable para obtener el id de producto desde la tabla factura
-                    String idProducto = "";
-                    //variables para actualizar las columnas de cantidad e importe
-                    float updateCantidad = 0, importeUpdate = 0;
-                    //for pa recorrer la tabla factura
-                    for (int i = 0; i < filas; i++) {
-                        idProducto = (String) this.modelo.getValueAt(i, 0);
-                        //si el producto a ingresar ala factura ya esta dentro de la factura que solamente se actualize la fila
-                        if (idProducto.equals(this.factura.getProducto()[0])) {
-                            updateCantidad = Float.parseFloat(this.modelo.getValueAt(i, 2).toString()) + Float.parseFloat(this.factura.getProducto()[2]);
-                            importeUpdate = updateCantidad * Float.parseFloat(this.modelo.getValueAt(i, 4).toString());
-                            switch (this.factura.getMonedaVenta()) {
-                                case "Dolar": {
-                                    importeUpdate = importeUpdate * precioDolar;
-                                    this.modelo.setValueAt(String.valueOf(updateCantidad), i, 2);
-                                    this.modelo.setValueAt(String.valueOf(importeUpdate), i, 5);
-                                }
-                                break;
-                                case "Córdobas": {
-                                    this.modelo.setValueAt(String.valueOf(updateCantidad), i, 2);
-                                    this.modelo.setValueAt(String.valueOf(importeUpdate), i, 5);
-                                }
-                            }
-                            bandera = 1;
-                        } else {
-                            bandera = 2;
-                        }
+                    this.factura.Vender(this.factura.getProducto()[0], this.factura.getProducto()[2]);
+                    for(int i = 0;i<filas;i++){
+                        totalImports += Float.parseFloat(this.modelo.getValueAt(i, 5).toString());
                     }
-                    // validar si el producto ya existe en la tabla factura solamente actualizar la fila y restar el stock si no agregar una nueva fila
-                    if (bandera == 1) {
-                        this.factura.Vender(this.factura.getProducto()[0], cantidadI);
-                        //actualizar las tablas productos y productos vender
-                        this.productos.MostrarProductosVender("");
-                        this.productos.MostrarProductos("");
-                        //limpiar el canpo codBarraFactura
-                        menu.txtCodBarraFactura.setText("");
-                        //for para recorrer y sumar todos los importes para sacar el total de factura
-                        for (int i = 0; i < filas; i++) {
-                            importe += Float.parseFloat(this.modelo.getValueAt(i, 5).toString());
-                        }
-                        //formatear el impuesto
-                        sacarImpuesto = Float.parseFloat(1 + "." + menu.lblImpuestoISV.getText());//concatenacion para sacar el valor 1.xx para sacar el iva
-                        //obtengo el IVA en entero "15" o cualquier que sea el impuesto
-                        porcentajeImp = Float.parseFloat(menu.lblImpuestoISV.getText());// "descProduct = descuento de producto"
-                        this.total = importe;
-                        //calcular el impuesto de la factura
-                        this.isv = (float) ((this.total / sacarImpuesto) * porcentajeImp) / 100;
-                        //calcular el subtotal de la factura
-                        this.subTotal = this.total - this.isv;
-                        menu.txtSubTotal.setText("" + formato.format(this.subTotal));
-                        menu.txtImpuesto.setText("" + formato.format(this.isv));
-                        menu.txtTotal.setText("" + this.total);
-                        DeshabilitarBtnGuardarFactura();
-                    } else {
-                        this.modelo.addRow(this.factura.getProducto());
-                        filas = this.modelo.getRowCount();
-                        this.factura.Vender(this.factura.getProducto()[0], cantidadI);
-                        this.productos.MostrarProductosVender("");
-                        this.productos.MostrarProductos("");
-                        //limpiar el canpo codBarraFactura
-                        menu.txtCodBarraFactura.setText("");
-                        //for para recorrer y sumar todos los importes para sacar el total de factura
-                        for (int i = 0; i < filas; i++) {
-                            importe += Float.parseFloat(this.modelo.getValueAt(i, 5).toString());
-                        }
-                        //formatear el impuesto
-                        sacarImpuesto = Float.parseFloat(1 + "." + menu.lblImpuestoISV.getText());//concatenacion para sacar el valor 1.xx para sacar el iva
-                        //obtengo el IVA en entero "15" o cualquier que sea el impuesto
-                        porcentajeImp = Float.parseFloat(menu.lblImpuestoISV.getText());// "descProduct = descuento de producto"
-                        this.total = importe;
-                        //calcular el impuesto de la factura
-                        this.isv = (float) ((this.total / sacarImpuesto) * porcentajeImp) / 100;
-                        //calcular el subtotal de la factura
-                        this.subTotal = this.total - this.isv;
-                        menu.txtSubTotal.setText("" + formato.format(this.subTotal));
-                        menu.txtImpuesto.setText("" + formato.format(this.isv));
-                        menu.txtTotal.setText("" + total);
-                        DeshabilitarBtnGuardarFactura();
-                        this.total = 0;
-                    }
-
+                    sacarImpuesto = Float.parseFloat(1 + "." + menu.lblImpuestoISV.getText());//concatenacion para sacar el valor 1.xx para sacar el iva
+                    //obtengo el IVA en entero "15" o cualquier que sea el impuesto
+                    porcentajeImp = Float.parseFloat(menu.lblImpuestoISV.getText());// "descProduct = descuento de producto"
+                    DecimalFormat formato = new DecimalFormat("#############.##");
+                    this.total = totalImports;
+                    this.isv = ((this.total / sacarImpuesto) * porcentajeImp) / 100;
+                    this.subTotal = this.total - this.isv;
+                    menu.txtSubTotal.setText(""+formato.format(this.subTotal));
+                    menu.txtImpuesto.setText(""+formato.format(this.isv));
+                    menu.txtTotal.setText(""+formato.format(this.total));
+                    menu.txtCodBarraFactura.setText("");
+                }else{
+                    JOptionPane.showMessageDialog(null, "El producto no esta ingresado...");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "No hay suficiente producto en stock para realizar esta venta", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                menu.txtCodBarraFactura.selectAll();
             }
-
         }
 
         if (e.VK_F10 == e.getKeyCode()) {
@@ -828,7 +864,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                 menu.txtBuscarPorNombre.selectAll();
             }
         }
-        if (e.VK_F2 == e.getKeyCode()) {
+        if (e.VK_SPACE == e.getKeyCode()) {
             try {
                 this.modelo = (DefaultTableModel) menu.tblFactura.getModel();//obtengo el modelo de tabla factura y sus datos
                 int filas = this.modelo.getRowCount();//Cuento las filas de la tabla Factura
