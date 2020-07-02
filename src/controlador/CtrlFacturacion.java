@@ -196,6 +196,9 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     menu.btnNotificaciones.setVisible(true);
                     menu.btnTransacciones.setVisible(true);
                     menu.btnInventario.setVisible(true);
+                    menu.btnInfoFactura.setVisible(true);
+                    menu.btnAgregar.setEnabled(true);
+                    menu.txtCodBarraFactura.setEnabled(true);
                     //menu.btnGuardarFactura.setEnabled(true);//deshabilitar boton guardarFactura
                     menu.btnAgregarProductoFactura.setEnabled(true);//deshabilitar boton AgregarProducto a factura
                     menu.btnNuevaFactura.setEnabled(true);//deshabilitar boton Nueva Factura
@@ -298,6 +301,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                 menu.btnNuevaFactura.setEnabled(false);//deshabilitar boton Nueva Factura
                 menu.btnEliminarFilaFactura.setEnabled(false);//deshabilitar boton EliminarFila Factura
                 menu.pnlReportes.setVisible(false);//ocultar panel Reportes
+                menu.btnInfoFactura.setVisible(false);
                 menu.vistaDetalleFacturas.setVisible(false);//ocultar la ventana de detalle de factura de reportes
                 menu.btnVentas.setVisible(false);
                 menu.btnReportes.setVisible(false);
@@ -305,6 +309,8 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                 menu.btnUsuarios.setVisible(false);
                 menu.btnCreditos.setVisible(false);
                 menu.btnClientes.setVisible(false);
+                menu.btnAgregar.setEnabled(false);
+                menu.txtCodBarraFactura.setEnabled(false);
                 menu.btnNotificaciones.setVisible(false);
                 menu.btnTransacciones.setVisible(false);
                 menu.btnInventario.setVisible(false);
@@ -405,11 +411,11 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
         }
         if (e.getSource() == menu.addDescuento) {
             //variables para el nombre e id de producto
-            String nombre = "", id = "";
+            String nombre = "", id = "", descuentoAgregar = "";
             //variable para el numero de filas de la tabla factura
             int filaseleccionada = 0, filas = 0;
             //variables para las operaciones
-            float cantidad = 0, precioUpdate = 0, precio = 0, importeUpdate = 0, totalImports = 0, sacarImpuesto = 0, porcentajeImp, precioDolar = 0;
+            float cantidad = 0, precioUpdate = 0, precio = 0, importeUpdate = 0, totalImports = 0, sacarImpuesto = 0, porcentajeImp, precioDolar = 0, descuento = 0;
             //variable para obtener la filaseleccionada de la tabla factura
             filaseleccionada = menu.tblFactura.getSelectedRow();
             try {
@@ -427,8 +433,14 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     nombre = (String) this.modelo.getValueAt(filaseleccionada, 3);
                     precio = Float.parseFloat(this.modelo.getValueAt(filaseleccionada, 4).toString());
                     id = (String) this.modelo.getValueAt(filaseleccionada, 0);
-                    //obtengo el descuento
-                    float descuento = Float.parseFloat(JOptionPane.showInputDialog(null, "Agregar descuento a " + nombre));
+                    descuentoAgregar = JOptionPane.showInputDialog(null, "Agregar descuento a " + nombre);
+                    if(!descuentoAgregar.equals(""))
+                    {
+                        //obtengo el descuento
+                        descuento = Float.parseFloat(descuentoAgregar);
+                    }else{
+                        descuento = 0;
+                    }
                     //realiza el escuento
                     precioUpdate = precio - descuento;
                     //obtengo desde el modelo facturta la moneda de venta de el producto na aplicarle el descuento

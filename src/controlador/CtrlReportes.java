@@ -52,6 +52,7 @@ public class CtrlReportes implements ActionListener, MouseListener {
         this.menu.btnProductosMasVendidos.addActionListener(this);
         this.menu.btnMostrarPmasV.addActionListener(this);
         this.menu.btnImprimirPmasV.addActionListener(this);
+        this.menu.btnMostrarFacturasEmitidas.addActionListener(this);
         EstiloTablaTotalV();
         iniciar();
     }
@@ -66,6 +67,7 @@ public class CtrlReportes implements ActionListener, MouseListener {
         this.menu.jcFecha2.setDate(this.fecha);
         this.menu.jc1.setDate(this.fecha);
         this.menu.jc2.setDate(this.fecha);
+        this.menu.jcFacturasEmitidas.setDate(this.fecha);
         SumaTotalFiltroReporte(this.fecha, this.fecha);
         inversion();
     }
@@ -84,7 +86,11 @@ public class CtrlReportes implements ActionListener, MouseListener {
         if (e.getSource() == menu.btnReporteDiario) {
             Date fecha1 = menu.jcFechaReporteDario.getDate(), fecha2 = menu.jcFecha2.getDate();
             reportesDiarios(fecha1);
-            MostrarReportesDario(fecha1);
+        }
+        if(e.getSource() == menu.btnMostrarFacturasEmitidas)
+        {
+            Date fecha = menu.jcFacturasEmitidas.getDate();
+            MostrarReportesDario(fecha);
         }
         if(e.getSource() == menu.btnMostraTotalFacturado)
         {
@@ -160,7 +166,7 @@ public class CtrlReportes implements ActionListener, MouseListener {
                         this.modelo = (DefaultTableModel) menu.tblReporte.getModel();
                         id = Integer.parseInt(this.modelo.getValueAt(filaseleccionada, 0).toString());
                         MostrarDetalleFactura(id);
-                        menu.vistaDetalleFacturas.setSize(746, 306);
+                        menu.vistaDetalleFacturas.setSize(782, 320);//762, 363
                         menu.vistaDetalleFacturas.setVisible(true);
                         menu.vistaDetalleFacturas.setLocationRelativeTo(null);
                     }
