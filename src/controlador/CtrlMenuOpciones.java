@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 import modelo.*;
 import vista.ILogin;
@@ -43,6 +45,9 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
     CtrlImprimirReport print;
     CtrlInfoFactura CTRLinfo;
     InfoFactura info;
+    CtrlDevoluciones devoluciones;
+    JSpinner spiner;
+    SpinnerNumberModel sModel;
 
     public CtrlMenuOpciones(IMenu menu,int permiso) {
         this.permiso = permiso;
@@ -80,15 +85,22 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
         ctrlGastos = new CtrlTransacciones(menu, gastos);
         ctrlPagos = new CtrlPagos(menu, pagos);
         this.print = new CtrlImprimirReport(menu, info);
+        this.devoluciones = new CtrlDevoluciones(menu, reportes);
     }
 
     public void iniciarMenu() {
         this.menu.setVisible(true);
         this.menu.setLocationRelativeTo(null);
+        this.menu.lblUsuarioSistema.setText("Cesar");
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-YYYY");
         String f = sdf.format(this.fecha);
-        String precio = JOptionPane.showInputDialog("Precio de Dolar hoy "+f+":");
-        this.menu.txtPrecioDolar.setText(precio);
+        this.sModel = new SpinnerNumberModel();
+        this.sModel.setMinimum(1.00);
+        this.sModel.setValue(1.00);
+        this.sModel.setStepSize(0.01);
+        this.spiner = new JSpinner(sModel);
+        JOptionPane.showMessageDialog(null, spiner, "Precio de Dolar hoy "+f+":",JOptionPane.INFORMATION_MESSAGE);
+        menu.txtPrecioDolar.setText(spiner.getValue().toString());
     }
 //    public void permisos(int permiso)
 //    {

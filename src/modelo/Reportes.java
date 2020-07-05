@@ -26,6 +26,7 @@ public class Reportes extends Conexiondb {
         this.consulta = null;
         this.cn = null;
     }
+
     //mostrar facturas realizadas por dia 
     public DefaultTableModel ReporteDiario(Date Fecha) {
         cn = Conexion();
@@ -54,10 +55,11 @@ public class Reportes extends Conexiondb {
             }
             cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e +"funcion reporteDiario");
+            JOptionPane.showMessageDialog(null, e + "funcion reporteDiario");
         }
         return modelo;
     }
+
     //mostrar facturas por rango de fechas
     public DefaultTableModel ReporteMensual(Date fecha1, Date fecha2) {
         cn = Conexion();
@@ -88,15 +90,16 @@ public class Reportes extends Conexiondb {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        
+
         return modelo;
     }
+
     //mostrar detalles de facturas
     public DefaultTableModel DetalleFactura(int id) {
         cn = Conexion();
         this.consulta = "SELECT productos.id,codigoBarra,nombre, detallefactura.id AS idDetalle,precioProducto,cantidadProducto,totalVenta FROM productos LEFT JOIN detallefactura ON(productos.id = detallefactura.producto) LEFT JOIN facturas ON(detallefactura.factura = facturas.id) WHERE facturas.id = " + id;
         String[] registros = new String[7];
-        String[] titulos = {"Detalle", "Id", "Codigo Barra", "Producto", "Cantidad", "Precio", "Total"};
+        String[] titulos = {"Detalle", "Id Producto", "Codigo Barra", "Producto", "Cantidad", "Precio", "Total"};
         this.modelo = new DefaultTableModel(null, titulos) {
             public boolean isCellEditable(int row, int col) {
                 return false;
@@ -121,6 +124,7 @@ public class Reportes extends Conexiondb {
         }
         return modelo;
     }
+
     //mostrar total de creditos realizados diariamente
     public float TotalCreditosDiario(Date fecha) {
         cn = Conexion();
@@ -138,10 +142,11 @@ public class Reportes extends Conexiondb {
             }
             cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+" credito diario");
+            JOptionPane.showMessageDialog(null, e + " credito diario");
         }
         return totalCreditos;
     }
+
     public float TotalCreditosGlobal() {
         cn = Conexion();
         float totalCreditos = 0;
@@ -157,10 +162,11 @@ public class Reportes extends Conexiondb {
             }
             cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+" credito global");
+            JOptionPane.showMessageDialog(null, e + " credito global");
         }
         return totalCreditos;
     }
+
     //mostrar creditso realizados segun rango de fechas
     public float TotalCreditosMensual(Date fechaInicio, Date fechaFinal) {
         cn = Conexion();
@@ -181,10 +187,11 @@ public class Reportes extends Conexiondb {
             }
             cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+" funcion creditoMensual");
+            JOptionPane.showMessageDialog(null, e + " funcion creditoMensual");
         }
         return totalCreditos;
     }
+
     //mostrar los Egresos por rango de fechas
     public float TotalGastos(Date fecha1, Date fecha2) {
         cn = Conexion();
@@ -203,15 +210,16 @@ public class Reportes extends Conexiondb {
             }
             cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+" funcion totalgastos");
+            JOptionPane.showMessageDialog(null, e + " funcion totalgastos");
         }
         return totalGasto;
     }
+
     //mostrar los egresos por dias
     public float TotalGastosDiario(Date fecha1) {
         cn = Conexion();
         float totalGasto = 0;
-        this.consulta = "SELECT SUM(monto) AS totalGasto FROM transaccion INNER JOIN cajas ON(transaccion.caja = cajas.id) WHERE fecha = ? AND cajas.caja='CAJA1'";
+        this.consulta = "SELECT SUM(monto) AS totalGasto FROM transaccion INNER JOIN cajas ON(transaccion.caja = cajas.id) WHERE fecha = ? AND cajas.caja='CAJA1' AND transaccion.tipoTransaccion = 'Egreso'";
         try {
             pst = this.cn.prepareStatement(this.consulta);
             pst.setDate(1, fecha1);
@@ -224,14 +232,15 @@ public class Reportes extends Conexiondb {
             }
             cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+" gasto diario");
+            JOptionPane.showMessageDialog(null, e + " gasto diario");
         }
         return totalGasto;
     }
-     public float TotalGastosGlobal() {
+
+    public float TotalGastosGlobal() {
         cn = Conexion();
         float totalGasto = 0;
-        this.consulta = "SELECT SUM(monto) AS totalGasto FROM transaccion INNER JOIN cajas ON(transaccion.caja = cajas.id) WHERE cajas.caja='CAJA1'";
+        this.consulta = "SELECT SUM(monto) AS totalGasto FROM transaccion INNER JOIN cajas ON(transaccion.caja = cajas.id) WHERE cajas.caja='CAJA1' AND transaccion.tipoTransaccion = 'Egreso'";
         try {
             pst = this.cn.prepareStatement(this.consulta);
             ResultSet rs = pst.executeQuery();
@@ -243,12 +252,53 @@ public class Reportes extends Conexiondb {
             }
             cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+" gasto diario");
+            JOptionPane.showMessageDialog(null, e + " gasto diario");
         }
         return totalGasto;
     }
+    
+    public float TotalIngresoEfectivoGlobal()
+    {
+        float ingresos = 0;
+        cn = Conexion();
+        this.consulta = "SELECT SUM(monto) AS totalGasto FROM transaccion INNER JOIN cajas ON(transaccion.caja = cajas.id) WHERE cajas.caja='CAJA1' AND transaccion.tipoTransaccion = 'Ingreso'";
+        try {
+            pst = this.cn.prepareStatement(this.consulta);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                ingresos = rs.getFloat("totalGasto");
+            }
+            if (ingresos == 0) {
+                ingresos = 0;
+            }
+            cn.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e + " funcion TotalIngresosEfectivos");
+        }
+        return ingresos;
+    }
+    
+    public float ingresoDiarioEfectivo(Date fecha)
+    {
+        this.cn = Conexion();
+        float ingresos = 0;
+        this.consulta = "SELECT SUM(t.monto) AS total FROM transaccion AS t INNER JOIN cajas AS c ON(t.caja = c.id) WHERE t.fecha = ? AND c.caja = 'CAJA1' AND t.tipoTransaccion = 'Ingreso'";
+        try{
+            this.pst = this.cn.prepareStatement(this.consulta);
+            this.pst.setDate(1,fecha);
+            ResultSet rs = this.pst.executeQuery();
+            while(rs.next()){
+                ingresos = rs.getFloat("total");
+            }
+            this.cn.close();
+        }catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e+ " en la funcion IngresoDiarioEfectivo en modelo Reportes");
+        }
+        return ingresos;
+    }
     //metodo para Obtener el total de ingreso por pagos de creditos en efectivo por rangos de fechas
-    public float totalPagosEfectivo(Date fecha1, Date fecha2){
+    public float totalPagosEfectivo(Date fecha1, Date fecha2) {
         cn = Conexion();
         float pagos = 0;
         /*this.consulta = "SELECT SUM(monto) AS TotalPagos FROM pagoscreditos INNER JOIN creditos ON(pagoscreditos.credito = creditos.id) "
@@ -260,22 +310,21 @@ public class Reportes extends Conexiondb {
             pst.setDate(1, fecha1);
             pst.setDate(2, fecha2);
             ResultSet rs = pst.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 pagos = rs.getFloat("totalPagos");
             }
-            if(pagos == 0)
-            {
+            if (pagos == 0) {
                 pagos = 0;
             }
             cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+" en la totalpagosefectivo");
+            JOptionPane.showMessageDialog(null, e + " en la totalpagosefectivo");
         }
         return pagos;
     }
+
     //metodo para Obtener el total de Ingresos por pagos en efectivo por dia 
-    public float totalPagosEfectivoDiario(Date fecha1){
+    public float totalPagosEfectivoDiario(Date fecha1) {
         cn = Conexion();
         float pagos = 0;
         this.consulta = "SELECT SUM(monto) AS TotalPagos FROM pagoscreditos INNER JOIN formapago ON(pagoscreditos.formaPago = formapago.id) WHERE formapago.tipoVenta = 'Efectivo' AND pagoscreditos.fecha = ?";
@@ -283,43 +332,41 @@ public class Reportes extends Conexiondb {
             pst = cn.prepareStatement(consulta);
             pst.setDate(1, fecha1);
             ResultSet rs = pst.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 pagos = rs.getFloat("totalPagos");
             }
-            if(pagos == 0)
-            {
+            if (pagos == 0) {
                 pagos = 0;
             }
             cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+" totalpagoefectivodiario");
+            JOptionPane.showMessageDialog(null, e + " totalpagoefectivodiario");
         }
         return pagos;
     }
-    public float totalPagosEfectivoGlobal(){
+
+    public float totalPagosEfectivoGlobal() {
         cn = Conexion();
         float pagos = 0;
         this.consulta = "SELECT SUM(monto) AS TotalPagos FROM pagoscreditos INNER JOIN formapago ON(pagoscreditos.formaPago = formapago.id) WHERE formapago.tipoVenta = 'Efectivo'";
         try {
             pst = cn.prepareStatement(consulta);
             ResultSet rs = pst.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 pagos = rs.getFloat("totalPagos");
             }
-            if(pagos == 0)
-            {
+            if (pagos == 0) {
                 pagos = 0;
             }
             cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+" totalpagoefectivodiario");
+            JOptionPane.showMessageDialog(null, e + " totalpagoefectivodiario");
         }
         return pagos;
     }
+
     //metodo para Obtener el total de ingreso por pagos de creditos con tarjeta por dia
-    public float totalPagosTarjetaDiario(Date fecha1){
+    public float totalPagosTarjetaDiario(Date fecha1) {
         cn = Conexion();
         float pagos = 0;
         this.consulta = "SELECT SUM(monto) AS TotalPagos FROM pagoscreditos INNER JOIN formapago ON(pagoscreditos.formaPago = formapago.id) WHERE formapago.tipoVenta = 'Tarjeta' AND pagoscreditos.fecha = ?";
@@ -327,43 +374,41 @@ public class Reportes extends Conexiondb {
             pst = cn.prepareStatement(consulta);
             pst.setDate(1, fecha1);
             ResultSet rs = pst.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 pagos = rs.getFloat("totalPagos");
             }
-            if(pagos == 0)
-            {
+            if (pagos == 0) {
                 pagos = 0;
             }
             cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+" totalpagotarjetadiario");
+            JOptionPane.showMessageDialog(null, e + " totalpagotarjetadiario");
         }
         return pagos;
     }
-    public float totalPagosTarjetaGlobal(){
+
+    public float totalPagosTarjetaGlobal() {
         cn = Conexion();
         float pagos = 0;
         this.consulta = "SELECT SUM(monto) AS TotalPagos FROM pagoscreditos INNER JOIN formapago ON(pagoscreditos.formaPago = formapago.id) WHERE formapago.tipoVenta = 'Tarjeta'";
         try {
             pst = cn.prepareStatement(consulta);
             ResultSet rs = pst.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 pagos = rs.getFloat("totalPagos");
             }
-            if(pagos == 0)
-            {
+            if (pagos == 0) {
                 pagos = 0;
             }
             cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+" totalpagotarjetadiario");
+            JOptionPane.showMessageDialog(null, e + " totalpagotarjetadiario");
         }
         return pagos;
     }
+
     //metodo para Obtener el total de ingreso por pagos de creditos con tarjeta  por rango de fechas
-    public float totalPagosTarjeta(Date fecha1, Date fecha2){
+    public float totalPagosTarjeta(Date fecha1, Date fecha2) {
         cn = Conexion();
         float pagos = 0;
         /*this.consulta = "SELECT SUM(monto) AS TotalPagos FROM pagoscreditos INNER JOIN creditos ON(pagoscreditos.credito = creditos.id) "
@@ -375,22 +420,21 @@ public class Reportes extends Conexiondb {
             pst.setDate(1, fecha1);
             pst.setDate(2, fecha2);
             ResultSet rs = pst.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 pagos = rs.getFloat("totalPagos");
             }
-            if(pagos == 0)
-            {
+            if (pagos == 0) {
                 pagos = 0;
             }
             cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+" funcion totalPagosTarjeta");
+            JOptionPane.showMessageDialog(null, e + " funcion totalPagosTarjeta");
         }
         return pagos;
     }
+
     //metodo para obtener todos los pagos de forma global sumando los pagos con tarjeta y en efectivo
-    public String totalPagos(Date fecha1, Date fecha2){
+    public String totalPagos(Date fecha1, Date fecha2) {
         cn = Conexion();
         String pagos = "";
         /*this.consulta = "SELECT SUM(monto) AS TotalPagos FROM pagoscreditos INNER JOIN creditos ON(pagoscreditos.credito = creditos.id) "
@@ -402,23 +446,21 @@ public class Reportes extends Conexiondb {
             pst.setDate(1, fecha1);
             pst.setDate(2, fecha2);
             ResultSet rs = pst.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 pagos = rs.getString("totalPagos");
             }
-            if(pagos == null)
-            {
+            if (pagos == null) {
                 pagos = "0";
             }
             cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+" totalpagos");
+            JOptionPane.showMessageDialog(null, e + " totalpagos");
         }
         return pagos;
     }
+
     //obtener nombres de cliente segun el id
-    public String nombreCliente(String id)
-    {
+    public String nombreCliente(String id) {
         cn = Conexion();
         String Nombres = "";
         this.consulta = "SELECT clientes.nombres FROM clientes INNER JOIN creditos ON(clientes.id = creditos.cliente) WHERE creditos.id = ?";
@@ -426,17 +468,17 @@ public class Reportes extends Conexiondb {
             this.pst = this.cn.prepareStatement(consulta);
             this.pst.setString(1, id);
             ResultSet rs = pst.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Nombres = rs.getString("nombres");
             }
             this.cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion nombres clientes");
+            JOptionPane.showMessageDialog(null, e + "funcion nombres clientes");
         }
-            return Nombres;
+        return Nombres;
     }
-    public String apellidoCliente(String id)
-    {
+
+    public String apellidoCliente(String id) {
         cn = Conexion();
         String apellidos = "";
         this.consulta = "SELECT clientes.apellidos FROM clientes INNER JOIN creditos ON(clientes.id = creditos.cliente) WHERE creditos.id = ?";
@@ -444,250 +486,260 @@ public class Reportes extends Conexiondb {
             this.pst = this.cn.prepareStatement(consulta);
             this.pst.setString(1, id);
             ResultSet rs = pst.executeQuery();
-            while(rs.next())
-            {
-                apellidos = rs.getString("apellidos");                
+            while (rs.next()) {
+                apellidos = rs.getString("apellidos");
             }
 
             this.cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion apellidos clientes");
+            JOptionPane.showMessageDialog(null, e + "funcion apellidos clientes");
         }
         return apellidos;
     }
+
     //metodo para obtener el total de inversion en el negocio precio de compra en cordobas
-    public float inversion(){
+    public float inversion() {
         cn = Conexion();
         float inversion = 0;
         this.consulta = "SELECT SUM(precioCompra*stock) AS inversion FROM productos";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 inversion = rs.getFloat("inversion");
             }
             this.cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion inversion en modelo");
+            JOptionPane.showMessageDialog(null, e + "funcion inversion en modelo");
         }
         return inversion;
     }
+
     //total de efectivo envertido en productos comprados en cordobas 
-    public float inversionCordobas()
-    {
+    public float inversionCordobas() {
         cn = Conexion();
         float inversion = 0;
         this.consulta = "SELECT SUM(precioCompra*stock) AS inversion FROM productos WHERE monedaCompra = 'Córdobas'";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 inversion = rs.getFloat("inversion");
             }
             this.cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion inversion en modelo");
+            JOptionPane.showMessageDialog(null, e + "funcion inversion en modelo");
         }
         return inversion;
     }
+
     //total de efectivo envertido en productos comprados en dolar
-    public float inversionDolar()
-    {
+    public float inversionDolar() {
         cn = Conexion();
         float inversion = 0;
         this.consulta = "SELECT SUM(precioCompra*stock) AS inversion FROM productos WHERE monedaCompra = 'Dolar'";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 inversion = rs.getFloat("inversion");
             }
             this.cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion inversion en modelo");
+            JOptionPane.showMessageDialog(null, e + "funcion inversion en modelo");
         }
         return inversion;
     }
+
     //Obtener Ingresos efectivo en caja por rango de fechas
-    public float ingresoEfectivoCaja(Date fecha1, Date fecha2){
+    public float ingresoEfectivoCaja(Date fecha1, Date fecha2) {
         float total = 0;
         cn = Conexion();
         this.consulta = "SELECT SUM(totalFactura) AS total FROM facturas INNER JOIN formapago ON(formapago.id=facturas.tipoVenta) INNER JOIN cajas ON(facturas.caja=cajas.id) WHERE fecha BETWEEN ? AND ? AND formapago.tipoVenta = 'Efectivo' AND cajas.caja='CAJA1'";
         //this.consulta = "SELECT SUM(totalFactura) AS total FROM facturas INNER JOIN formapago ON(formapago.id=facturas.tipoVenta) WHERE fecha = ? AND formapago.tipoVenta = 'Efectivo'";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
-            pst.setDate(1,fecha1);
+            pst.setDate(1, fecha1);
             pst.setDate(2, fecha2);
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 total = rs.getFloat("total");
             }
             this.cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion IngresoEfectivoCaja en modelo");
+            JOptionPane.showMessageDialog(null, e + "funcion IngresoEfectivoCaja en modelo");
         }
         return total;
     }
+
     //obtener Ingresos en efectivo a cajas por dia
-    public float ingresoEfectivoCajaDiario(Date fecha1){
+    public float ingresoEfectivoCajaDiario(Date fecha1) {
         float total = 0;
         cn = Conexion();
         this.consulta = "SELECT SUM(totalFactura) AS total FROM facturas INNER JOIN formapago ON(formapago.id=facturas.tipoVenta) INNER JOIN cajas ON(facturas.caja=cajas.id) WHERE fecha = ? AND formapago.tipoVenta = 'Efectivo' AND cajas.caja='CAJA1'";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
-            pst.setDate(1,fecha1);
+            pst.setDate(1, fecha1);
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 total = rs.getFloat("total");
             }
             this.cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion IngresoEfectivoCaja en modelo");
+            JOptionPane.showMessageDialog(null, e + "funcion IngresoEfectivoCaja en modelo");
         }
         return total;
     }
-     public float ingresoEfectivoCajaGlobal(){
+
+    public float ingresoEfectivoCajaGlobal() {
         float total = 0;
         cn = Conexion();
         this.consulta = "SELECT SUM(totalFactura) AS total FROM facturas INNER JOIN formapago ON(formapago.id=facturas.tipoVenta) INNER JOIN cajas ON(facturas.caja=cajas.id) WHERE formapago.tipoVenta = 'Efectivo' AND cajas.caja='CAJA1'";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 total = rs.getFloat("total");
             }
             this.cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion IngresoEfectivoCaja en modelo");
+            JOptionPane.showMessageDialog(null, e + "funcion IngresoEfectivoCaja en modelo");
         }
         return total;
     }
+
     //obtener los ingresos totales osea todo lo vendido seun rango de fechas
-    public float IngresosTotales(Date fecha1, Date fecha2){
+    public float IngresosTotales(Date fecha1, Date fecha2) {
         float total = 0;
         cn = Conexion();
         this.consulta = "SELECT SUM(totalFactura) AS total FROM facturas INNER JOIN cajas ON(facturas.caja=cajas.id) WHERE fecha BETWEEN ? AND ? AND cajas.caja='CAJA1'";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
-            pst.setDate(1,fecha1);
+            pst.setDate(1, fecha1);
             pst.setDate(2, fecha2);
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 total = rs.getFloat("total");
             }
             this.cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion IngresosTotales en modelo");
+            JOptionPane.showMessageDialog(null, e + "funcion IngresosTotales en modelo");
         }
         return total;
     }
+
     //obtener los ingresos totales osea todo lo vendido por dia
-    public float IngresosTotalesDiario(Date fecha1){
+    public float IngresosTotalesDiario(Date fecha1) {
         float total = 0;
         cn = Conexion();
         this.consulta = "SELECT SUM(totalFactura) AS total FROM facturas INNER JOIN cajas ON(facturas.caja=cajas.id) WHERE fecha = ? AND cajas.caja = 'CAJA1'";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
-            pst.setDate(1,fecha1);
+            pst.setDate(1, fecha1);
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 total = rs.getFloat("total");
             }
             this.cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion IngresosTotales en modelo");
+            JOptionPane.showMessageDialog(null, e + "funcion IngresosTotales en modelo");
         }
         return total;
     }
-    public float IngresosTotalesGlobal(){
+
+    public float IngresosTotalesGlobal() {
         float total = 0;
         cn = Conexion();
         this.consulta = "SELECT SUM(totalFactura) AS total FROM facturas INNER JOIN cajas ON(facturas.caja=cajas.id) WHERE cajas.caja = 'CAJA1'";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 total = rs.getFloat("total");
             }
             this.cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion IngresosTotales en modelo");
+            JOptionPane.showMessageDialog(null, e + "funcion IngresosTotales en modelo");
         }
         return total;
     }
+
     //Ingresos totales a bancos segun rangos de fecha (ventas con tarjeta de credito o debito)
-    public float IngresoAbancos(Date fecha1, Date fecha2){
+    public float IngresoAbancos(Date fecha1, Date fecha2) {
         float total = 0;
         cn = Conexion();
         this.consulta = "SELECT SUM(totalFactura) AS total FROM facturas INNER JOIN formapago ON(formapago.id=facturas.tipoVenta) INNER JOIN cajas ON(facturas.caja=cajas.id) WHERE fecha BETWEEN ? AND ? AND formapago.tipoVenta = 'Tarjeta' AND cajas.caja = 'CAJA1'";
         //this.consulta = "SELECT SUM(totalFactura) AS total FROM facturas INNER JOIN formapago ON(formapago.id=facturas.tipoVenta) INNER JOIN cajas ON(facturas.caja=cajas.id) WHERE facturas.fecha = ? AND formapago.tipoVenta = 'Tarjeta' AND cajas.caja = 'CAJA1'";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
-            pst.setDate(1,fecha1);
+            pst.setDate(1, fecha1);
             pst.setDate(2, fecha2);
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 total = rs.getFloat("total");
             }
             this.cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion Ingreso A bancos en modelo");
+            JOptionPane.showMessageDialog(null, e + "funcion Ingreso A bancos en modelo");
         }
         return total;
     }
+
     //Ingresos totales a bancos por dia (ventas con tarjeta de credito o debito)
-    public float IngresoAbancosDiario(Date fecha1){
+    public float IngresoAbancosDiario(Date fecha1) {
         float total = 0;
         cn = Conexion();
         this.consulta = "SELECT SUM(totalFactura) AS total FROM facturas INNER JOIN formapago ON(formapago.id=facturas.tipoVenta) INNER JOIN cajas ON(facturas.caja=cajas.id) WHERE facturas.fecha = ? AND formapago.tipoVenta = 'Tarjeta' AND cajas.caja = 'CAJA1'";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
-            pst.setDate(1,fecha1);
+            pst.setDate(1, fecha1);
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 total = rs.getFloat("total");
             }
             this.cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion Ingreso A bancos en modelo");
+            JOptionPane.showMessageDialog(null, e + "funcion Ingreso A bancos en modelo");
         }
         return total;
     }
-    public float IngresoAbancosGlobal(){
+
+    public float IngresoAbancosGlobal() {
         float total = 0;
         cn = Conexion();
         this.consulta = "SELECT SUM(totalFactura) AS total FROM facturas INNER JOIN formapago ON(formapago.id=facturas.tipoVenta) INNER JOIN cajas ON(facturas.caja=cajas.id) WHERE formapago.tipoVenta = 'Tarjeta' AND cajas.caja = 'CAJA1'";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
             ResultSet rs = pst.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 total = rs.getFloat("total");
             }
             this.cn.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion Ingreso A bancos en modelo");
+            JOptionPane.showMessageDialog(null, e + "funcion Ingreso A bancos en modelo");
         }
         return total;
     }
-    public float baseEfectivoDiario(Date fecha){
+
+    public float baseEfectivoDiario(Date fecha) {
         float base = 0;
         this.cn = Conexion();
         this.consulta = "SELECT efectivo FROM aperturas INNER JOIN cajas ON(aperturas.caja=cajas.id) WHERE aperturas.fecha = ? AND cajas.caja='CAJA1'";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
-            pst.setDate(1,fecha);
+            pst.setDate(1, fecha);
             ResultSet rs = pst.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 base = rs.getFloat("efectivo");
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion baseEfectivoDiario");
+            JOptionPane.showMessageDialog(null, e + "funcion baseEfectivoDiario");
         }
         return base;
     }
+
     //monto de apertura por dia
-    public float TotalAperturasCaja(Date fecha1, Date fecha2)
-    {
+    public float TotalAperturasCaja(Date fecha1, Date fecha2) {
         float monto = 0;
         this.cn = Conexion();
         this.consulta = "SELECT SUM(efectivo) total FROM aperturas INNER JOIN cajas ON(aperturas.caja=cajas.id) WHERE aperturas.fecha BETWEEN ? AND ? AND cajas.caja='CAJA1'";
@@ -696,51 +748,51 @@ public class Reportes extends Conexiondb {
             pst.setDate(1, fecha1);
             pst.setDate(2, fecha2);
             ResultSet rs = pst.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 monto = rs.getFloat("total");
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion TotalAperturasCaja");
+            JOptionPane.showMessageDialog(null, e + "funcion TotalAperturasCaja");
         }
-        
+
         return monto;
     }
-      public float TotalAperturasCajaGlobal()
-    {
+
+    public float TotalAperturasCajaGlobal() {
         float monto = 0;
         this.cn = Conexion();
         this.consulta = "SELECT SUM(efectivo) total FROM aperturas INNER JOIN cajas ON(aperturas.caja=cajas.id) WHERE cajas.caja='CAJA1'";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
             ResultSet rs = pst.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 monto = rs.getFloat("total");
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion TotalAperturasCaja");
+            JOptionPane.showMessageDialog(null, e + "funcion TotalAperturasCaja");
         }
-        
+
         return monto;
     }
-    public float PrimeraApertura()
-    {
+
+    public float PrimeraApertura() {
         float monto = 0;
         this.cn = Conexion();
         this.consulta = "SELECT efectivo FROM aperturas INNER JOIN cajas ON(aperturas.caja=cajas.id) WHERE aperturas.id = 1 AND cajas.caja='CAJA1'";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
             ResultSet rs = pst.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 monto = rs.getFloat("efectivo");
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+"funcion UltimaApertura");
+            JOptionPane.showMessageDialog(null, e + "funcion UltimaApertura");
         }
-        
+
         return monto;
     }
-    public DefaultTableModel productosMasVendidos(Date fecha1, Date fecha2)
-    {
+
+    public DefaultTableModel productosMasVendidos(Date fecha1, Date fecha2) {
         int n = 1;
         this.cn = Conexion();
         this.consulta = "SELECT p.id,p.nombre, m.nombre AS marca, p.descripcion, SUM(d.cantidadProducto) AS vendido FROM productos AS p "
@@ -748,9 +800,9 @@ public class Reportes extends Conexiondb {
                 + "WHERE f.fecha BETWEEN ? AND ? GROUP BY p.id ORDER BY vendido DESC";
         String[] registros = new String[5];
         String[] title = {"ID", "Nombre", "Marca", "Descripción", "Vendido"};
-        this.modelo = new DefaultTableModel(null, title){
+        this.modelo = new DefaultTableModel(null, title) {
             @Override
-            public boolean isCellEditable(int row, int col){
+            public boolean isCellEditable(int row, int col) {
                 return false;
             }
         };
@@ -759,20 +811,52 @@ public class Reportes extends Conexiondb {
             this.pst.setDate(1, fecha1);
             this.pst.setDate(2, fecha2);
             ResultSet rs = this.pst.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 registros[0] = rs.getString("id");
                 registros[1] = rs.getString("nombre");
                 registros[2] = rs.getString("marca");
                 registros[3] = rs.getString("descripcion");
-                registros[4] = rs.getString("vendido")+" Unidades";
+                registros[4] = rs.getString("vendido") + " Unidades";
                 this.modelo.addRow(registros);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+" en la funcion productosMasVendidos");
+            JOptionPane.showMessageDialog(null, e + " en la funcion productosMasVendidos");
         }
-        
+
         return this.modelo;
-        
+
     }
-    
+
+    public DefaultTableModel BuscarFactura(int id) {
+        this.cn = Conexion();
+        this.consulta = "SELECT facturas.id,facturas.fecha AS fechaFactura, impuestoISV, totalFactura, nombre_comprador, formapago.tipoVenta, creditos.id as idCredito, cajas.caja from facturas LEFT JOIN formapago ON(formapago.id = facturas.tipoVenta) LEFT JOIN creditos ON(facturas.credito = creditos.id) LEFT JOIN cajas ON(facturas.caja=cajas.id) WHERE facturas.id = ?";        
+        String[] facturas = new String[8];
+        String[] titulos = {"Factura", "Fecha", "Iva", "Total", "Comprador", "Forma Pago", "N° Credito", "Caja"};
+        this.modelo = new DefaultTableModel(null, titulos) {
+            public boolean isCellEditable(int row, int col) {
+                return false;
+            }
+        };
+        try {
+            this.pst = this.cn.prepareStatement(this.consulta);
+//            this.pst.setDate(1, fecha);
+            this.pst.setInt(1, id);
+            ResultSet rs = this.pst.executeQuery();
+            while(rs.next()){
+                facturas[0] = rs.getString("id");
+                facturas[1] = rs.getString("fechaFactura");
+                facturas[2] = rs.getString("impuestoISV");
+                facturas[3] = rs.getString("totalFactura");
+                facturas[4] = rs.getString("nombre_comprador");
+                facturas[5] = rs.getString("tipoVenta");
+                facturas[6] = rs.getString("idCredito");
+                facturas[7] = rs.getString("caja");
+                modelo.addRow(facturas);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e+ "Error en la funcion BuscarFactura en modelo Reportes");
+        }
+        return this.modelo;
+    }
+
 }

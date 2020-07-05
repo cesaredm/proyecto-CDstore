@@ -379,6 +379,7 @@ public class Facturacion extends Conexiondb {
                 }
                 producto[5] = String.valueOf(importe);
             }
+            this.cn.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e + " en lafuncion obtenerPorCodBarra");
         }
@@ -395,7 +396,24 @@ public class Facturacion extends Conexiondb {
             while (rs.next()) {
                 this.monedaVenta = rs.getString("monedaVenta");
             }
+            this.cn.close();
         } catch (Exception e) {
+        }
+    }
+    
+    public void ActualizarDevolucion(int id, float iva, float total){
+        this.cn = Conexion();
+        this.consulta = "UPDATE facturas SET impuestoISV = ?, totalFactura = ? WHERE id = ?";
+        try {
+            this.pst = this.cn.prepareStatement(this.consulta);
+            this.pst.setFloat(1, iva);
+            this.pst.setFloat(2, total);
+            this.pst.setInt(3, id);
+            this.pst.executeUpdate();
+            this.cn.close();
+        }
+        catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e+" en la funcion ActualizarDetalle en modelo Facturacion");
         }
     }
 
