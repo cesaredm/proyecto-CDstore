@@ -4,11 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/gallomasgallo/Documents/NetBeansProjects/CDstore1/src/vista/IMenu.java</file>
-            <file>file:/C:/Users/gallomasgallo/Documents/NetBeansProjects/CDstore1/src/controlador/CtrlFacturacion.java</file>
-            <file>file:/C:/Users/gallomasgallo/Documents/NetBeansProjects/CDstore1/src/modelo/Reportes.java</file>
-            <file>file:/C:/Users/gallomasgallo/Documents/NetBeansProjects/CDstore1/src/controlador/CtrlDevoluciones.java</file>
+            <file>file:/C:/Users/gallomasgallo/Documents/NetBeansProjects/CDstore1/src/controlador/CtrlLogin.java</file>
             <file>file:/C:/Users/gallomasgallo/Documents/NetBeansProjects/CDstore1/src/controlador/CtrlMenuOpciones.java</file>
-            <file>file:/C:/Users/gallomasgallo/Documents/NetBeansProjects/CDstore1/src/controlador/CtrlReportes.java</file>
         </group>
     </open-files>
 </project-private>

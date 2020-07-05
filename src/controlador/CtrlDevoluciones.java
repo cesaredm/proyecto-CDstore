@@ -59,7 +59,7 @@ public class CtrlDevoluciones implements ActionListener, WindowListener {
             DevolverProducto();
         }
     }
-
+    //funcion para devolver productos
     public void DevolverProducto() {
         Date fecha = menu.jcFacturasEmitidas.getDate();
         int idProducto = 0, filaseleccionada = 0, filaseleccionadaR = 0, idDetalle = 0, idFactura = 0;
@@ -67,7 +67,9 @@ public class CtrlDevoluciones implements ActionListener, WindowListener {
         float precio = 0, cantidadActual = 0, total = 0, totalUpdate = 0, ivaUpdate = 0, subTotalUpdate = 0, cantidadUpdate = 0, cantidadDevolver = 0, sacarImpuesto = 0, porcentajeImp = 0, importe = 0;
         this.modelo = (DefaultTableModel) menu.tblMostrarDetalleFactura.getModel();
         try {
+            //fila seleccionada de la tabla DetalleFactura
             filaseleccionada = menu.tblMostrarDetalleFactura.getSelectedRow();
+            //fila seleccionada de la tabla reportes
             filaseleccionadaR = menu.tblReporte.getSelectedRow();
             sacarImpuesto = Float.parseFloat(1 + "." + menu.lblImpuestoISV.getText());//concatenacion para sacar el valor 1.xx para sacar el iva
             //obtengo el IVA en entero "15" o cualquier que sea el impuesto
@@ -86,31 +88,37 @@ public class CtrlDevoluciones implements ActionListener, WindowListener {
                     idFactura = Integer.parseInt(menu.tblReporte.getValueAt(filaseleccionadaR, 0).toString());
                     total = Float.parseFloat(menu.tblReporte.getValueAt(filaseleccionadaR, 3).toString());
                     this.factura.monedaVentaProducto(String.valueOf(idProducto));
-                    cantidadUpdate = cantidadActual - cantidadDevolver;
-                    if(this.factura.getMonedaVenta().equals("Dolar"))
-                    {
-                        if(menu.isNumeric(precioDolar)){
-                            importe = (cantidadUpdate * precio) * Float.parseFloat(precioDolar);
-                            totalUpdate = total - ((cantidadDevolver * precio) * Float.parseFloat(precioDolar));
-                        }else{
-                            JOptionPane.showMessageDialog(null, "El valor del dolar establecido es inavlido..");
+                    //validar que lo que se va a devolver sea menor o igual que lo que compro
+                    if (cantidadDevolver <= cantidadActual) {
+                        cantidadUpdate = cantidadActual - cantidadDevolver;
+                        //validar que moneda
+                        if (this.factura.getMonedaVenta().equals("Dolar")) {
+                            //validar que precioDolar sea numerico
+                            if (menu.isNumeric(precioDolar)) {
+                                importe = (cantidadUpdate * precio) * Float.parseFloat(precioDolar);
+                                totalUpdate = total - ((cantidadDevolver * precio) * Float.parseFloat(precioDolar));
+                            } else {
+                                JOptionPane.showMessageDialog(null, "El valor del dolar establecido es inavlido..");
+                            }
+
+                        } else {
+                            importe = cantidadUpdate * precio;
+                            totalUpdate = total - (cantidadDevolver * precio);
                         }
-                        
-                    }else{
-                        importe = cantidadUpdate * precio;
-                        totalUpdate = total - (cantidadDevolver * precio);
+                        //calcular el nuevo impuesto
+                        ivaUpdate = ((totalUpdate / sacarImpuesto) * porcentajeImp) / 100;
+                        //calcular el nuevo subtotal
+                        subTotalUpdate = totalUpdate - ivaUpdate;
+                        //llamar las funciones para actualizar los datos correpondientes
+                        this.factura.ActualizarDetalle(String.valueOf(idDetalle), String.valueOf(idProducto), String.valueOf(precio), String.valueOf(cantidadUpdate), String.valueOf(importe));
+                        this.factura.ActualizarDevolucion(idFactura, ivaUpdate, totalUpdate);
+                        this.producto.AgregarProductoStock(String.valueOf(idProducto), String.valueOf(cantidadDevolver));
+                        MostrarDetalleFactura(idFactura);
+                        MostrarProductos("");
+                        MostrarProductosVender("");
                     }
-                    ivaUpdate = ((totalUpdate / sacarImpuesto) * porcentajeImp) / 100;
-                    subTotalUpdate = totalUpdate - ivaUpdate;
-                    this.factura.ActualizarDetalle(String.valueOf(idDetalle), String.valueOf(idProducto), String.valueOf(precio), String.valueOf(cantidadUpdate), String.valueOf(importe));
-                    this.factura.ActualizarDevolucion(idFactura, ivaUpdate, totalUpdate);
-                    this.producto.AgregarProductoStock(String.valueOf(idProducto), String.valueOf(cantidadDevolver));
-//                    MostrarReportesDario(fecha);
-                    MostrarDetalleFactura(idFactura);
-                    MostrarProductos("");
-                    MostrarProductosVender("");
                 }else{
-                    
+
                 }
             }
         } catch (Exception ex) {
@@ -126,7 +134,7 @@ public class CtrlDevoluciones implements ActionListener, WindowListener {
         menu.tblMostrarDetalleFactura.getTableHeader().setForeground(new Color(255, 255, 255));
         menu.tblMostrarDetalleFactura.setModel(reportes.DetalleFactura(id));
     }
-    
+
     public void MostrarReportesDario(Date fecha1)//metodo para llenar la tabla de reortes por rango o mensual del menu reportes
     {
         long f1 = fecha1.getTime();//
@@ -135,16 +143,16 @@ public class CtrlDevoluciones implements ActionListener, WindowListener {
         menu.tblReporte.getTableHeader().setOpaque(false);
         menu.tblReporte.getTableHeader().setBackground(new Color(100, 100, 100));
         menu.tblReporte.getTableHeader().setForeground(new Color(255, 255, 255));
-        menu.tblReporte.getTableHeader().setPreferredSize(new java.awt.Dimension(0,35));
+        menu.tblReporte.getTableHeader().setPreferredSize(new java.awt.Dimension(0, 35));
         try {
             menu.tblReporte.setModel(reportes.ReporteDiario(fechaInicio));
-            
+
         } catch (Exception err) {
 
         }
 
     }
-    
+
     public void MostrarProductos(String buscar) {
         menu.tblProductos.getTableHeader().setFont(new Font("Sugoe UI", Font.PLAIN, 14));
         menu.tblProductos.getTableHeader().setOpaque(false);
@@ -152,7 +160,7 @@ public class CtrlDevoluciones implements ActionListener, WindowListener {
         menu.tblProductos.getTableHeader().setForeground(new Color(255, 255, 255));
         menu.tblProductos.setModel(this.producto.Consulta(buscar));
     }
-    
+
     public void MostrarProductosVender(String Buscar) {
         menu.tblAddProductoFactura.getTableHeader().setFont(new Font("Sugoe UI", Font.PLAIN, 14));
         menu.tblAddProductoFactura.getTableHeader().setOpaque(false);

@@ -417,4 +417,17 @@ public class Facturacion extends Conexiondb {
         }
     }
 
+    public void eliminarDetalle(int id){
+        this.cn = Conexion();
+        this.consulta = "DELETE FROM detalleFactura WHERE id = ?";
+        try {
+            this.pst = this.cn.prepareStatement(this.consulta);
+            this.pst.setInt(1, id);
+            this.pst.executeUpdate();
+            this.cn.close();
+        }
+        catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e+" en la funcion eliminarDetalle en modelo Facturacion");
+        }
+    }
 }

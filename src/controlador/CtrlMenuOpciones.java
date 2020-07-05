@@ -23,6 +23,7 @@ import vista.IMenu;
  */
 public class CtrlMenuOpciones implements MouseListener, ActionListener {
     int permiso;
+    private String usuario;
     Date fecha;
     IMenu menu;
     DefaultTableModel modelo;
@@ -49,7 +50,8 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
     JSpinner spiner;
     SpinnerNumberModel sModel;
 
-    public CtrlMenuOpciones(IMenu menu,int permiso) {
+    public CtrlMenuOpciones(IMenu menu,int permiso, String usuario) {
+        this.usuario = usuario;
         this.permiso = permiso;
         this.fecha = new Date();
         this.menu = menu;
@@ -91,7 +93,7 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
     public void iniciarMenu() {
         this.menu.setVisible(true);
         this.menu.setLocationRelativeTo(null);
-        this.menu.lblUsuarioSistema.setText("Cesar");
+        this.menu.lblUsuarioSistema.setText(this.usuario);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-YYYY");
         String f = sdf.format(this.fecha);
         this.sModel = new SpinnerNumberModel();
@@ -119,6 +121,10 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
 //        
 //    }
 
+    public void setUsuario(String usuario){
+        this.usuario = usuario;
+    }
+    
     @Override
     public void mouseClicked(MouseEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

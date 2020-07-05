@@ -97,7 +97,7 @@ public class Reportes extends Conexiondb {
     //mostrar detalles de facturas
     public DefaultTableModel DetalleFactura(int id) {
         cn = Conexion();
-        this.consulta = "SELECT productos.id,codigoBarra,nombre, detallefactura.id AS idDetalle,precioProducto,cantidadProducto,totalVenta FROM productos LEFT JOIN detallefactura ON(productos.id = detallefactura.producto) LEFT JOIN facturas ON(detallefactura.factura = facturas.id) WHERE facturas.id = " + id;
+        this.consulta = "SELECT productos.id,codigoBarra,nombre, detallefactura.id AS idDetalle,precioProducto,cantidadProducto,totalVenta FROM productos LEFT JOIN detallefactura ON(productos.id = detallefactura.producto) LEFT JOIN facturas ON(detallefactura.factura = facturas.id) WHERE facturas.id = "+id+" AND detallefactura.cantidadProducto > 0";
         String[] registros = new String[7];
         String[] titulos = {"Detalle", "Id Producto", "Codigo Barra", "Producto", "Cantidad", "Precio", "Total"};
         this.modelo = new DefaultTableModel(null, titulos) {
@@ -106,8 +106,8 @@ public class Reportes extends Conexiondb {
             }
         };
         try {
-            Statement st = this.cn.createStatement();
-            ResultSet rs = st.executeQuery(this.consulta);
+            this.pst = this.cn.prepareStatement(this.consulta);
+            ResultSet rs = pst.executeQuery(this.consulta);
             while (rs.next()) {
                 registros[0] = rs.getString("idDetalle");
                 registros[1] = rs.getString("id");
@@ -519,7 +519,7 @@ public class Reportes extends Conexiondb {
     public float inversionCordobas() {
         cn = Conexion();
         float inversion = 0;
-        this.consulta = "SELECT SUM(precioCompra*stock) AS inversion FROM productos WHERE monedaCompra = 'Córdobas'";
+        this.consulta = "SELECT SUM(precioVenta*stock) AS inversion FROM productos WHERE monedaVenta = 'Córdobas'";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
             ResultSet rs = pst.executeQuery();
@@ -537,7 +537,7 @@ public class Reportes extends Conexiondb {
     public float inversionDolar() {
         cn = Conexion();
         float inversion = 0;
-        this.consulta = "SELECT SUM(precioCompra*stock) AS inversion FROM productos WHERE monedaCompra = 'Dolar'";
+        this.consulta = "SELECT SUM(precioVenta*stock) AS inversion FROM productos WHERE monedaVenta = 'Dolar'";
         try {
             PreparedStatement pst = this.cn.prepareStatement(this.consulta);
             ResultSet rs = pst.executeQuery();

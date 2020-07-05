@@ -95,12 +95,12 @@ public class CtrlLogin implements ActionListener, KeyListener {
                 modelLogin.setPassUsuario(pass);
                 switch(modelLogin.ValidacionAdmin()){
                     case 1:{
-                        this.menu = new CtrlMenuOpciones(m, 1);
+                        this.menu = new CtrlMenuOpciones(m, 1, nombre);
                         menu.iniciarMenu();
                         this.login.dispose();
                     }break;
                     case 2:{
-                        this.menu = new CtrlMenuOpciones(m, 2);
+                        this.menu = new CtrlMenuOpciones(m, 2, nombre);
                         menu.iniciarMenu();
                         this.login.dispose();
                     }break;
@@ -179,12 +179,12 @@ public class CtrlLogin implements ActionListener, KeyListener {
                 modelLogin.setPassUsuario(pass);
                 switch(modelLogin.ValidacionAdmin()){
                     case 1:{
-                        this.menu = new CtrlMenuOpciones(m, 1);
+                        this.menu = new CtrlMenuOpciones(m, 1, nombre);
                         menu.iniciarMenu();
                         this.login.dispose();
                     }break;
                     case 2:{
-                        this.menu = new CtrlMenuOpciones(m, 2);
+                        this.menu = new CtrlMenuOpciones(m, 2, nombre);
                         menu.iniciarMenu();
                         this.login.dispose();
                     }break;

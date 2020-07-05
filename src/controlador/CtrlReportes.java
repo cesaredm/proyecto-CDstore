@@ -210,13 +210,16 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    //metodo para calcular la inversion aun no esta listo
+    //para la inversion
     public void inversion() {
         float cordobas = this.reportes.inversionCordobas(),
                 dolar = this.reportes.inversionDolar(),
                 precioDolar = Float.parseFloat(menu.txtPrecioDolar.getText()),
-                total = cordobas + (dolar * precioDolar);
-        menu.lblInversion.setText("" + total);
+                total = 0;
+        if(menu.isNumeric(String.valueOf(precioDolar))){
+            total = cordobas + (dolar * precioDolar);
+            menu.lblInversion.setText("" + total);
+        }
     }
 
     public void reportesDiarios(Date fecha) {
@@ -260,7 +263,7 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         menu.lbltotalVendidoDiario.setText("" + totalVendidio);
 
     }
-
+    //funcion para filtros de reportes por rangos
     public void SumaTotalFiltroReporte(Date fecha1, Date fecha2) {
         /*float totalVendidio = 0, exisCaja = 0, ingresosEfectivo = 0, Ingresosbancos = 0, creditos = 0, Egresos = 0, apertura = 0;
         long f1 = fecha1.getTime(), f2 = fecha2.getTime();
@@ -399,7 +402,7 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
 
         }
     }
-
+//funcion pára realizar el corte por los momentos no se esta usando
     public void RealizarCorte() {
         String descripcion = menu.txtDescripcionCierre.getText(), fecha = menu.txtFechaInicioCierre.getText();;
         String efectivo = menu.txtIngresoEfectivoCierre.getText(),
@@ -455,16 +458,12 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.VK_ENTER == e.getKeyCode()) {
+            //busqueda de factura por numero de facturas
             String id = menu.txtBuscarFactura.getText();
             if (menu.isNumeric(id)) {
                 Date fecha = menu.jcFacturasEmitidas.getDate();
                 long ff1 = fecha.getTime();
                 java.sql.Date f = new java.sql.Date(ff1);
-//            menu.tblReporte.getTableHeader().setFont(new Font("Sugoe UI", Font.PLAIN, 14));
-//            menu.tblReporte.getTableHeader().setOpaque(false);
-//            menu.tblReporte.getTableHeader().setBackground(new Color(100, 100, 100));
-//            menu.tblReporte.getTableHeader().setForeground(new Color(255, 255, 255));
-//            menu.tblReporte.getTableHeader().setPreferredSize(new java.awt.Dimension(0,35));
                 try {
                     menu.tblReporte.setModel(this.reportes.BuscarFactura(Integer.parseInt(id)));
                 } catch (Exception ex) {
