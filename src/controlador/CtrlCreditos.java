@@ -123,6 +123,7 @@ public class CtrlCreditos implements ActionListener, CaretListener, MouseListene
                     apellidos = this.modelo.getValueAt(filaseleccionada, 2).toString();
                     id = this.modelo.getValueAt(filaseleccionada, 0).toString();
                     menu.txtClienteCredito.setText(id);
+                    menu.BuscarClienteCredito.setVisible(false);
                 }
 
             } catch (Exception err) {

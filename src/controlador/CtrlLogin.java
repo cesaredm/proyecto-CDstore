@@ -19,6 +19,9 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import modelo.AperturasYcierres;
 
 /**
  *
@@ -30,7 +33,10 @@ public class CtrlLogin implements ActionListener, KeyListener {
     private Login modelLogin;
     public CtrlMenuOpciones menu;
     public IMenu m;
+    public AperturasYcierres aperturas;
     Date fecha;
+    JSpinner spiner;
+    SpinnerNumberModel sModel;
     File licencia;
 
     public CtrlLogin(ILogin login, Login modelLogin) {
@@ -49,7 +55,19 @@ public class CtrlLogin implements ActionListener, KeyListener {
         this.login.setVisible(true);
         this.login.setLocationRelativeTo(null);
     }
+    public void Preparar(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-YYYY");
+        String f = sdf.format(this.fecha);
+        this.sModel = new SpinnerNumberModel();
+        this.sModel.setMinimum(1.00);
+        this.sModel.setValue(1.00);
+        this.sModel.setStepSize(0.01);
+        this.spiner = new JSpinner(sModel);
+        JOptionPane.showMessageDialog(null, spiner, "Precio de Dolar hoy "+f+":",JOptionPane.INFORMATION_MESSAGE);
+        m.txtPrecioDolar.setText(spiner.getValue().toString());
+    }
 
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -96,8 +114,10 @@ public class CtrlLogin implements ActionListener, KeyListener {
                 switch(modelLogin.ValidacionAdmin()){
                     case 1:{
                         this.menu = new CtrlMenuOpciones(m, 1, nombre);
-                        menu.iniciarMenu();
                         this.login.dispose();
+                        Preparar();
+                        menu.iniciarMenu();
+                        
                     }break;
                     case 2:{
                         this.menu = new CtrlMenuOpciones(m, 2, nombre);
@@ -180,8 +200,9 @@ public class CtrlLogin implements ActionListener, KeyListener {
                 switch(modelLogin.ValidacionAdmin()){
                     case 1:{
                         this.menu = new CtrlMenuOpciones(m, 1, nombre);
-                        menu.iniciarMenu();
                         this.login.dispose();
+                        Preparar();
+                        menu.iniciarMenu();
                     }break;
                     case 2:{
                         this.menu = new CtrlMenuOpciones(m, 2, nombre);

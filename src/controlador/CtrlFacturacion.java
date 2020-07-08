@@ -200,7 +200,6 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     menu.btnReportes.setVisible(true);
                     menu.btnCerrarSesion.setVisible(true);
                     menu.btnUsuarios.setVisible(true);
-                    menu.btnCreditos.setVisible(true);
                     menu.btnClientes.setVisible(true);
                     menu.btnNotificaciones.setVisible(true);
                     menu.btnTransacciones.setVisible(true);
@@ -316,7 +315,6 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                 menu.btnReportes.setVisible(false);
                 menu.btnCerrarSesion.setVisible(false);
                 menu.btnUsuarios.setVisible(false);
-                menu.btnCreditos.setVisible(false);
                 menu.btnClientes.setVisible(false);
                 menu.btnAgregar.setEnabled(false);
                 menu.txtCodBarraFactura.setEnabled(false);

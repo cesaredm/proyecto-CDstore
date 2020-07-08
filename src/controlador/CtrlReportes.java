@@ -89,6 +89,8 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         this.menu.jcFecha2.setDate(this.fecha);
         this.menu.jc1.setDate(this.fecha);
         this.menu.jc2.setDate(this.fecha);
+        this.menu.jcFechaReport1.setDate(this.fecha);
+        this.menu.jcFechaReport2.setDate(this.fecha);
         this.menu.jcFacturasEmitidas.setDate(this.fecha);
         SumaTotalFiltroReporte(this.fecha, this.fecha);
         inversion();
@@ -137,6 +139,7 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         }
         if (e.getSource().equals(menu.btnGuardarApertura)) {
             GuardarAperturas();
+            
         }
         if (e.getSource().equals(menu.btnAddTotalV)) {
             if (!menu.lblTotalFacturado.getText().equals("")) {
@@ -162,6 +165,11 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         if (e.getSource() == menu.btnMostrarPmasV) {
             Date fecha1 = menu.jc1.getDate(), fecha2 = menu.jc2.getDate();
             mostrarProductosMasVendidios(fecha1, fecha2);
+        }
+        if(e.getSource() == menu.btnBuscarFiltroReporte)
+        {
+            Date fecha1 = menu.jcFechaReport1.getDate(), fecha2 = menu.jcFechaReport2.getDate();
+            SumaTotalFiltroReporte(fecha1, fecha2);
         }
     }
 
@@ -265,30 +273,30 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
     }
     //funcion para filtros de reportes por rangos
     public void SumaTotalFiltroReporte(Date fecha1, Date fecha2) {
-        /*float totalVendidio = 0, exisCaja = 0, ingresosEfectivo = 0, Ingresosbancos = 0, creditos = 0, Egresos = 0, apertura = 0;
+        float totalVendidio = 0, exisCaja = 0, ingresosEfectivo = 0, Ingresosbancos = 0, creditos = 0, Egresos = 0, apertura = 0;
         long f1 = fecha1.getTime(), f2 = fecha2.getTime();
         java.sql.Date fechaInicio = new java.sql.Date(f1);//convertir la fecha a formato sql
         java.sql.Date fechaFinal = new java.sql.Date(f2);//convertir la fecha a formato sql
         //aperturas a restar al efectivo en caja
         apertura = reportes.TotalAperturasCaja(fechaInicio, fechaFinal) - reportes.PrimeraApertura();
         //ingreso de efectivo a caja
-        ingresosEfectivo = reportes.ingresoEfectivoCaja(fechaInicio, fechaFinal) + reportes.totalPagosEfectivo(fechaInicio, fechaFinal)+reportes.TotalAperturasCaja(fechaInicio, fechaFinal);
-        menu.lblIngresosCajaMes.setText(""+ingresosEfectivo);
+        ingresosEfectivo = reportes.ingresoEfectivoCaja(fechaInicio, fechaFinal) + reportes.totalPagosEfectivo(fechaInicio, fechaFinal);
+        menu.lblTotalVentasEfectivoFiltro.setText(""+ingresosEfectivo);
         //ingresos a bancos
         Ingresosbancos = reportes.IngresoAbancos(fechaInicio, fechaFinal) + reportes.totalPagosTarjeta(fechaInicio, fechaFinal);
-        menu.lblIngresosBancoFiltro.setText(""+Ingresosbancos);
+        menu.lblTotalBancosReportFiltro.setText(""+Ingresosbancos);
         //creditos realizados
         creditos = reportes.TotalCreditosMensual(fechaInicio, fechaFinal)-(reportes.totalPagosEfectivo(fechaInicio, fechaFinal) + reportes.totalPagosTarjeta(fechaInicio, fechaFinal));
-        menu.lblCreditosFiltro.setText(""+creditos);
+        menu.lblCreditosReportFiltro.setText(""+creditos);
         //salida de efectivo
         Egresos = reportes.TotalGastos(fechaInicio, fechaFinal);
-        menu.lblEgresosFiltro.setText(""+Egresos);
+        menu.lblSalidaEfectivoFiltro.setText(""+Egresos);
         //total vendido
         totalVendidio = reportes.IngresosTotales(fechaInicio, fechaFinal);
-        m47enu.lblTotalVendidoFiltro.setText(""+totalVendidio);
+        menu.lblTotalVendidoReportFiltro.setText(""+totalVendidio);
         //total existencia en caja
-        exisCaja = ingresosEfectivo - Egresos - apertura;
-        menu.lblExistenciaCajaFiltro.setText(""+exisCaja);*/
+        exisCaja = ingresosEfectivo - Egresos;
+        menu.lblTotalEfectivoCajaFiltro.setText(""+exisCaja);
     }
 
     public void ReporteGlobal() {
