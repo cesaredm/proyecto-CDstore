@@ -74,6 +74,7 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         this.menu.btnMostrarFacturasEmitidas.setActionCommand("MOSTRARFACTURASEMITIDAS");
         this.menu.btnDevolverProducto.addActionListener(this);
         this.menu.btnDevolverProducto.setActionCommand("DEVOLVER-PRODUCTO");
+        this.menu.btnBuscarFiltroReporte.addActionListener(this);
         this.menu.txtBuscarFactura.addKeyListener(this);
         EstiloTablaTotalV();
         iniciar();
@@ -273,15 +274,21 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
     }
     //funcion para filtros de reportes por rangos
     public void SumaTotalFiltroReporte(Date fecha1, Date fecha2) {
-        float totalVendidio = 0, exisCaja = 0, ingresosEfectivo = 0, Ingresosbancos = 0, creditos = 0, Egresos = 0, apertura = 0;
+        float totalVendidio = 0, exisCaja = 0, ingresosEfectivo = 0, Ingresosbancos = 0, creditos = 0, Egresos = 0;
         long f1 = fecha1.getTime(), f2 = fecha2.getTime();
         java.sql.Date fechaInicio = new java.sql.Date(f1);//convertir la fecha a formato sql
         java.sql.Date fechaFinal = new java.sql.Date(f2);//convertir la fecha a formato sql
-        //aperturas a restar al efectivo en caja
-        apertura = reportes.TotalAperturasCaja(fechaInicio, fechaFinal) - reportes.PrimeraApertura();
+        //ventas en efectivo
+        menu.lblTotalVentasEfectivoFiltro.setText(""+reportes.ingresoEfectivoCaja(fechaInicio, fechaFinal));
         //ingreso de efectivo a caja
-        ingresosEfectivo = reportes.ingresoEfectivoCaja(fechaInicio, fechaFinal) + reportes.totalPagosEfectivo(fechaInicio, fechaFinal);
-        menu.lblTotalVentasEfectivoFiltro.setText(""+ingresosEfectivo);
+        ingresosEfectivo = reportes.ingresoEfectivoCaja(fechaInicio, fechaFinal) + reportes.totalPagosEfectivo(fechaInicio, fechaFinal) + reportes.ingresoEfecitivoRango(fechaInicio, fechaFinal);
+        menu.lblIngresosEfectivo.setText(""+reportes.ingresoEfecitivoRango(fechaInicio, fechaFinal));
+        //ingresos ventas con tarjetas
+        menu.lblVentasTarjetaFiltro.setText(""+reportes.IngresoAbancos(fechaInicio, fechaFinal));
+        //ingreso´por abonos en efectivo
+        menu.lblAbonosEfectivoFiltro.setText(""+reportes.totalPagosEfectivo(fechaInicio, fechaFinal));
+        //ingreso por abonos con tarjeta
+        menu.lblAbonosTarjetaFiltro.setText(""+reportes.totalPagosTarjeta(fechaInicio, fechaFinal));
         //ingresos a bancos
         Ingresosbancos = reportes.IngresoAbancos(fechaInicio, fechaFinal) + reportes.totalPagosTarjeta(fechaInicio, fechaFinal);
         menu.lblTotalBancosReportFiltro.setText(""+Ingresosbancos);

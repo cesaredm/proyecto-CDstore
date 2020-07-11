@@ -93,6 +93,11 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
         this.menu.setVisible(true);
         this.menu.setLocationRelativeTo(null);
         this.menu.lblUsuarioSistema.setText(this.usuario);
+        this.menu.txtImpuesto.setVisible(false);
+        this.menu.txtSubTotal.setVisible(false);
+        this.menu.jPanel5.setVisible(false);
+        this.menu.lblSubTotalFactura.setVisible(false);
+        this.menu.lblImpuestoFactura.setVisible(false);
 //        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-YYYY");
 //        String f = sdf.format(this.fecha);
 //        this.sModel = new SpinnerNumberModel();
@@ -234,7 +239,6 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
             menu.btnVentas.setBackground(new java.awt.Color(60,60,60));
             menu.lblMenuVentas.setForeground(new java.awt.Color(0, 222, 171));
             menu.lblTituloDeVentanas.setText("Facturación");
-            menu.txtCodBarraFactura.requestFocus();
 
             menu.btnReportes.setBackground(new java.awt.Color(72,72,72));
             menu.lblMenuReportes.setForeground(new java.awt.Color(255, 255, 255));
@@ -264,6 +268,7 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
             {
                 menu.pnlClientes.setVisible(false);
                 menu.pnlVentas.setVisible(true);
+                menu.txtCodBarraFactura.requestFocus();
                 menu.pnlReportes.setVisible(false);
                 menu.pnlInventario.setVisible(false);
                 menu.pnlUsuarios.setVisible(false);

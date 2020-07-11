@@ -47,7 +47,8 @@ public class Facturacion extends Conexiondb {
         cn = Conexion();
         this.consulta = "INSERT INTO facturas(caja ,fecha, nombre_comprador, credito, tipoVenta, impuestoISV, totalFactura) VALUES(?,?,?,?,?,?,?)";
         int idCredito = 0, formaPago = Integer.parseInt(pago);
-        float impuestoIVA = Float.parseFloat(iva), totalFactura = Float.parseFloat(total);
+        //TODO cambiar el valor iva por el que recibe la funcion
+        float impuestoIVA = Float.parseFloat("0"), totalFactura = Float.parseFloat(total);
         if (!credito.equals("")) {
             idCredito = Integer.parseInt(credito);
             try {
@@ -315,7 +316,8 @@ public class Facturacion extends Conexiondb {
             pst.setString(3, nombreComprador);
             pst.setDate(4, fecha);
             pst.setString(5, pago);
-            pst.setString(6, iva);
+            //TODO cambiar el iva
+            pst.setString(6, "0"/*iva*/);
             pst.setString(7, total);
             pst.setString(8, id);
             pst.execute();
@@ -413,10 +415,10 @@ public class Facturacion extends Conexiondb {
             this.cn.close();
         }
         catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e+" en la funcion ActualizarDetalle en modelo Facturacion");
+            JOptionPane.showMessageDialog(null, e+" en la funcion ActualizarDevolucion en modelo Facturacion");
         }
     }
-
+    //esta funcio no se esta utilizando
     public void eliminarDetalle(int id){
         this.cn = Conexion();
         this.consulta = "DELETE FROM detalleFactura WHERE id = ?";

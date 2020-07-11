@@ -30,9 +30,10 @@ public class Reportes extends Conexiondb {
     //mostrar facturas realizadas por dia 
     public DefaultTableModel ReporteDiario(Date Fecha) {
         cn = Conexion();
-        this.consulta = "SELECT facturas.id,facturas.fecha AS fechaFactura, impuestoISV, totalFactura, nombre_comprador, formapago.tipoVenta, creditos.id as idCredito, cajas.caja from facturas LEFT JOIN formapago ON(formapago.id = facturas.tipoVenta) LEFT JOIN creditos ON(facturas.credito = creditos.id) LEFT JOIN cajas ON(facturas.caja=cajas.id) WHERE facturas.fecha = ? ORDER BY facturas.id";
+        //TODO agregar el campo impuestoIVA ala consulta
+        this.consulta = "SELECT facturas.id,facturas.fecha AS fechaFactura, totalFactura, nombre_comprador, formapago.tipoVenta, creditos.id as idCredito, cajas.caja from facturas LEFT JOIN formapago ON(formapago.id = facturas.tipoVenta) LEFT JOIN creditos ON(facturas.credito = creditos.id) LEFT JOIN cajas ON(facturas.caja=cajas.id) WHERE facturas.fecha = ? ORDER BY facturas.id";
         String[] Resultados = new String[8];
-        String[] titulos = {"Factura", "Fecha", "Iva", "Total", "Comprador", "Forma Pago", "N° Credito", "Caja"};
+        String[] titulos = {"Factura", "Fecha", "Total", "Comprador", "Forma Pago", "N° Credito", "Caja"};
         this.modelo = new DefaultTableModel(null, titulos) {
             public boolean isCellEditable(int row, int col) {
                 return false;
@@ -45,12 +46,12 @@ public class Reportes extends Conexiondb {
             while (rs.next()) {
                 Resultados[0] = rs.getString("id");
                 Resultados[1] = rs.getString("fechaFactura");
-                Resultados[2] = rs.getString("impuestoISV");
-                Resultados[3] = rs.getString("totalFactura");
-                Resultados[4] = rs.getString("nombre_comprador");
-                Resultados[5] = rs.getString("tipoVenta");
-                Resultados[6] = rs.getString("idCredito");
-                Resultados[7] = rs.getString("caja");
+//                Resultados[2] = rs.getString("impuestoISV");
+                Resultados[2] = rs.getString("totalFactura");
+                Resultados[3] = rs.getString("nombre_comprador");
+                Resultados[4] = rs.getString("tipoVenta");
+                Resultados[5] = rs.getString("idCredito");
+                Resultados[6] = rs.getString("caja");
                 modelo.addRow(Resultados);
             }
             cn.close();
@@ -286,6 +287,26 @@ public class Reportes extends Conexiondb {
         try{
             this.pst = this.cn.prepareStatement(this.consulta);
             this.pst.setDate(1,fecha);
+            ResultSet rs = this.pst.executeQuery();
+            while(rs.next()){
+                ingresos = rs.getFloat("total");
+            }
+            this.cn.close();
+        }catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e+ " en la funcion IngresoDiarioEfectivo en modelo Reportes");
+        }
+        return ingresos;
+    }
+    public float ingresoEfecitivoRango(Date fecha1, Date fecha2)
+    {
+        this.cn = Conexion();
+        float ingresos = 0;
+        this.consulta = "SELECT SUM(t.monto) AS total FROM transaccion AS t INNER JOIN cajas AS c ON(t.caja = c.id) WHERE t.fecha BETWEEN ? AND ? AND c.caja = 'CAJA1' AND t.tipoTransaccion = 'Ingreso'";
+        try{
+            this.pst = this.cn.prepareStatement(this.consulta);
+            this.pst.setDate(1,fecha1);
+            this.pst.setDate(2, fecha2);
             ResultSet rs = this.pst.executeQuery();
             while(rs.next()){
                 ingresos = rs.getFloat("total");
@@ -829,9 +850,10 @@ public class Reportes extends Conexiondb {
 
     public DefaultTableModel BuscarFactura(int id) {
         this.cn = Conexion();
-        this.consulta = "SELECT facturas.id,facturas.fecha AS fechaFactura, impuestoISV, totalFactura, nombre_comprador, formapago.tipoVenta, creditos.id as idCredito, cajas.caja from facturas LEFT JOIN formapago ON(formapago.id = facturas.tipoVenta) LEFT JOIN creditos ON(facturas.credito = creditos.id) LEFT JOIN cajas ON(facturas.caja=cajas.id) WHERE facturas.id = ?";        
+        //TODO agregar campo impuestoISV a la consulta
+        this.consulta = "SELECT facturas.id,facturas.fecha AS fechaFactura, totalFactura, nombre_comprador, formapago.tipoVenta, creditos.id as idCredito, cajas.caja from facturas LEFT JOIN formapago ON(formapago.id = facturas.tipoVenta) LEFT JOIN creditos ON(facturas.credito = creditos.id) LEFT JOIN cajas ON(facturas.caja=cajas.id) WHERE facturas.id = ?";        
         String[] facturas = new String[8];
-        String[] titulos = {"Factura", "Fecha", "Iva", "Total", "Comprador", "Forma Pago", "N° Credito", "Caja"};
+        String[] titulos = {"Factura", "Fecha", "Total", "Comprador", "Forma Pago", "N° Credito", "Caja"};
         this.modelo = new DefaultTableModel(null, titulos) {
             public boolean isCellEditable(int row, int col) {
                 return false;
@@ -845,12 +867,12 @@ public class Reportes extends Conexiondb {
             while(rs.next()){
                 facturas[0] = rs.getString("id");
                 facturas[1] = rs.getString("fechaFactura");
-                facturas[2] = rs.getString("impuestoISV");
-                facturas[3] = rs.getString("totalFactura");
-                facturas[4] = rs.getString("nombre_comprador");
-                facturas[5] = rs.getString("tipoVenta");
-                facturas[6] = rs.getString("idCredito");
-                facturas[7] = rs.getString("caja");
+//                facturas[2] = rs.getString("impuestoISV");
+                facturas[2] = rs.getString("totalFactura");
+                facturas[3] = rs.getString("nombre_comprador");
+                facturas[4] = rs.getString("tipoVenta");
+                facturas[5] = rs.getString("idCredito");
+                facturas[6] = rs.getString("caja");
                 modelo.addRow(facturas);
             }
         } catch (SQLException e) {

@@ -136,9 +136,12 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     factura = menu.txtNumeroFactura.getText();//capturo id de factura ala que pertenece el detalle de factura
                     this.factura.DetalleFactura(factura, id, precio, cantidad, totalDetalle);//envio los datos a guardar de los detalles
                     //this.factura.Vender(id,cantidad);//funcion para diminuir el stock segun la cantidad que se venda
+//                    subNombre = nombreProduct.substring(0, 10);
+//                    System.out.print(subNombre);
                     ArregloImprimir[cont] = nombreProduct + "  " + cantidad + "   " + precio + "   " + totalDetalle + "\n";
                 }
-                menu.txtNumeroFactura.setText(this.factura.ObtenerIdFactura());//Actualizo el campo numero de factura con la funcion obtenerIdFactura               
+                menu.txtNumeroFactura.setText(this.factura.ObtenerIdFactura());//Actualizo el campo numero de factura con la funcion obtenerIdFactura 
+                menu.txtCodBarraFactura.requestFocus();
                 LimpiarTablaFactura();//limpio la factura
                 DeshabilitarBtnGuardarFactura();
                 productos.MostrarProductos("");
@@ -339,7 +342,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
         }
         if (e.getSource() == menu.btnEliminarFilaFactura) {
             int filaseleccionada = menu.tblFactura.getSelectedRow();
-            float importe, totalActual;
+            float importe, totalActual, sacarImpuesto, porcentajeImp;
             String cantidad, id;
             try {
                 if (filaseleccionada == -1) {
@@ -350,16 +353,23 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     cantidad = (String) modelo.getValueAt(filaseleccionada, 2);
                     importe = Float.parseFloat(modelo.getValueAt(filaseleccionada, 5).toString());
                     totalActual = Float.parseFloat(menu.txtTotal.getText());
+                    //fromato para los totales
+                    DecimalFormat formato = new DecimalFormat("#############.##");
+                    //formatreo de le inpuesto IVA
+                    sacarImpuesto = Float.parseFloat(1 + "." + menu.lblImpuestoISV.getText());//concatenacion para sacar el valor 1.xx para sacar el iva
+                    //obtengo el IVA en entero "15" o cualquier que sea el impuesto
+                    porcentajeImp = Float.parseFloat(menu.lblImpuestoISV.getText());// "descProduct = descuento de producto"
                     this.total = totalActual - importe;
-                    this.isv = (float) (this.total * Float.parseFloat(menu.lblImpuestoISV.getText())) / 100;
+                    this.isv = ((this.total / sacarImpuesto) * porcentajeImp) / 100;
                     this.subTotal = this.total - isv;
                     menu.txtTotal.setText("" + this.total);
-                    menu.txtSubTotal.setText("" + this.subTotal);
-                    menu.txtImpuesto.setText("" + this.isv);
+                    menu.txtSubTotal.setText("" + formato.format(this.subTotal));
+                    menu.txtImpuesto.setText("" + formato.format(this.isv));
                     modelProduct.AgregarProductoStock(id, cantidad);
                     productos.MostrarProductosVender("");
                     this.modelo.removeRow(filaseleccionada);
                     DeshabilitarBtnGuardarFactura();
+                    menu.txtCodBarraFactura.requestFocus();
                 }
             } catch (Exception err) {
                 JOptionPane.showMessageDialog(null, err);
@@ -378,6 +388,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                 }
                 LimpiarTablaFactura();
                 DeshabilitarBtnGuardarFactura();
+                menu.txtCodBarraFactura.requestFocus();
             } catch (Exception err) {
                 JOptionPane.showMessageDialog(null, err);
             }
@@ -448,6 +459,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     menu.txtTotal.setText("" + this.total);
                     menu.txtCodBarraFactura.setText("");
                     DeshabilitarBtnGuardarFactura();
+                    menu.txtCodBarraFactura.requestFocus();
                 } else {
                     JOptionPane.showMessageDialog(null, "El producto no esta ingresado...");
                     menu.txtCodBarraFactura.setText("");
@@ -513,6 +525,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                         menu.txtSubTotal.setText("" + formato.format(this.subTotal));
                         menu.txtImpuesto.setText("" + formato.format(this.isv));
                         menu.txtTotal.setText("" + this.total);
+                        menu.txtCodBarraFactura.requestFocus();
                         spiner.setValue(0.00);
                     }
                 }
@@ -565,6 +578,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     menu.txtSubTotal.setText("" + formato.format(this.subTotal));
                     menu.txtImpuesto.setText("" + formato.format(this.isv));
                     menu.txtTotal.setText("" + this.total);
+                    menu.txtCodBarraFactura.requestFocus();
                     spiner.setValue(0.00);
                 }
             } catch (Exception err) {
@@ -738,6 +752,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                         menu.txtAClienteFactura.setText(apellido);
                         menu.cmbFormaPago.setSelectedItem("Pendiente");
                         menu.AddCreditoFactura.setVisible(false);
+                        menu.txtCodBarraFactura.requestFocus();
                     }
                 } catch (Exception err) {
                     JOptionPane.showMessageDialog(null, err);
@@ -954,6 +969,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     this.factura.DetalleFactura(factura, id, precio, cantidad, totalDetalle);//envio los datos a guardar de los detalles
                     //this.factura.Vender(id,cantidad);//funcion para diminuir el stock segun la cantidad que se venda
                     ArregloImprimir[cont] = nombreProduct + "  " + cantidad + "   " + precio + "   " + totalDetalle + "\n";
+                    System.out.println(ArregloImprimir[cont]);
                 }
                 menu.txtNumeroFactura.setText(this.factura.ObtenerIdFactura());//Actualizo el campo numero de factura con la funcion obtenerIdFactura               
                 LimpiarTablaFactura();//limpio la factura

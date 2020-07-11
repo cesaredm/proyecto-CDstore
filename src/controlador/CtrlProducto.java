@@ -87,6 +87,15 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
         DeshabilitarProductos();
         menu.rbBuscarNombreCodBarra.setSelected(true);
         this.menu.jcFechaVProducto.setDate(fecha);
+        //TODO comentar esto y reordenar los elementos en el formulario de ingreso de productos
+        menu.txtCompraProducto.setVisible(false);
+        menu.jLabel11.setVisible(false);
+        menu.jLabel12.setVisible(false);
+        menu.cmbMonedaCompraProducto.setVisible(false);
+        menu.jLabel20.setVisible(false);
+        menu.txtGananciaProducto.setVisible(false);
+        menu.txtMargenGanancia.setVisible(false);
+        menu.btnCalcularGanancia.setVisible(false);
     }
 
     @Override
@@ -110,8 +119,6 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
             //Validacion de que sean ingresados los datos correctos y que no esten vacios
             if (nombre.equals("")) {
                 //JOptionPane.showMessageDialog(null, "Llene el campo Nombre", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else if (precioCProducto.equals("")) {
-                JOptionPane.showMessageDialog(null, "Llene el campo Precio Compra", "Advertencia", JOptionPane.WARNING_MESSAGE);
             } else if (precioVProducto.equals("")) {
                 JOptionPane.showMessageDialog(null, "Llene el campo Precio Venta", "Advertencia", JOptionPane.WARNING_MESSAGE);
             } else if (fechaVencimiento.equals(null)) {
@@ -123,10 +130,11 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
             } else if (laboratorio.equals("")) {
                 JOptionPane.showMessageDialog(null, "Llene el campo Laboratorio", "Advertencia", JOptionPane.WARNING_MESSAGE);
             } else {//validacion para ingreso de nuemeros 
+                /*TODO opcional descomentar esto
                 if (!isNumeric(precioCProducto)) {
                     //txtCompraProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
                     JOptionPane.showMessageDialog(null, "Solo numeros campo Precio Compra", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                } else if (!isNumeric(precioVProducto)) {
+                } else*/ if (!isNumeric(precioVProducto)) {
                     JOptionPane.showMessageDialog(null, "Solo numeros campo Precio Venta", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 } else if (!isNumeric(cantidad)) {
                     JOptionPane.showMessageDialog(null, "Solo numeros campo Cantidad", "Advertencia", JOptionPane.WARNING_MESSAGE);

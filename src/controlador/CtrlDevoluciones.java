@@ -81,12 +81,13 @@ public class CtrlDevoluciones implements ActionListener, WindowListener {
                 int confirmar = JOptionPane.showConfirmDialog(null, spiner, "Cantidad a devolver:", JOptionPane.OK_CANCEL_OPTION);
                 if (confirmar == JOptionPane.YES_OPTION) {
                     cantidadDevolver = Float.parseFloat(spiner.getValue().toString());
+                    //TODO CAMBIAR LAS POSICIONES POR LA CONSULTA
                     idDetalle = Integer.parseInt(this.modelo.getValueAt(filaseleccionada, 0).toString());
                     idProducto = Integer.parseInt(this.modelo.getValueAt(filaseleccionada, 1).toString());
                     precio = Float.parseFloat(this.modelo.getValueAt(filaseleccionada, 5).toString());
                     cantidadActual = Float.parseFloat(this.modelo.getValueAt(filaseleccionada, 4).toString());
                     idFactura = Integer.parseInt(menu.tblReporte.getValueAt(filaseleccionadaR, 0).toString());
-                    total = Float.parseFloat(menu.tblReporte.getValueAt(filaseleccionadaR, 3).toString());
+                    total = Float.parseFloat(menu.tblReporte.getValueAt(filaseleccionadaR, 2).toString());
                     this.factura.monedaVentaProducto(String.valueOf(idProducto));
                     //validar que lo que se va a devolver sea menor o igual que lo que compro
                     if (cantidadDevolver <= cantidadActual) {
@@ -106,12 +107,13 @@ public class CtrlDevoluciones implements ActionListener, WindowListener {
                             totalUpdate = total - (cantidadDevolver * precio);
                         }
                         //calcular el nuevo impuesto
+                        //TODO sustituuir el 0 por ivaUpdate en this.factura.Actualizar Detalle
                         ivaUpdate = ((totalUpdate / sacarImpuesto) * porcentajeImp) / 100;
                         //calcular el nuevo subtotal
                         subTotalUpdate = totalUpdate - ivaUpdate;
                         //llamar las funciones para actualizar los datos correpondientes
                         this.factura.ActualizarDetalle(String.valueOf(idDetalle), String.valueOf(idProducto), String.valueOf(precio), String.valueOf(cantidadUpdate), String.valueOf(importe));
-                        this.factura.ActualizarDevolucion(idFactura, ivaUpdate, totalUpdate);
+                        this.factura.ActualizarDevolucion(idFactura, 0, totalUpdate);
                         this.producto.AgregarProductoStock(String.valueOf(idProducto), String.valueOf(cantidadDevolver));
                         MostrarDetalleFactura(idFactura);
                         MostrarProductos("");

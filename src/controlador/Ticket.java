@@ -40,7 +40,7 @@ public class Ticket {
     "Pago:    {{formaPago}}\n"+
     "Fecha:   {{dateTime}} \n"+
           "\n"+
-    "DESCRIP   CANT.  PRECIO  IMPORTE\n"+
+    "DESCRIP    CANT. PRECIO IMPORTE\n"+
     "=================================N \n"+
     "{{items}} \n"+
     "=================================N \n"+
@@ -84,7 +84,7 @@ public class Ticket {
   }
     
   public void print() {
-    //System.out.println(this.contentTicket);
+    System.out.println(this.contentTicket);
     //Especificamos el tipo de dato a imprimir
     //Tipo: bytes; Subtipo: autodetectado
     DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
