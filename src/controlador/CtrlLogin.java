@@ -4,6 +4,8 @@ import modelo.*;
 import vista.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -27,7 +29,7 @@ import modelo.AperturasYcierres;
  *
  * @author CESAR DIAZ MARADIAGA
  */
-public class CtrlLogin implements ActionListener, KeyListener {
+public class CtrlLogin implements ActionListener, KeyListener ,FocusListener{
 
     private ILogin login;
     private Login modelLogin;
@@ -48,7 +50,9 @@ public class CtrlLogin implements ActionListener, KeyListener {
         modelLogin.fechaIntalacion(this.fecha.getTime());//si no existe una fecha de instalacion se guardara la fecha si no no hara nada 
         this.login.btnAceptar.addActionListener(this);
         this.login.btnAceptar.addKeyListener(this);
-        this.login.txtNombreUsuario.selectAll();
+        this.login.txtNombreUsuario.addFocusListener(this);
+        this.login.txtPassUsuario.addFocusListener(this);
+        this.login.txtPassUsuario.addKeyListener(this);
     }
 
     public void iniciar() {
@@ -154,11 +158,6 @@ public class CtrlLogin implements ActionListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
         if (e.VK_ENTER == e.getKeyCode()) {
             String nombre = login.txtNombreUsuario.getText(), pass = login.txtPassUsuario.getText();
             //switch para metodo de prueba de 20 dias
@@ -214,6 +213,54 @@ public class CtrlLogin implements ActionListener, KeyListener {
                 }
             }else{
                 JOptionPane.showMessageDialog(null, "Complete los campos usuario y password");
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        
+    }
+
+    @Override
+    public void focusGained(FocusEvent e) {
+        if(e.getSource() == login.txtNombreUsuario){
+            String Valor = login.txtNombreUsuario.getText();
+            if(Valor.equals("Usuario"))
+            {
+                login.txtNombreUsuario.setText("");
+            }else{
+                
+            }
+            
+        }
+        if(e.getSource() == login.txtPassUsuario){
+            String valor = login.txtPassUsuario.getText();
+            if(valor.equals("cdsoft")){
+                login.txtPassUsuario.setText("");
+            }else{
+                
+            }
+            
+        }
+    }
+
+    @Override
+    public void focusLost(FocusEvent e) {
+        if(e.getSource() == login.txtNombreUsuario){
+            String valor = login.txtNombreUsuario.getText();
+            if(valor.equals("") || valor.equals("Usuario")){
+                login.txtNombreUsuario.setText("Usuario");
+            }else{
+                
+            }
+        }
+        if(e.getSource() == login.txtPassUsuario){
+            String valor = login.txtPassUsuario.getText();
+            if(valor.equals("") || valor.equals("cdsoft")){
+                login.txtPassUsuario.setText("cdsoft");
+            }else{
+                
             }
         }
     }

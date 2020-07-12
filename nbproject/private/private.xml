@@ -5,7 +5,10 @@
         <group>
             <file>file:/C:/Users/gallomasgallo/Documents/NetBeansProjects/CDstore1/src/vista/IMenu.java</file>
             <file>file:/C:/Users/gallomasgallo/Documents/NetBeansProjects/CDstore1/src/controlador/CtrlFacturacion.java</file>
-            <file>file:/C:/Users/gallomasgallo/Documents/NetBeansProjects/CDstore1/src/controlador/Ticket.java</file>
+            <file>file:/C:/Users/gallomasgallo/Documents/NetBeansProjects/CDstore1/src/modelo/AperturasYcierres.java</file>
+            <file>file:/C:/Users/gallomasgallo/Documents/NetBeansProjects/CDstore1/src/controlador/CtrlLogin.java</file>
+            <file>file:/C:/Users/gallomasgallo/Documents/NetBeansProjects/CDstore1/src/vista/ILogin.java</file>
+            <file>file:/C:/Users/gallomasgallo/Documents/NetBeansProjects/CDstore1/src/controlador/CtrlReportes.java</file>
         </group>
     </open-files>
 </project-private>

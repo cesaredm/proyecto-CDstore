@@ -30,13 +30,22 @@ public class Productos extends Conexiondb {
     PreparedStatement pst;
     String consulta;
     int banderin;
-
+    private boolean existe = true;
+    
     public Productos() {
         this.cn = null;
         this.combo = new DefaultComboBoxModel();
         this.pst = null;
     }
 
+    public boolean isExiste() {
+        return existe;
+    }
+
+    public void setExiste(boolean existe) {
+        this.existe = existe;
+    }
+    
     public void Guardar(String codigoBarra, String nombre, String precioCompra, String monedaCompra, String precioVenta, String monedaVenta, Date fechaVencimiento, String stock, String categoria, String laboratorio, String ubicacion, String descripcion) {
         cn = Conexion();
         this.consulta = "INSERT INTO productos(codigoBarra, nombre, precioCompra, monedaCompra, precioVenta, monedaVenta, fechaVencimiento, stock, categoria, marca, ubicacion, descripcion) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -114,9 +123,10 @@ public class Productos extends Conexiondb {
 
     public DefaultTableModel Consulta(String buscar) {
         cn = Conexion();
-        this.consulta = "SELECT productos.id, productos.codigoBarra, productos.nombre AS nombreProducto, precioCompra, monedaCompra, precioVenta, monedaVenta, fechaVencimiento, stock, ubicacion, productos.descripcion, categorias.nombre AS nombreCategoria, marca.nombre as nombreMarca FROM productos LEFT JOIN categorias ON(productos.categoria=categorias.id) LEFT JOIN marca ON(productos.marca=marca.id) WHERE CONCAT(productos.codigoBarra, productos.nombre) LIKE '%" + buscar + "%'";
+        //TODO agregar los campos precioCompra y moneda compra en la consulta
+        this.consulta = "SELECT productos.id, productos.codigoBarra, productos.nombre AS nombreProducto, precioVenta, monedaVenta, fechaVencimiento, stock, ubicacion, productos.descripcion, categorias.nombre AS nombreCategoria, marca.nombre as nombreMarca FROM productos LEFT JOIN categorias ON(productos.categoria=categorias.id) LEFT JOIN marca ON(productos.marca=marca.id) WHERE CONCAT(productos.codigoBarra, productos.nombre) LIKE '%" + buscar + "%'";
         String[] registros = new String[14];
-        String[] titulos = {"Id", "Codigo Barra", "Nombre", "precioCompra", "Moneda","precioVenta", "Moneda", "Fecha Vencimiento", "Stock", "Categoria", "marca", "Ubicación", "Descripción"};
+        String[] titulos = {"Id", "Codigo Barra", "Nombre","precioVenta", "Moneda", "Fecha Vencimiento", "Stock", "Categoria", "marca", "Ubicación", "Descripción"};
         modelo = new DefaultTableModel(null, titulos) {
             @Override
             public boolean isCellEditable(int row, int col) {
@@ -130,16 +140,16 @@ public class Productos extends Conexiondb {
                 registros[0] = rs.getString("id");
                 registros[1] = rs.getString("codigoBarra");
                 registros[2] = rs.getString("nombreProducto");
-                registros[3] = rs.getString("precioCompra");
-                registros[4] = rs.getString("monedaCompra");
-                registros[5] = rs.getString("precioVenta");
-                registros[6] = rs.getString("monedaVenta");
-                registros[7] = rs.getString("fechaVencimiento");
-                registros[8] = rs.getString("stock");
-                registros[9] = rs.getString("nombreCategoria");
-                registros[10] = rs.getString("nombreMarca");
-                registros[11] = rs.getString("ubicacion");
-                registros[12] = rs.getString("descripcion");
+//                registros[3] = rs.getString("precioCompra");
+//                registros[4] = rs.getString("monedaCompra");
+                registros[3] = rs.getString("precioVenta");
+                registros[4] = rs.getString("monedaVenta");
+                registros[5] = rs.getString("fechaVencimiento");
+                registros[6] = rs.getString("stock");
+                registros[7] = rs.getString("nombreCategoria");
+                registros[8] = rs.getString("nombreMarca");
+                registros[9] = rs.getString("ubicacion");
+                registros[10] = rs.getString("descripcion");
                 this.modelo.addRow(registros);
             }
             cn.close();
@@ -369,5 +379,26 @@ public class Productos extends Conexiondb {
             JOptionPane.showMessageDialog(null, e+"funcion inversion en modelo");
         }
         return inversion;
+    }
+    public void ExitsCodBarra(String codBarra){
+        
+        String producto = "";
+        this.cn = Conexion();
+        this.consulta = "SELECT codigoBarra FROM productos WHERE codigoBarra = ?";
+        try {
+            this.pst = this.cn.prepareStatement(this.consulta);
+            this.pst.setString(1, codBarra);
+            ResultSet rs = this.pst.executeQuery();
+            while(rs.next()){
+                producto = rs.getString("codigoBarra");
+            }
+            if(producto.equals("")){
+                setExiste(false);
+            }else{
+                setExiste(true);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e+" en la funcion ExistCodBarra en modelo productos");
+        }
     }
 }

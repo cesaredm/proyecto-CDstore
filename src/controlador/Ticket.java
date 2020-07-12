@@ -44,8 +44,8 @@ public class Ticket {
     "=================================N \n"+
     "{{items}} \n"+
     "=================================N \n"+
-    "SUBTOTAL: {{subTotal}}\n"+
-    "IVA: {{iva}}\n"+
+    "{{subTotal}}"+
+    "{{iva}}"+
     "TOTAL:{{total}} \n"+
     "RECIBIDO: {{recibo}}\n"+
     "CAMBIO: {{change}}\n"+

@@ -287,10 +287,28 @@ public class Creditos extends Conexiondb {
             {
                 validar = true;
             }
+            this.cn.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e+"funcion VerificarExistenciaDeCredito");
         }
         return validar;
     }
-    
+    //metodo para obtener el nombre de cliente que tiene el credito
+    public String NombreCliente(String idCredito)
+    {
+        String nombre = "";
+        this.cn = Conexion();
+        this.consulta = "SELECT c.nombres, c.apellidos FROM clientes AS c INNER JOIN creditos ON(c.id = creditos.cliente) WHERE creditos.id = ?";
+        try {
+            this.pst = this.cn.prepareStatement(this.consulta);
+            this.pst.setString(1, idCredito);
+            ResultSet rs = this.pst.executeQuery();
+            while(rs.next()){
+                nombre = rs.getString("nombres")+" "+rs.getString("apellidos");
+            }
+        } catch (SQLException e) {
+             JOptionPane.showMessageDialog(null, e+"funcion NombreCliente en el modelo credito");
+        }
+        return nombre;
+    }
 }

@@ -55,6 +55,7 @@ public class PrintReportes {
   "Ingreso por ventas con Tarjeta    {{ventasT}}\n"+
   "Ingresos por pagos en efectivo    {{pagosE}}\n"+
   "Ingresos por pagos con Tarjeta    {{pagosT}}\n"+
+  "Ingresos de Efectivo              {{ingresosE}}"+
   "Creditos                          {{creditos}}\n"+
   "Egresos de Efectivo de caja       {{egresos}}\n"+
   "==============================================N\n"+
@@ -73,16 +74,17 @@ public class PrintReportes {
   "{{nombreTienda}}           \n"+
   "REPORTE GENERAL GLOBAL      \n"+
   "\n"+
-  "Ingreso por ventas en efectivo + Base   {{ventasE+B}}\n"+
-  "Ingreso por ventas con Tarjeta          {{ventasT}}\n"+
-  "Ingresos por pagos en efectivo          {{pagosE}}\n"+
-  "Ingresos por pagos con Tarjeta          {{pagosT}}\n"+
-  "Creditos                                {{creditos}}\n"+
-  "Egresos de Efectivo de caja             {{egresos}}\n"+
-  "=========================================================N\n"+
-  "Total efectivo en caja                  {{existCaja}}\n"+
-  "Total Bancos                            {{bancos}}\n"+
-  "Total vendido                           {{totalV}}\n"+
+  "Ingreso por ventas en efectivo     {{ventasE}}\n"+
+  "Ingreso por ventas con Tarjeta     {{ventasT}}\n"+
+  "Ingresos por pagos en efectivo     {{pagosE}}\n"+
+  "Ingresos por pagos con Tarjeta     {{pagosT}}\n"+
+  "Ingresos de Efectivo               {{ingresosE}}"+
+  "Creditos                           {{creditos}}\n"+
+  "Egresos de Efectivo de caja        {{egresos}}\n"+
+  "====================================================N\n"+
+  "Total efectivo en caja             {{existCaja}}\n"+
+  "Total Bancos                       {{bancos}}\n"+
+  "Total vendido                      {{totalV}}\n"+
   "..\n\n\n\n\n";
   
   //bussines Intelligense
@@ -100,7 +102,7 @@ public class PrintReportes {
 
     }
    
-    public void llenarTicketDiario(String NombreTienda, String fecha, String base, String ventasEfectivo, String ventasT, String pagosE, String pagosT, String creditos, String egreso, String existCaja, String bancos, String totalV)
+    public void llenarTicketDiario(String NombreTienda, String fecha, String base, String ventasEfectivo, String ventasT, String pagosE, String pagosT, String ingresosE, String creditos, String egreso, String existCaja, String bancos, String totalV)
     {
         this.contentTicketDiario = this.contentTicketDiario.replace("{{nombreTienda}}", NombreTienda);
         this.contentTicketDiario = this.contentTicketDiario.replace("{{fecha}}",fecha);
@@ -109,6 +111,7 @@ public class PrintReportes {
         this.contentTicketDiario = this.contentTicketDiario.replace("{{ventasT}}",ventasT);
         this.contentTicketDiario = this.contentTicketDiario.replace("{{pagosE}}",pagosE);
         this.contentTicketDiario = this.contentTicketDiario.replace("{{pagosT}}",pagosT);
+        this.contentTicketDiario = this.contentTicketDiario.replace("{{ingresosE}}",ingresosE);
         this.contentTicketDiario = this.contentTicketDiario.replace("{{creditos}}",creditos);
         this.contentTicketDiario = this.contentTicketDiario.replace("{{egresos}}",egreso);
         this.contentTicketDiario = this.contentTicketDiario.replace("{{existCaja}}",existCaja);
@@ -142,13 +145,14 @@ public class PrintReportes {
         this.BI = this.BI.replace("{{producto}}",Producto);
         //System.out.println(this.BI);
     }
-    public void llenarTicketGlobal(String NombreTienda, String ventasEfectivo, String ventasT, String pagosE, String pagosT, String creditos, String egreso, String existCaja, String bancos, String totalV)
+    public void llenarTicketGlobal(String NombreTienda, String ventasEfectivo, String ventasT, String pagosE, String pagosT, String ingresosE, String creditos, String egreso, String existCaja, String bancos, String totalV)
     {
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{nombreTienda}}", NombreTienda);
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{ventasE+B}}",ventasEfectivo);
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{ventasT}}",ventasT);
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{pagosE}}",pagosE);
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{pagosT}}",pagosT);
+        this.contentTicketGlobal = this.contentTicketGlobal.replace("{{ingresosE}}",ingresosE);
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{creditos}}",creditos);
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{egresos}}",egreso);
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{existCaja}}",existCaja);

@@ -34,15 +34,14 @@ public class AperturasYcierres extends Conexiondb {
         this.consulta = "";
         this.banderin = 0;
     }
-    public void GuardarAperturas(Date fecha,int caja,float efectivo, String descripcion){
+    public void GuardarAperturas(Date fecha,int caja,float efectivo){
         this.cn = Conexion();
-        this.consulta = "INSERT INTO aperturas(fecha,caja,efectivo,descripcion) VALUES(?,?,?,?)";
+        this.consulta = "INSERT INTO aperturas(fecha,caja,efectivo) VALUES(?,?,?)";
         try {
             this.pst = this.cn.prepareStatement(this.consulta);
             this.pst.setDate(1, fecha);
             this.pst.setInt(2,caja);
             this.pst.setFloat(3, efectivo);
-            this.pst.setString(4, descripcion);
             this.banderin = this.pst.executeUpdate();
             if(this.banderin>0)
             {

@@ -57,6 +57,7 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
         this.menu.txtBuscarPorLaboratorio.addCaretListener(this);
         this.menu.txtBuscarCategoriaAdd.addCaretListener(this);
         this.menu.txtLaboratorioAdd.addCaretListener(this);
+        this.menu.txtCodBarraProducto.addCaretListener(this);
         this.menu.EditarProducto.addActionListener(this);
         this.menu.BorrarProducto.addActionListener(this);
         this.menu.AddProductoStock.addActionListener(this);
@@ -431,6 +432,18 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
         if (e.getSource() == menu.txtLaboratorioAdd) {
             String Nombre = menu.txtLaboratorioAdd.getText();
             llenarAddLaboratorio(Nombre);
+        }
+        if(e.getSource() == menu.txtCodBarraProducto)
+        {
+            String cod = menu.txtCodBarraProducto.getText();
+            this.productos.ExitsCodBarra(cod);
+            if(!this.productos.isExiste()){
+                menu.lblErrorCodBarra.setText("");
+                menu.btnGuardarProducto.setEnabled(true);
+            }else{
+                menu.lblErrorCodBarra.setText("Oops. el código ya existe..");
+                menu.btnGuardarProducto.setEnabled(false);
+            }
         }
     }
 

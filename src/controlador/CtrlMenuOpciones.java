@@ -614,7 +614,8 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
         for (int i = 0; i < filas; i++)//recorro la tabla productos
         {
             try {
-                fechaFinal = sdf.parse(this.modelo.getValueAt(i, 7).toString());//obtengo la fecha del producto de la tabla producto lo paso a formato Date
+                //TODO cambiar el numero de columna segun la tabla 
+                fechaFinal = sdf.parse(this.modelo.getValueAt(i, 5).toString());//obtengo la fecha del producto de la tabla producto lo paso a formato Date
                 int dias = (int) ((fechaFinal.getTime() - fechaInicio.getTime()) / 86400000);//calculo de diferencias de dias "conversion de milesegundos a dias"
                 String nombre = (String) this.modelo.getValueAt(i, 2);//obtengo el nombre del producto de la tabla producto
                 if (dias == 60)//

@@ -134,13 +134,14 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
             this.menu.cmbCajasApertura.setModel(aperturas.mostrarCajas());
             menu.AperturasCaja.setVisible(true);
             menu.jcFechaApertura.setDate(this.fecha);
+            menu.txtEfectivoApertura.requestFocus();
         }
         if (e.getSource() == menu.btnMostrarInversion) {
             inversion();
         }
         if (e.getSource().equals(menu.btnGuardarApertura)) {
             GuardarAperturas();
-            
+            menu.AperturasCaja.setVisible(false);
         }
         if (e.getSource().equals(menu.btnAddTotalV)) {
             if (!menu.lblTotalFacturado.getText().equals("")) {
@@ -378,7 +379,6 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
 
     public void LimpiarAperturas() {
         menu.txtEfectivoApertura.setText("");
-        menu.txtDescripcionApertura.setText("");
     }
 
     public void LimpiarCierre() {
@@ -396,7 +396,6 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
     }
 
     public void GuardarAperturas() {
-        String descripcion = menu.txtDescripcionApertura.getText();
         String efectivo = menu.txtEfectivoApertura.getText();
         Date fecha = menu.jcFechaApertura.getDate();
         long fec = fecha.getTime(), fechaActual = this.fecha.getTime();
@@ -406,7 +405,7 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         if (menu.isNumeric(menu.txtEfectivoApertura.getText())) {
             if (!efectivo.equals("")) {
                 float efectivoA = Float.parseFloat(efectivo);
-                aperturas.GuardarAperturas(f, caja, efectivoA, descripcion);
+                aperturas.GuardarAperturas(f, caja, efectivoA);
                 menu.lblBase.setText("" + reportes.baseEfectivoDiario(f1));
                 reportesDiarios(f1);
                 LimpiarAperturas();

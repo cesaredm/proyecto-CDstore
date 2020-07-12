@@ -1,5 +1,6 @@
 package vista;
 
+import java.awt.Color;
 import modelo.Productos;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -308,9 +309,6 @@ public class IMenu extends javax.swing.JFrame {
         btnGuardarApertura = new javax.swing.JButton();
         jcFechaApertura = new com.toedter.calendar.JDateChooser();
         cmbCajasApertura = new javax.swing.JComboBox<>();
-        jLabel112 = new javax.swing.JLabel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        txtDescripcionApertura = new javax.swing.JTextArea();
         jLabel119 = new javax.swing.JLabel();
         CortesCaja = new javax.swing.JDialog();
         jPanel22 = new javax.swing.JPanel();
@@ -576,6 +574,7 @@ public class IMenu extends javax.swing.JFrame {
         cmbMonedaCompraProducto = new javax.swing.JComboBox<>();
         cmbMonedaVentaProducto = new javax.swing.JComboBox<>();
         jLabel101 = new javax.swing.JLabel();
+        lblErrorCodBarra = new javax.swing.JLabel();
         btnAgregarLaboratorio = new javax.swing.JButton();
         btnMostrarStockMinimo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -1432,7 +1431,7 @@ public class IMenu extends javax.swing.JFrame {
         btnReImprimirFactura.setBackground(new java.awt.Color(0, 153, 153));
         btnReImprimirFactura.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnReImprimirFactura.setForeground(new java.awt.Color(255, 255, 255));
-        btnReImprimirFactura.setText("Imprimir");
+        btnReImprimirFactura.setText("Imprimir Copia");
         btnReImprimirFactura.setBorderPainted(false);
         btnReImprimirFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReImprimirFactura.setFocusPainted(false);
@@ -2037,26 +2036,17 @@ public class IMenu extends javax.swing.JFrame {
 
         btnGuardarApertura.setBackground(new java.awt.Color(0, 166, 192));
         btnGuardarApertura.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnGuardarApertura.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardarApertura.setText("Aceptar");
         btnGuardarApertura.setBorderPainted(false);
         btnGuardarApertura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarApertura.setFocusPainted(false);
         btnGuardarApertura.setFocusable(false);
-        jPanel21.add(btnGuardarApertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, -1, 30));
+        jPanel21.add(btnGuardarApertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, 30));
         jPanel21.add(jcFechaApertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 40, 168, 30));
 
         cmbCajasApertura.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jPanel21.add(cmbCajasApertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 75, 168, -1));
-
-        jLabel112.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
-        jLabel112.setText("Descripción:");
-        jPanel21.add(jLabel112, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
-
-        txtDescripcionApertura.setColumns(20);
-        txtDescripcionApertura.setRows(5);
-        jScrollPane8.setViewportView(txtDescripcionApertura);
-
-        jPanel21.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 250, 50));
 
         jLabel119.setFont(new java.awt.Font("Segoe UI Light", 1, 17)); // NOI18N
         jLabel119.setText("Apertura de Caja");
@@ -2319,6 +2309,7 @@ public class IMenu extends javax.swing.JFrame {
         pnlContenedor.setPreferredSize(new java.awt.Dimension(1262, 607));
 
         pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        pnlPrincipal.setOpaque(false);
         pnlPrincipal.setLayout(new java.awt.CardLayout());
 
         pnlVentas.setBackground(new java.awt.Color(255, 255, 255));
@@ -4236,6 +4227,10 @@ public class IMenu extends javax.swing.JFrame {
         jLabel101.setText("Moneda Venta:");
         jPanel2.add(jLabel101, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 110, -1));
 
+        lblErrorCodBarra.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        lblErrorCodBarra.setForeground(new java.awt.Color(255, 0, 51));
+        jPanel2.add(lblErrorCodBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 57, 200, 10));
+
         btnAgregarLaboratorio.setBackground(new java.awt.Color(44, 201, 144));
         btnAgregarLaboratorio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnAgregarLaboratorio.setForeground(new java.awt.Color(255, 255, 255));
@@ -4832,6 +4827,7 @@ public class IMenu extends javax.swing.JFrame {
         pnlPrincipal.add(pnlInfoFactura, "card10");
 
         pnlEncabezado.setBackground(new java.awt.Color(239, 244, 245));
+        pnlEncabezado.setPreferredSize(new java.awt.Dimension(1103, 30));
 
         btnSalirSistema.setBackground(new java.awt.Color(204, 0, 0));
         btnSalirSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cruzar (1).png"))); // NOI18N
@@ -5067,7 +5063,7 @@ public class IMenu extends javax.swing.JFrame {
                 .addComponent(pnlMenuLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addGroup(pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, 1104, Short.MAX_VALUE)
                     .addGroup(pnlContenedorLayout.createSequentialGroup()
                         .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(1, 1, 1))))
@@ -5347,7 +5343,6 @@ public class IMenu extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel110;
     private javax.swing.JLabel jLabel111;
-    private javax.swing.JLabel jLabel112;
     private javax.swing.JLabel jLabel113;
     private javax.swing.JLabel jLabel114;
     private javax.swing.JLabel jLabel115;
@@ -5550,7 +5545,6 @@ public class IMenu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
@@ -5594,6 +5588,7 @@ public class IMenu extends javax.swing.JFrame {
     public javax.swing.JLabel lblEditarInfoFactura;
     public javax.swing.JLabel lblEgresosDiarios;
     public javax.swing.JLabel lblEgresosFiltro;
+    public javax.swing.JLabel lblErrorCodBarra;
     public javax.swing.JLabel lblExistenciaCajaFiltro;
     public javax.swing.JLabel lblGastosMenu;
     private javax.swing.JLabel lblIconCerrarSesion;
@@ -5720,7 +5715,6 @@ public class IMenu extends javax.swing.JFrame {
     public javax.swing.JTextField txtCreditoFactura;
     public javax.swing.JTextField txtCreditoPago;
     public javax.swing.JTextField txtCreditosCierre;
-    public javax.swing.JTextArea txtDescripcionApertura;
     public javax.swing.JTextArea txtDescripcionCategoria;
     public javax.swing.JTextArea txtDescripcionCierre;
     public javax.swing.JTextArea txtDescripcionGasto;
