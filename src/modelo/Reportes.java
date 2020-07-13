@@ -31,7 +31,7 @@ public class Reportes extends Conexiondb {
     public DefaultTableModel ReporteDiario(Date Fecha) {
         cn = Conexion();
         //TODO agregar el campo impuestoIVA ala consulta
-        this.consulta = "SELECT facturas.id,facturas.fecha AS fechaFactura, totalFactura, nombre_comprador, formapago.tipoVenta, creditos.id as idCredito, cajas.caja from facturas LEFT JOIN formapago ON(formapago.id = facturas.tipoVenta) LEFT JOIN creditos ON(facturas.credito = creditos.id) LEFT JOIN cajas ON(facturas.caja=cajas.id) WHERE facturas.fecha = ? ORDER BY facturas.id";
+        this.consulta = "SELECT facturas.id,facturas.fecha AS fechaFactura, totalFactura, nombre_comprador, formapago.tipoVenta, creditos.id as idCredito, cajas.caja from facturas LEFT JOIN formapago ON(formapago.id = facturas.tipoVenta) LEFT JOIN creditos ON(facturas.credito = creditos.id) LEFT JOIN cajas ON(facturas.caja=cajas.id) WHERE facturas.fecha = ? ORDER BY facturas.id DESC";
         String[] Resultados = new String[8];
         String[] titulos = {"Factura", "Fecha", "Total", "Comprador", "Forma Pago", "N° Credito", "Caja"};
         this.modelo = new DefaultTableModel(null, titulos) {

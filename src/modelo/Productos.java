@@ -124,7 +124,7 @@ public class Productos extends Conexiondb {
     public DefaultTableModel Consulta(String buscar) {
         cn = Conexion();
         //TODO agregar los campos precioCompra y moneda compra en la consulta
-        this.consulta = "SELECT productos.id, productos.codigoBarra, productos.nombre AS nombreProducto, precioVenta, monedaVenta, fechaVencimiento, stock, ubicacion, productos.descripcion, categorias.nombre AS nombreCategoria, marca.nombre as nombreMarca FROM productos LEFT JOIN categorias ON(productos.categoria=categorias.id) LEFT JOIN marca ON(productos.marca=marca.id) WHERE CONCAT(productos.codigoBarra, productos.nombre) LIKE '%" + buscar + "%'";
+        this.consulta = "SELECT productos.id, productos.codigoBarra, productos.nombre AS nombreProducto, precioVenta, monedaVenta, fechaVencimiento, stock, ubicacion, productos.descripcion, categorias.nombre AS nombreCategoria, marca.nombre as nombreMarca FROM productos LEFT JOIN categorias ON(productos.categoria=categorias.id) LEFT JOIN marca ON(productos.marca=marca.id) WHERE CONCAT(productos.codigoBarra, productos.nombre) LIKE '%" + buscar + "%' ORDER BY productos.id DESC";
         String[] registros = new String[14];
         String[] titulos = {"Id", "Codigo Barra", "Nombre","precioVenta", "Moneda", "Fecha Vencimiento", "Stock", "Categoria", "marca", "Ubicación", "Descripción"};
         modelo = new DefaultTableModel(null, titulos) {

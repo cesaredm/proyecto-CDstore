@@ -5045,7 +5045,7 @@ public class IMenu extends javax.swing.JFrame {
 
         pnlMenuLateral.add(btnInfoFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 200, 47));
 
-        lblUsuarioSistema.setFont(new java.awt.Font("Segoe UI Light", 2, 16)); // NOI18N
+        lblUsuarioSistema.setFont(new java.awt.Font("Segoe UI Light", 3, 16)); // NOI18N
         lblUsuarioSistema.setForeground(new java.awt.Color(255, 255, 255));
         lblUsuarioSistema.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUsuarioSistema.setText("Usuario");

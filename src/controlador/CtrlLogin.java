@@ -23,13 +23,14 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.Timer;
 import modelo.AperturasYcierres;
 
 /**
  *
  * @author CESAR DIAZ MARADIAGA
  */
-public class CtrlLogin implements ActionListener, KeyListener ,FocusListener{
+public class CtrlLogin implements ActionListener, KeyListener, FocusListener {
 
     private ILogin login;
     private Login modelLogin;
@@ -59,7 +60,8 @@ public class CtrlLogin implements ActionListener, KeyListener ,FocusListener{
         this.login.setVisible(true);
         this.login.setLocationRelativeTo(null);
     }
-    public void Preparar(){
+
+    public void Preparar() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-YYYY");
         String f = sdf.format(this.fecha);
         this.sModel = new SpinnerNumberModel();
@@ -67,14 +69,12 @@ public class CtrlLogin implements ActionListener, KeyListener ,FocusListener{
         this.sModel.setValue(1.00);
         this.sModel.setStepSize(0.01);
         this.spiner = new JSpinner(sModel);
-        JOptionPane.showMessageDialog(null, spiner, "Precio de Dolar hoy "+f+":",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, spiner, "Precio de Dolar hoy " + f + ":", JOptionPane.INFORMATION_MESSAGE);
         m.txtPrecioDolar.setText(spiner.getValue().toString());
     }
 
-    
     @Override
     public void actionPerformed(ActionEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         if (e.getSource() == login.btnAceptar) {
             String nombre = login.txtNombreUsuario.getText(), pass = login.txtPassUsuario.getText();
             //switch para metodo de prueba de 20 dias
@@ -115,23 +115,27 @@ public class CtrlLogin implements ActionListener, KeyListener ,FocusListener{
             if (!nombre.equals("") && !pass.equals("")) {
                 modelLogin.setNombreUsuario(nombre);
                 modelLogin.setPassUsuario(pass);
-                switch(modelLogin.ValidacionAdmin()){
-                    case 1:{
+                switch (modelLogin.ValidacionAdmin()) {
+                    case 1: {
                         this.menu = new CtrlMenuOpciones(m, 1, nombre);
                         this.login.dispose();
                         Preparar();
                         menu.iniciarMenu();
                         
-                    }break;
-                    case 2:{
-                        this.menu = new CtrlMenuOpciones(m, 2, nombre);
-                        menu.iniciarMenu();
-                        this.login.dispose();
-                    }break;
-                    case 0: JOptionPane.showMessageDialog(null, "Nombre o contraseña invalida");
+                    }
                     break;
+                    case 2: {
+                        this.menu = new CtrlMenuOpciones(m, 2, nombre);
+                        this.login.dispose();
+                        Preparar();
+                        menu.iniciarMenu();
+                    }
+                    break;
+                    case 0:
+                        JOptionPane.showMessageDialog(null, "Nombre o contraseña invalida");
+                        break;
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Complete los campos usuario y password");
             }
         }
@@ -150,6 +154,12 @@ public class CtrlLogin implements ActionListener, KeyListener ,FocusListener{
             response = "noValido";
         }
         return response;
+    }
+
+    public void Espera() {
+        this.login.espera.setVisible(true);
+        this.login.espera.setLocationRelativeTo(null);
+        this.login.espera.setSize(315, 73);
     }
 
     @Override
@@ -196,22 +206,26 @@ public class CtrlLogin implements ActionListener, KeyListener ,FocusListener{
             if (!nombre.equals("") && !pass.equals("")) {
                 modelLogin.setNombreUsuario(nombre);
                 modelLogin.setPassUsuario(pass);
-                switch(modelLogin.ValidacionAdmin()){
-                    case 1:{
+                switch (modelLogin.ValidacionAdmin()) {
+                    case 1: {
                         this.menu = new CtrlMenuOpciones(m, 1, nombre);
                         this.login.dispose();
                         Preparar();
                         menu.iniciarMenu();
-                    }break;
-                    case 2:{
-                        this.menu = new CtrlMenuOpciones(m, 2, nombre);
-                        menu.iniciarMenu();
-                        this.login.dispose();
-                    }break;
-                    case 0: JOptionPane.showMessageDialog(null, "Nombre o contraseña invalida");
+                    }
                     break;
+                    case 2: {
+                        this.menu = new CtrlMenuOpciones(m, 2, nombre);
+                        this.login.dispose();
+                        Preparar();
+                        menu.iniciarMenu();
+                    }
+                    break;
+                    case 0:
+                        JOptionPane.showMessageDialog(null, "Nombre o contraseña invalida");
+                        break;
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Complete los campos usuario y password");
             }
         }
@@ -219,48 +233,47 @@ public class CtrlLogin implements ActionListener, KeyListener ,FocusListener{
 
     @Override
     public void keyReleased(KeyEvent e) {
-        
+
     }
 
     @Override
     public void focusGained(FocusEvent e) {
-        if(e.getSource() == login.txtNombreUsuario){
+        if (e.getSource() == login.txtNombreUsuario) {
             String Valor = login.txtNombreUsuario.getText();
-            if(Valor.equals("Usuario"))
-            {
+            if (Valor.equals("Usuario")) {
                 login.txtNombreUsuario.setText("");
-            }else{
-                
+            } else {
+
             }
-            
+
         }
-        if(e.getSource() == login.txtPassUsuario){
+        if (e.getSource() == login.txtPassUsuario) {
             String valor = login.txtPassUsuario.getText();
-            if(valor.equals("cdsoft")){
+            if (valor.equals("cdsoft")) {
                 login.txtPassUsuario.setText("");
-            }else{
-                
+            } else {
+
             }
-            
+
         }
     }
 
     @Override
     public void focusLost(FocusEvent e) {
-        if(e.getSource() == login.txtNombreUsuario){
+        if (e.getSource() == login.txtNombreUsuario) {
             String valor = login.txtNombreUsuario.getText();
-            if(valor.equals("") || valor.equals("Usuario")){
+            if (valor.equals("") || valor.equals("Usuario")) {
                 login.txtNombreUsuario.setText("Usuario");
-            }else{
-                
+            } else {
+
             }
         }
-        if(e.getSource() == login.txtPassUsuario){
+        if (e.getSource() == login.txtPassUsuario) {
             String valor = login.txtPassUsuario.getText();
-            if(valor.equals("") || valor.equals("cdsoft")){
+            if (valor.equals("") || valor.equals("cdsoft")) {
                 login.txtPassUsuario.setText("cdsoft");
-            }else{
-                
+            } else {
+
             }
         }
     }

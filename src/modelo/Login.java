@@ -4,7 +4,6 @@ import controlador.CtrlProducto;
 import vista.ILogin;
 import java.sql.*;
 import javax.swing.JOptionPane;
-import vista.IMenu;
 
 /**
  *
@@ -124,6 +123,7 @@ public class Login extends Conexiondb {
         }
         
     }
+
 }
 
 

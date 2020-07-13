@@ -328,6 +328,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     menu.txtTotal.setText("" + this.total);
                     menu.txtCodBarraFactura.setText("");
                     DeshabilitarBtnGuardarFactura();
+                    productos.MostrarProductosVender("");
                 } else {
                     JOptionPane.showMessageDialog(null, "El producto no esta ingresado...");
                     menu.txtCodBarraFactura.setText("");
@@ -361,6 +362,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
             menu.txtSubTotal.setText("" + this.total);
             menu.txtImpuesto.setText("" + this.subTotal);
             menu.txtTotal.setText("" + this.isv);
+            
         } catch (Exception err) {
             JOptionPane.showMessageDialog(null, err);
         }
@@ -612,6 +614,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     }
                     this.modelo.setValueAt(String.valueOf(cantidadUpdate), filaseleccionada, 2);
                     this.modelo.setValueAt(String.valueOf(importeUpdate), filaseleccionada, 5);
+                    this.factura.Vender(id, String.valueOf(cantidadIngresar));
                     for (int i = 0; i < filas; i++) {
                         totalImports += Float.parseFloat(this.modelo.getValueAt(i, 5).toString());
                     }
@@ -632,6 +635,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     menu.txtTotal.setText("" + this.total);
                     menu.txtCodBarraFactura.requestFocus();
                     spiner.setValue(0.00);
+                    productos.MostrarProductosVender("");
                 }
             } catch (Exception err) {
             }
