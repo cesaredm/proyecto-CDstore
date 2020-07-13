@@ -50,14 +50,14 @@ public class PrintReportes {
   "{{nombreTienda}}           \n"+
   "REPORTE DEL DIA {{fecha}}      \n"+
   "\n"+
-  "Efctivo de Apertura Caja          {{base}}\n"+
+  "Efctivo de apertura caja          {{base}}\n"+
   "Ingreso por ventas en efectivo    {{ventasE}}\n"+
-  "Ingreso por ventas con Tarjeta    {{ventasT}}\n"+
+  "Ingreso por ventas con tarjeta    {{ventasT}}\n"+
   "Ingresos por pagos en efectivo    {{pagosE}}\n"+
-  "Ingresos por pagos con Tarjeta    {{pagosT}}\n"+
-  "Ingresos de Efectivo              {{ingresosE}}"+
+  "Ingresos por pagos con tarjeta    {{pagosT}}\n"+
+  "Ingresos de efectivo              {{ingresosE}}\n"+
   "Creditos                          {{creditos}}\n"+
-  "Egresos de Efectivo de caja       {{egresos}}\n"+
+  "Egresos de efectivo de caja       {{egresos}}\n"+
   "==============================================N\n"+
   "Total efectivo en caja            {{existCaja}}\n"+
   "Total Bancos                      {{bancos}}\n"+
@@ -75,13 +75,13 @@ public class PrintReportes {
   "REPORTE GENERAL GLOBAL      \n"+
   "\n"+
   "Ingreso por ventas en efectivo     {{ventasE}}\n"+
-  "Ingreso por ventas con Tarjeta     {{ventasT}}\n"+
+  "Ingreso por ventas con tarjeta     {{ventasT}}\n"+
   "Ingresos por pagos en efectivo     {{pagosE}}\n"+
-  "Ingresos por pagos con Tarjeta     {{pagosT}}\n"+
-  "Ingresos de Efectivo               {{ingresosE}}"+
+  "Ingresos por pagos con tarjeta     {{pagosT}}\n"+
+  "Ingresos de efectivo               {{ingresosE}}\n"+
   "Creditos                           {{creditos}}\n"+
-  "Egresos de Efectivo de caja        {{egresos}}\n"+
-  "====================================================N\n"+
+  "Egresos de efectivo de caja        {{egresos}}\n"+
+  "===============================================N\n"+
   "Total efectivo en caja             {{existCaja}}\n"+
   "Total Bancos                       {{bancos}}\n"+
   "Total vendido                      {{totalV}}\n"+
@@ -92,9 +92,9 @@ public class PrintReportes {
   "{{nombreTienda}}            \n"+
   "Productos mas vendidos o solicitados\n"+
   "Fecha: {{fecha1}} Hasta {{fecha2}}\n"+
-  "-----------------------------------------------------------\n"+
-  "Nombre                         Vendido\n"+
-  "-----------------------------------------------------------\n"+
+  "------------------------------------------------\n"+
+  "N°   Nombre                         Vendido\n"+
+  "-------------------------------------------------\n"+
   "{{producto}}\n"+
    "\n\n\n\n\n";
   //constructor
@@ -117,7 +117,7 @@ public class PrintReportes {
         this.contentTicketDiario = this.contentTicketDiario.replace("{{existCaja}}",existCaja);
         this.contentTicketDiario = this.contentTicketDiario.replace("{{bancos}}",bancos);
         this.contentTicketDiario = this.contentTicketDiario.replace("{{totalV}}",totalV);
-        //System.out.println(this.contentTicketDiario);
+        System.out.println(this.contentTicketDiario);
     }
     public void llenarTicketTotalV(String[] datos, String tienda)
     {
@@ -143,12 +143,12 @@ public class PrintReportes {
         this.BI = this.BI.replace("{{fecha1}}", fecha1);
         this.BI = this.BI.replace("{{fecha2}}", fecha2);
         this.BI = this.BI.replace("{{producto}}",Producto);
-        //System.out.println(this.BI);
+        System.out.println(this.BI);
     }
     public void llenarTicketGlobal(String NombreTienda, String ventasEfectivo, String ventasT, String pagosE, String pagosT, String ingresosE, String creditos, String egreso, String existCaja, String bancos, String totalV)
     {
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{nombreTienda}}", NombreTienda);
-        this.contentTicketGlobal = this.contentTicketGlobal.replace("{{ventasE+B}}",ventasEfectivo);
+        this.contentTicketGlobal = this.contentTicketGlobal.replace("{{ventasE}}",ventasEfectivo);
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{ventasT}}",ventasT);
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{pagosE}}",pagosE);
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{pagosT}}",pagosT);
@@ -158,7 +158,7 @@ public class PrintReportes {
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{existCaja}}",existCaja);
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{bancos}}",bancos);
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{totalV}}",totalV);
-        //System.out.println(this.contentTicketGlobal);
+        System.out.println(this.contentTicketGlobal);
     }
   public void print(String TipoReport) {
     //Especificamos el tipo de dato a imprimir

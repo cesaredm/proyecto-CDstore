@@ -3760,6 +3760,7 @@ public class IMenu extends javax.swing.JFrame {
         jPanel1.add(btnActualizarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 100, 40));
 
         txtBuscarCliente.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        txtBuscarCliente.setBorder(null);
 
         jSeparator1.setForeground(new java.awt.Color(64, 64, 64));
         jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -4173,16 +4174,16 @@ public class IMenu extends javax.swing.JFrame {
         btnNuevoProducto.setBorderPainted(false);
         btnNuevoProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevoProducto.setFocusPainted(false);
-        jPanel2.add(btnNuevoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 100, 40));
+        jPanel2.add(btnNuevoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 120, 40));
 
         btnGuardarProducto.setBackground(new java.awt.Color(0, 166, 192));
         btnGuardarProducto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnGuardarProducto.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardarProducto.setText("Guardar");
+        btnGuardarProducto.setText("[ENTER]Guardar");
         btnGuardarProducto.setBorderPainted(false);
         btnGuardarProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardarProducto.setFocusPainted(false);
-        jPanel2.add(btnGuardarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, 100, 40));
+        jPanel2.add(btnGuardarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 170, 40));
 
         btnActualizarProducto.setBackground(new java.awt.Color(0, 166, 192));
         btnActualizarProducto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N

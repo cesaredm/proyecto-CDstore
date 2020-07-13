@@ -150,6 +150,7 @@ public class CtrlClientes implements ActionListener, CaretListener {
         menu.tblClientes.getTableHeader().setOpaque(false);
         menu.tblClientes.getTableHeader().setBackground(new Color(100, 100, 100));
         menu.tblClientes.getTableHeader().setForeground(new Color(255, 255, 255));
+        menu.tblClientes.getTableHeader().setPreferredSize(new java.awt.Dimension(0, 35));
         menu.tblClientes.setModel(clientes.Consulta(Buscar));
     }
 

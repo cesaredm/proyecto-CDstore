@@ -202,6 +202,7 @@ public class CtrlCreditos implements ActionListener, CaretListener, MouseListene
         menu.tblCreditosCreados.getTableHeader().setOpaque(false);
         menu.tblCreditosCreados.getTableHeader().setBackground(new Color(100, 100, 100));
         menu.tblCreditosCreados.getTableHeader().setForeground(new Color(255, 255, 255));
+        menu.tblCreditosCreados.getTableHeader().setPreferredSize(new java.awt.Dimension(0, 35));
         menu.jcFechaCredito.setDate(this.fecha);
         menu.tblCreditosCreados.setModel(creditos.MostrarCreditosCreados(buscar));
     }
@@ -231,6 +232,7 @@ public class CtrlCreditos implements ActionListener, CaretListener, MouseListene
         menu.tblCreditos.getTableHeader().setOpaque(false);
         menu.tblCreditos.getTableHeader().setBackground(new Color(100, 100, 100));
         menu.tblCreditos.getTableHeader().setForeground(new Color(255, 255, 255));
+        menu.tblCreditos.getTableHeader().setPreferredSize(new java.awt.Dimension(0, 35));
         menu.tblCreditos.setModel(this.creditos.Mostrar(buscar));
     }
 

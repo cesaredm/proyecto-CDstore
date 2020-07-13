@@ -7,6 +7,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
@@ -27,7 +29,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
  *
  * @author CESAR DIAZ MARADIAGA
  */
-public class CtrlProducto implements ActionListener, CaretListener, MouseListener {
+public class CtrlProducto implements ActionListener, CaretListener, MouseListener, KeyListener {
 
     Productos productos;
     IMenu menu;
@@ -73,6 +75,15 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
         this.menu.tblAddLaboratorio.addMouseListener(this);
         this.menu.AgregarProductoStock.addActionListener(this);
         this.menu.btnGenerarReporteStock.addMouseListener(this);
+        this.menu.txtCodBarraProducto.addKeyListener(this);
+        this.menu.txtNombreProducto.addKeyListener(this);
+        this.menu.txtVentaProducto.addKeyListener(this);
+        this.menu.txtCantidadProducto.addKeyListener(this);
+        this.menu.txtCategoriaProducto.addKeyListener(this);
+        this.menu.txtLaboratorioProducto.addKeyListener(this);
+        this.menu.txtUbicacionProducto.addKeyListener(this);
+        this.menu.txtDescripcionProducto.addKeyListener(this);
+        this.menu.btnGuardarProducto.addKeyListener(this);
         this.id = null;
         this.modelo = new DefaultTableModel();
         iniciar();
@@ -97,63 +108,13 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
         menu.txtGananciaProducto.setVisible(false);
         menu.txtMargenGanancia.setVisible(false);
         menu.btnCalcularGanancia.setVisible(false);
+        menu.btnGuardarProducto.addKeyListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == menu.btnGuardarProducto) {
-            String codigoBarra = menu.txtCodBarraProducto.getText(),
-                    nombre = menu.txtNombreProducto.getText(),
-                    precioCProducto = menu.txtCompraProducto.getText(),
-                    precioVProducto = menu.txtVentaProducto.getText(),
-                    ganancia = menu.txtGananciaProducto.getText(),
-                    cantidad = menu.txtCantidadProducto.getText(),
-                    categoria = menu.txtCategoriaProducto.getText(),
-                    laboratorio = menu.txtLaboratorioProducto.getText(),
-                    ubicacion = menu.txtUbicacionProducto.getText(),
-                    descripcion = menu.txtDescripcionProducto.getText(),
-                    monedaCompra = menu.cmbMonedaCompraProducto.getSelectedItem().toString(),
-                    monedaVenta = menu.cmbMonedaVentaProducto.getSelectedItem().toString();
-            Date fechaVencimiento = menu.jcFechaVProducto.getDate();
-            long fechaV = fechaVencimiento.getTime();
-            java.sql.Date fecha = new java.sql.Date(fechaV);
-            //Validacion de que sean ingresados los datos correctos y que no esten vacios
-            if (nombre.equals("")) {
-                //JOptionPane.showMessageDialog(null, "Llene el campo Nombre", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else if (precioVProducto.equals("")) {
-                JOptionPane.showMessageDialog(null, "Llene el campo Precio Venta", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else if (fechaVencimiento.equals(null)) {
-                JOptionPane.showMessageDialog(null, "Llene el campo Fecha Vencimiento", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else if (cantidad.equals("")) {
-                JOptionPane.showMessageDialog(null, "Llene el campo Cantidad", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else if (categoria.equals("")) {
-                JOptionPane.showMessageDialog(null, "Llene el campo Categoria", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else if (laboratorio.equals("")) {
-                JOptionPane.showMessageDialog(null, "Llene el campo Laboratorio", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else {//validacion para ingreso de nuemeros 
-                /*TODO opcional descomentar esto
-                if (!isNumeric(precioCProducto)) {
-                    //txtCompraProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-                    JOptionPane.showMessageDialog(null, "Solo numeros campo Precio Compra", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                } else*/ if (!isNumeric(precioVProducto)) {
-                    JOptionPane.showMessageDialog(null, "Solo numeros campo Precio Venta", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                } else if (!isNumeric(cantidad)) {
-                    JOptionPane.showMessageDialog(null, "Solo numeros campo Cantidad", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                } else if (!isNumeric(laboratorio)) {
-                    JOptionPane.showMessageDialog(null, "Solo Numeros Campo Laboratorio", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                } else if (!isNumeric(categoria)) {
-                    JOptionPane.showMessageDialog(null, "Solo Numeros Campo Categoria", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                } else {   //funcion Guardar de la clase Productos para guardar productos
-                    productos.Guardar(codigoBarra, nombre, precioCProducto, monedaCompra, precioVProducto, monedaVenta, fecha, cantidad, categoria, laboratorio, ubicacion, descripcion);
-                    MostrarProductos("");
-                    LimpiarProducto();
-                    menu.btnGuardarProducto.setEnabled(true);
-                    menu.btnActualizarProducto.setEnabled(false);
-                    MostrarProductosVender("");
-                    inversion();
-                }
-
-            }
+            guardarProducto();
         }
         if (e.getSource() == menu.btnCalcularGanancia) {
             float compra, porcentaje, resultado;
@@ -230,7 +191,7 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
         }
         if (e.getSource() == menu.EditarProducto) {
             int filaseleccionada;
-            String id, codBarra, nombre, precioC, precioV, cantidad, categoria, laboratorio, ubicacion, descripcion,monedaCompra, monedaVenta;
+            String id, codBarra, nombre, precioC, precioV, cantidad, categoria, laboratorio, ubicacion, descripcion, monedaCompra, monedaVenta;
             Date fechaVencimiento;
             SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
             try {
@@ -243,7 +204,7 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
                     codBarra = (String) modelo.getValueAt(filaseleccionada, 1);
                     nombre = (String) modelo.getValueAt(filaseleccionada, 2);
                     precioC = (String) modelo.getValueAt(filaseleccionada, 3);
-                    monedaCompra = (String) modelo.getValueAt(filaseleccionada,4);
+                    monedaCompra = (String) modelo.getValueAt(filaseleccionada, 4);
                     precioV = (String) modelo.getValueAt(filaseleccionada, 5);
                     monedaVenta = (String) modelo.getValueAt(filaseleccionada, 6);
                     fechaVencimiento = formatoFecha.parse(modelo.getValueAt(filaseleccionada, 7).toString());
@@ -404,7 +365,7 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
                 menu.txtBuscarPorNombre.requestFocus();
             }
         }
-        
+
     }
 
     @Override
@@ -433,14 +394,13 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
             String Nombre = menu.txtLaboratorioAdd.getText();
             llenarAddLaboratorio(Nombre);
         }
-        if(e.getSource() == menu.txtCodBarraProducto)
-        {
+        if (e.getSource() == menu.txtCodBarraProducto) {
             String cod = menu.txtCodBarraProducto.getText();
             this.productos.ExitsCodBarra(cod);
-            if(!this.productos.isExiste()){
+            if (!this.productos.isExiste()) {
                 menu.lblErrorCodBarra.setText("");
                 menu.btnGuardarProducto.setEnabled(true);
-            }else{
+            } else {
                 menu.lblErrorCodBarra.setText("Oops. el código ya existe..");
                 menu.btnGuardarProducto.setEnabled(false);
             }
@@ -462,6 +422,7 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
         menu.tblProductos.getTableHeader().setBackground(new Color(100, 100, 100));
         menu.tblProductos.getTableHeader().setForeground(new Color(255, 255, 255));
         menu.tblProductos.setModel(this.productos.Consulta(buscar));
+        menu.tblProductos.getTableHeader().setPreferredSize(new java.awt.Dimension(0, 35));
     }
 
     public void MostrarProductosVender(String Buscar) {
@@ -470,6 +431,7 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
         menu.tblAddProductoFactura.getTableHeader().setBackground(new Color(100, 100, 100));
         menu.tblAddProductoFactura.getTableHeader().setForeground(new Color(255, 255, 255));
         menu.tblAddProductoFactura.setModel(factura.BusquedaGeneralProductoVender(Buscar));
+        menu.tblAddProductoFactura.getTableHeader().setPreferredSize(new java.awt.Dimension(0, 35));
     }
 
     public void LimpiarProducto()//metodo para limpiar los campos de formulario Productos
@@ -509,15 +471,15 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
         menu.cmbMonedaVentaProducto.setEnabled(true);
     }
 //este metodo iversion es el mismo metodo que esta en reportes lo repite para no crear una nueva instancia de la clase reportes
-    public void inversion()
-    {
+
+    public void inversion() {
         float cordobas = this.productos.inversionCordobas(),
                 dolar = this.productos.inversionDolar(),
                 precioDolar = Float.parseFloat(menu.txtPrecioDolar.getText()),
-                total = cordobas + (dolar*precioDolar);
-        menu.lblInversion.setText(""+total);
+                total = cordobas + (dolar * precioDolar);
+        menu.lblInversion.setText("" + total);
     }
-    
+
     public void StockMinimoP(String categoria, float cantidad)//llenar tabla de productos bajos de estock
     {
         //los parametros que recibe son para los filtros de bussqueda den la base de datos
@@ -554,6 +516,62 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
         menu.tblAddLaboratorio.getTableHeader().setBackground(new Color(100, 100, 100));
         menu.tblAddLaboratorio.getTableHeader().setForeground(new Color(255, 255, 255));
         menu.tblAddLaboratorio.setModel(productos.MostrarMarca(nombre));
+    }
+
+    public void guardarProducto() {
+        String codigoBarra = menu.txtCodBarraProducto.getText(),
+                nombre = menu.txtNombreProducto.getText(),
+                precioCProducto = menu.txtCompraProducto.getText(),
+                precioVProducto = menu.txtVentaProducto.getText(),
+                ganancia = menu.txtGananciaProducto.getText(),
+                cantidad = menu.txtCantidadProducto.getText(),
+                categoria = menu.txtCategoriaProducto.getText(),
+                laboratorio = menu.txtLaboratorioProducto.getText(),
+                ubicacion = menu.txtUbicacionProducto.getText(),
+                descripcion = menu.txtDescripcionProducto.getText(),
+                monedaCompra = menu.cmbMonedaCompraProducto.getSelectedItem().toString(),
+                monedaVenta = menu.cmbMonedaVentaProducto.getSelectedItem().toString();
+        Date fechaVencimiento = menu.jcFechaVProducto.getDate();
+        long fechaV = fechaVencimiento.getTime();
+        java.sql.Date fecha = new java.sql.Date(fechaV);
+        //Validacion de que sean ingresados los datos correctos y que no esten vacios
+        if (nombre.equals("")) {
+            //JOptionPane.showMessageDialog(null, "Llene el campo Nombre", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else if (precioVProducto.equals("")) {
+            JOptionPane.showMessageDialog(null, "Llene el campo Precio Venta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else if (fechaVencimiento.equals(null)) {
+            JOptionPane.showMessageDialog(null, "Llene el campo Fecha Vencimiento", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else if (cantidad.equals("")) {
+            JOptionPane.showMessageDialog(null, "Llene el campo Cantidad", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else /*if (categoria.equals("")) {
+                JOptionPane.showMessageDialog(null, "Llene el campo Categoria", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else if (laboratorio.equals("")) {
+                JOptionPane.showMessageDialog(null, "Llene el campo Laboratorio", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else*/ {//validacion para ingreso de nuemeros 
+            /*TODO opcional descomentar esto
+                if (!isNumeric(precioCProducto)) {
+                    //txtCompraProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+                    JOptionPane.showMessageDialog(null, "Solo numeros campo Precio Compra", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                } else*/ if (!isNumeric(precioVProducto)) {
+                JOptionPane.showMessageDialog(null, "Solo numeros campo Precio Venta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else if (!isNumeric(cantidad)) {
+                JOptionPane.showMessageDialog(null, "Solo numeros campo Cantidad", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else if (!isNumeric(laboratorio)) {
+                JOptionPane.showMessageDialog(null, "Solo Numeros Campo Laboratorio", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else if (!isNumeric(categoria)) {
+                JOptionPane.showMessageDialog(null, "Solo Numeros Campo Categoria", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else {   //funcion Guardar de la clase Productos para guardar productos
+                productos.Guardar(codigoBarra, nombre, precioCProducto, monedaCompra, precioVProducto, monedaVenta, fecha, cantidad, categoria, laboratorio, ubicacion, descripcion);
+                MostrarProductos("");
+                LimpiarProducto();
+                menu.btnGuardarProducto.setEnabled(true);
+                menu.btnActualizarProducto.setEnabled(false);
+                menu.txtCodBarraProducto.requestFocus();
+                MostrarProductosVender("");
+                inversion();
+            }
+
+        }
     }
 
     @Override
@@ -603,12 +621,11 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
 
             }
         }
-        if(e.getSource() == menu.btnGenerarReporteStock){
+        if (e.getSource() == menu.btnGenerarReporteStock) {
             float cant = 0;
-            if(menu.txtCantidadStockM.getText().equals(""))
-            {
-                
-            }else{
+            if (menu.txtCantidadStockM.getText().equals("")) {
+
+            } else {
                 cant = Float.parseFloat(menu.txtCantidadStockM.getText());
                 try {
                     productos.GenerarReporteStockMin(menu.txtCategoriaStockM.getText(), cant);
@@ -658,4 +675,20 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
         menu.cmbMonedaCompraProducto.setEnabled(false);
         menu.cmbMonedaVentaProducto.setEnabled(false);
     }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.VK_ENTER == e.getKeyCode()) {
+            guardarProducto();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
+
 }

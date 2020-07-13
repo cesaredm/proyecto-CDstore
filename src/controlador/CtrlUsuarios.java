@@ -154,6 +154,7 @@ public class CtrlUsuarios implements ActionListener, CaretListener{
         menu.tblUsuarios.getTableHeader().setOpaque(false);
         menu.tblUsuarios.getTableHeader().setBackground(new Color(100,100,100));
         menu.tblUsuarios.getTableHeader().setForeground(new Color(255,255,255));
+        menu.tblUsuarios.getTableHeader().setPreferredSize(new java.awt.Dimension(0, 35));
         menu.tblUsuarios.setModel(this.usuarios.Mostrar(buscar));
     }
     public void LimpiarUsuarios()

@@ -58,6 +58,8 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         this.menu.btnAperturaCaja.addActionListener(this);
         this.menu.btnAperturaCaja.setActionCommand("APERTURA-CAJA");
         this.menu.btnGuardarApertura.addActionListener(this);
+        this.menu.btnGuardarApertura.addKeyListener(this);
+        this.menu.txtEfectivoApertura.addKeyListener(this);
         this.menu.btnGuardarApertura.setActionCommand("GUARDAR-APERTURA");
         this.menu.btnAddTotalV.addActionListener(this);
         this.menu.btnAddTotalV.setActionCommand("ADD-TOTALV");
@@ -485,6 +487,9 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
                 }
             }
 
+        }
+        if(e.VK_SPACE == e.getKeyCode()){
+            GuardarAperturas();
         }
     }
 

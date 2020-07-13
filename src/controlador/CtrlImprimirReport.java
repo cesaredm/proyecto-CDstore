@@ -120,17 +120,17 @@ public class CtrlImprimirReport extends PrintReportes implements ActionListener 
         int filas = menu.tblProductosMasVendidos.getRowCount(), n = 1;
         Date f1 = menu.jc1.getDate(), f2 = menu.jc2.getDate();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-YYYY");
-        String fecha1 = sdf.format(f1), fecha2 = sdf.format(f2), tienda = info.getNombre(), nombre, marca, vendido;
+        String fecha1 = sdf.format(f1), fecha2 = sdf.format(f2), tienda = info.getNombre(), nombre, nombreCorto = "", marca, vendido;
         String[] producto = new String[filas];
         for (int i = 0; i < filas; i++) {
             n = n + i;
             nombre = (String) menu.tblProductosMasVendidos.getValueAt(i, 1);
             marca = (String) menu.tblProductosMasVendidos.getValueAt(i, 2);
             vendido = (String) menu.tblProductosMasVendidos.getValueAt(i, 4);
-            if (nombre.length() > 29) {
-                nombre = nombre.substring(0, 29);
+            if (nombre.length() > 18) {
+                nombre = nombre.substring(0, 18);
             }
-            producto[i] = n + " " + nombre + " " + marca + "          " + vendido;
+            producto[i] = n+"  "+nombre + " " + marca + "       " + vendido;
         }
         BIP(tienda, fecha1, fecha2, producto);
         try {

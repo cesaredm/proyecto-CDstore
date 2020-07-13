@@ -34,7 +34,7 @@ public class Ticket {
     "RUT:{{RFC}}\n"+
     "Rango Permitido: {{Rango}}\n"+
     "Caja # {{box}} - Factura # {{ticket}}\n"+
-    "ATENDIO: {{Cajero}} \n"+
+    "Atendió: {{Cajero}} \n"+
     "Cliente: {{cliente}} {{comprador}}\n"+
     "Venta:   {{tipoVenta}} \n"+
     "Pago:    {{formaPago}}\n"+
