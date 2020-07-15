@@ -167,11 +167,12 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
                 menu.pnlClientes.setVisible(false);
                 menu.pnlVentas.setVisible(false);
                 menu.pnlReportes.setVisible(false);
-                menu.pnlInventario.setVisible(false);
+                menu.pnlInventario.setVisible(true);
                 menu.pnlUsuarios.setVisible(false);
                 menu.pnlNotificaciones.setVisible(false);
                 menu.pnlTransacciones.setVisible(false);
                 menu.lblTituloDeVentanas.setText("");
+                menu.pnlBlanco.setVisible(false);
             }else if(this.permiso == 1)
             {
                 menu.pnlClientes.setVisible(false);
@@ -215,7 +216,7 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
 
              if(this.permiso == 2)
             {
-                menu.pnlClientes.setVisible(false);
+                menu.pnlClientes.setVisible(true);
                 menu.pnlVentas.setVisible(false);
                 menu.pnlReportes.setVisible(false);
                 menu.pnlInventario.setVisible(false);
@@ -223,6 +224,7 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
                 menu.pnlNotificaciones.setVisible(false);
                 menu.pnlTransacciones.setVisible(false);
                 menu.lblTituloDeVentanas.setText("");
+                menu.pnlBlanco.setVisible(false);
             }else if(this.permiso == 1)
             {
                 menu.pnlClientes.setVisible(true);
@@ -274,6 +276,7 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
                 menu.pnlUsuarios.setVisible(false);
                 menu.pnlNotificaciones.setVisible(false);
                 menu.pnlTransacciones.setVisible(false);
+                menu.pnlBlanco.setVisible(false);
             }else if(this.permiso == 1)
             {
                 menu.pnlClientes.setVisible(false);
@@ -319,12 +322,13 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
             {
                 menu.pnlClientes.setVisible(false);
                 menu.pnlVentas.setVisible(false);
-                menu.pnlReportes.setVisible(false);
+                menu.pnlReportes.setVisible(true);
                 menu.pnlInventario.setVisible(false);
                 menu.pnlUsuarios.setVisible(false);
                 menu.pnlNotificaciones.setVisible(false);
                 menu.pnlTransacciones.setVisible(false);
                 menu.lblTituloDeVentanas.setText("");
+                menu.pnlBlanco.setVisible(false);
             }else if(this.permiso == 1)
             {
                 menu.pnlClientes.setVisible(false);
@@ -376,6 +380,7 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
                 menu.pnlNotificaciones.setVisible(false);
                 menu.pnlTransacciones.setVisible(false);
                 menu.lblTituloDeVentanas.setText("");
+                menu.pnlBlanco.setVisible(true);
             }else if(this.permiso == 1)
             {
                 menu.pnlClientes.setVisible(false);
@@ -427,6 +432,7 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
                 menu.pnlNotificaciones.setVisible(false);
                 menu.pnlTransacciones.setVisible(false);
                 menu.lblTituloDeVentanas.setText("");
+                menu.pnlBlanco.setVisible(true);
             }else if(this.permiso == 1)
             {
                 menu.pnlClientes.setVisible(false);
@@ -478,6 +484,7 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
                 menu.pnlUsuarios.setVisible(false);
                 menu.pnlNotificaciones.setVisible(true);
                 menu.pnlTransacciones.setVisible(false);
+                menu.pnlBlanco.setVisible(false);
             }else if(this.permiso == 1)
             {
                 menu.pnlClientes.setVisible(false);
@@ -529,6 +536,7 @@ public class CtrlMenuOpciones implements MouseListener, ActionListener {
                 menu.pnlNotificaciones.setVisible(false);
                 menu.pnlTransacciones.setVisible(false);
                 menu.lblTituloDeVentanas.setText("");
+                menu.pnlBlanco.setVisible(true);
             }else if(this.permiso == 1)
             {
                 menu.pnlInfoFactura.setVisible(true);

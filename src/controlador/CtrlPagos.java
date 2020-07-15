@@ -208,11 +208,11 @@ public class CtrlPagos implements ActionListener, CaretListener {
 
     public void guardarPago() {
         int c;
-        float montoPago, saldo = 0;
+        float montoPago, saldo = 0, saldoActual = 0;
         String fechaString = "", credito = menu.txtCreditoPago.getText(), monto = menu.txtMontoPago.getText(), formaPago = menu.cmbFormaPagoCredito.getSelectedItem().toString();
         int idFormaPago = Integer.parseInt(pagos.ObtenerFormaPago(formaPago));
         Date f = menu.jcFechaPago.getDate();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-YYYY");
         long fecha = f.getTime();
         java.sql.Date fechaPago = new java.sql.Date(fecha);
         fechaString = sdf.format(fecha);
@@ -221,8 +221,9 @@ public class CtrlPagos implements ActionListener, CaretListener {
                 try {
                     c = Integer.parseInt(credito);
                     montoPago = Float.parseFloat(monto);
+                    saldoActual = pagos.deuda(credito) - pagos.PagosSegunCredito(credito);
                     pagos.Guardar(c, montoPago, fechaPago, idFormaPago);
-                    saldo = pagos.saldo(credito) - montoPago;
+                    saldo = saldoActual - montoPago;
                     info.obtenerInfoFactura();
                     print.llenarTicketPago(info.getNombre(), fechaString, this.pagos.cliente(credito), credito, monto, String.valueOf(saldo));
                     MostrarPagos("");

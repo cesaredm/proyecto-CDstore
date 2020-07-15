@@ -113,5 +113,31 @@ public class AperturasYcierres extends Conexiondb {
         }
         return this.combo;
     }
+    
+    public boolean ExistenciaApertura(Date fecha)
+    {
+        String fechaApertura = "";
+        boolean yes = true;
+        cn = Conexion();
+        this.consulta = "SELECT caja FROM aperturas WHERE fecha = ?";
+        try {
+            pst = this.cn.prepareStatement(this.consulta);
+            this.pst.setDate(1, fecha);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next())
+            {
+                fechaApertura = rs.getString("caja");
+            }
+            if(fechaApertura.equals("")){
+                yes = false;
+            }else{
+                yes = true;
+            }
+            this.cn.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e+" en la funcion ExistenciaApertura");
+        }
+        return yes;
+    }
 
 }

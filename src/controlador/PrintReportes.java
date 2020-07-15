@@ -53,8 +53,8 @@ public class PrintReportes {
   "Efctivo de apertura caja          {{base}}\n"+
   "Ingreso por ventas en efectivo    {{ventasE}}\n"+
   "Ingreso por ventas con tarjeta    {{ventasT}}\n"+
-  "Ingresos por pagos en efectivo    {{pagosE}}\n"+
-  "Ingresos por pagos con tarjeta    {{pagosT}}\n"+
+  "Ingresos por abonos en efectivo    {{pagosE}}\n"+
+  "Ingresos por abonos con tarjeta    {{pagosT}}\n"+
   "Ingresos de efectivo              {{ingresosE}}\n"+
   "Creditos                          {{creditos}}\n"+
   "Egresos de efectivo de caja       {{egresos}}\n"+
@@ -76,8 +76,8 @@ public class PrintReportes {
   "\n"+
   "Ingreso por ventas en efectivo     {{ventasE}}\n"+
   "Ingreso por ventas con tarjeta     {{ventasT}}\n"+
-  "Ingresos por pagos en efectivo     {{pagosE}}\n"+
-  "Ingresos por pagos con tarjeta     {{pagosT}}\n"+
+  "Ingresos por abonos en efectivo     {{pagosE}}\n"+
+  "Ingresos por abonos con tarjeta     {{pagosT}}\n"+
   "Ingresos de efectivo               {{ingresosE}}\n"+
   "Creditos                           {{creditos}}\n"+
   "Egresos de efectivo de caja        {{egresos}}\n"+
@@ -102,11 +102,11 @@ public class PrintReportes {
   private String ReciboPago = ""+
   "{{tienda}}\n"+
   "COMPROBANTE DE PAGO\n"+
-  "Fecha : {{fecha}}\n"+
-  "Cliente: {{cliente}}\n"+
-  "N° Credito: {{credito}}\n"+
-  "Monto de pago :{{monto}}\n"+
-  "Saldo: {{saldo}}\n\n";
+  "FECHA : {{fecha}}\n"+
+  "CLIENTE: {{cliente}}\n"+
+  "N° CREDITO: {{credito}}\n"+
+  "MONTO DE PAGO :{{monto}}\n"+
+  "SALDO: {{saldo}}\n\n";
   //constructor
     PrintReportes() {
 
@@ -149,7 +149,7 @@ public class PrintReportes {
         }
         this.ticketTotalV = this.ticketTotalV.replace("{{nombreTienda}}", tienda);
         this.ticketTotalV = this.ticketTotalV.replace("{{datos}}",a);
-        //System.out.println(this.ticketTotalV);
+        System.out.println(this.ticketTotalV);
     }
     //bussines 
     public void BIP(String tienda, String fecha1, String fecha2 ,String[] P)

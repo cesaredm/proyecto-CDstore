@@ -136,7 +136,7 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
             this.menu.cmbCajasApertura.setModel(aperturas.mostrarCajas());
             menu.AperturasCaja.setVisible(true);
             menu.jcFechaApertura.setDate(this.fecha);
-            menu.txtEfectivoApertura.requestFocus();
+            ValidarExistApertura();
         }
         if (e.getSource() == menu.btnMostrarInversion) {
             inversion();
@@ -498,4 +498,18 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
 
     }
 
+    public void ValidarExistApertura()
+    {
+        Date fecha = menu.jcFechaApertura.getDate();
+        long ff1 = fecha.getTime();
+        java.sql.Date f = new java.sql.Date(ff1);
+        if(aperturas.ExistenciaApertura(f)){
+            menu.txtEfectivoApertura.setEnabled(false);
+            menu.btnGuardarApertura.setEnabled(false);
+            menu.lblExistApertura.setText("Ya existe una apertura para esta fecha");
+        }else{
+            menu.lblExistApertura.setText("");
+            menu.txtEfectivoApertura.requestFocus();
+        }
+    }
 }

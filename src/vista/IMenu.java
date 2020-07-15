@@ -310,6 +310,7 @@ public class IMenu extends javax.swing.JFrame {
         jcFechaApertura = new com.toedter.calendar.JDateChooser();
         cmbCajasApertura = new javax.swing.JComboBox<>();
         jLabel119 = new javax.swing.JLabel();
+        lblExistApertura = new javax.swing.JLabel();
         CortesCaja = new javax.swing.JDialog();
         jPanel22 = new javax.swing.JPanel();
         jLabel120 = new javax.swing.JLabel();
@@ -396,6 +397,10 @@ public class IMenu extends javax.swing.JFrame {
         txtImpuesto = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
+        txtPagoCon = new javax.swing.JTextField();
+        txtCambio = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
         pnlReportes = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel13 = new javax.swing.JPanel();
@@ -637,6 +642,7 @@ public class IMenu extends javax.swing.JFrame {
         txtTelefonoTienda = new javax.swing.JTextField();
         jScrollPane28 = new javax.swing.JScrollPane();
         txtInfoActual = new javax.swing.JTextArea();
+        pnlBlanco = new javax.swing.JPanel();
         pnlEncabezado = new javax.swing.JPanel();
         btnSalirSistema = new javax.swing.JButton();
         btnMaximizar = new javax.swing.JButton();
@@ -2052,6 +2058,11 @@ public class IMenu extends javax.swing.JFrame {
         jLabel119.setText("Apertura de Caja");
         jPanel21.add(jLabel119, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 5, -1, -1));
 
+        lblExistApertura.setFont(new java.awt.Font("Segoe UI Light", 0, 16)); // NOI18N
+        lblExistApertura.setForeground(new java.awt.Color(255, 102, 102));
+        lblExistApertura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel21.add(lblExistApertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 400, 30));
+
         javax.swing.GroupLayout AperturasCajaLayout = new javax.swing.GroupLayout(AperturasCaja.getContentPane());
         AperturasCaja.getContentPane().setLayout(AperturasCajaLayout);
         AperturasCajaLayout.setHorizontalGroup(
@@ -2292,7 +2303,7 @@ public class IMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setSize(new java.awt.Dimension(0, 0));
+        setSize(new java.awt.Dimension(1310, 610));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 formMouseDragged(evt);
@@ -2586,68 +2597,60 @@ public class IMenu extends javax.swing.JFrame {
         jPanel27.add(txtPrecioDolar, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 5, 55, -1));
 
         jPanel29.setPreferredSize(new java.awt.Dimension(90, 54));
+        jPanel29.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblSubTotalFactura.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblSubTotalFactura.setText("Sub-Total L.");
+        jPanel29.add(lblSubTotalFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 12, -1, -1));
 
         txtSubTotal.setBackground(new java.awt.Color(204, 255, 204));
         txtSubTotal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtSubTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtSubTotal.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txtSubTotal.setEnabled(false);
+        jPanel29.add(txtSubTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 12, 145, -1));
 
         lblImpuestoFactura.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblImpuestoFactura.setText("Impuesto IVA");
+        jPanel29.add(lblImpuestoFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
 
         txtImpuesto.setBackground(new java.awt.Color(255, 204, 153));
         txtImpuesto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtImpuesto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtImpuesto.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txtImpuesto.setEnabled(false);
+        jPanel29.add(txtImpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 145, -1));
 
         jLabel30.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel30.setText("Total");
+        jPanel29.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(843, 13, -1, -1));
 
         txtTotal.setBackground(new java.awt.Color(153, 255, 153));
         txtTotal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTotal.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txtTotal.setEnabled(false);
+        jPanel29.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(892, 12, 147, -1));
 
-        javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
-        jPanel29.setLayout(jPanel29Layout);
-        jPanel29Layout.setHorizontalGroup(
-            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel29Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(lblSubTotalFactura)
-                .addGap(6, 6, 6)
-                .addComponent(txtSubTotal)
-                .addGap(131, 131, 131)
-                .addComponent(lblImpuestoFactura)
-                .addGap(11, 11, 11)
-                .addComponent(txtImpuesto)
-                .addGap(176, 176, 176)
-                .addComponent(jLabel30)
-                .addGap(10, 10, 10)
-                .addComponent(txtTotal)
-                .addGap(44, 44, 44))
-        );
-        jPanel29Layout.setVerticalGroup(
-            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel29Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel29Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jLabel30))
-                    .addComponent(lblImpuestoFactura)
-                    .addComponent(txtImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSubTotalFactura)
-                    .addComponent(txtSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        txtPagoCon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPagoCon.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanel29.add(txtPagoCon, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 23, 110, -1));
+
+        txtCambio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtCambio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCambio.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtCambio.setEnabled(false);
+        jPanel29.add(txtCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(731, 23, 100, -1));
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel28.setText("Cambio");
+        jPanel29.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(726, 4, 100, -1));
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel29.setText("Pago con");
+        jPanel29.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(597, 4, 110, -1));
 
         javax.swing.GroupLayout pnlVentasLayout = new javax.swing.GroupLayout(pnlVentas);
         pnlVentas.setLayout(pnlVentasLayout);
@@ -3195,7 +3198,7 @@ public class IMenu extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Reportes", jPanel13);
+        jTabbedPane1.addTab("Reporte Diario", jPanel13);
 
         jPanel28.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -4825,6 +4828,21 @@ public class IMenu extends javax.swing.JFrame {
 
         pnlPrincipal.add(pnlInfoFactura, "card10");
 
+        pnlBlanco.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnlBlancoLayout = new javax.swing.GroupLayout(pnlBlanco);
+        pnlBlanco.setLayout(pnlBlancoLayout);
+        pnlBlancoLayout.setHorizontalGroup(
+            pnlBlancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1103, Short.MAX_VALUE)
+        );
+        pnlBlancoLayout.setVerticalGroup(
+            pnlBlancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 576, Short.MAX_VALUE)
+        );
+
+        pnlPrincipal.add(pnlBlanco, "card10");
+
         pnlEncabezado.setBackground(new java.awt.Color(239, 244, 245));
         pnlEncabezado.setPreferredSize(new java.awt.Dimension(1103, 30));
 
@@ -5406,6 +5424,8 @@ public class IMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
@@ -5588,6 +5608,7 @@ public class IMenu extends javax.swing.JFrame {
     public javax.swing.JLabel lblEgresosDiarios;
     public javax.swing.JLabel lblEgresosFiltro;
     public javax.swing.JLabel lblErrorCodBarra;
+    public javax.swing.JLabel lblExistApertura;
     public javax.swing.JLabel lblExistenciaCajaFiltro;
     public javax.swing.JLabel lblGastosMenu;
     private javax.swing.JLabel lblIconCerrarSesion;
@@ -5646,6 +5667,7 @@ public class IMenu extends javax.swing.JFrame {
     public javax.swing.JPopupMenu mnTablaFactura;
     public javax.swing.JDialog pagosAcreditos;
     private javax.swing.JPopupMenu pagosDeCreditos;
+    public javax.swing.JPanel pnlBlanco;
     public javax.swing.JPanel pnlClientes;
     public javax.swing.JPanel pnlContenedor;
     private javax.swing.JPanel pnlEncabezado;
@@ -5701,6 +5723,7 @@ public class IMenu extends javax.swing.JFrame {
     public javax.swing.JTextField txtBuscarProducto;
     public javax.swing.JTextField txtBuscarUsuario;
     public javax.swing.JTextField txtCajaCierre;
+    public javax.swing.JTextField txtCambio;
     public javax.swing.JTextField txtCantidadAgregar;
     public javax.swing.JTextField txtCantidadProducto;
     public javax.swing.JTextField txtCantidadStockM;
@@ -5744,6 +5767,7 @@ public class IMenu extends javax.swing.JFrame {
     public javax.swing.JTextField txtNombreUsuario;
     public javax.swing.JTextField txtNombresCliente;
     public javax.swing.JTextField txtNumeroFactura;
+    public javax.swing.JTextField txtPagoCon;
     public javax.swing.JTextField txtPasswordUsuario;
     public javax.swing.JTextField txtPrecioDolar;
     public javax.swing.JTextField txtRFCTienda;
