@@ -566,7 +566,6 @@ public class IMenu extends javax.swing.JFrame {
         btnGuardarProducto = new javax.swing.JButton();
         btnActualizarProducto = new javax.swing.JButton();
         txtLaboratorioProducto = new javax.swing.JTextField();
-        txtCategoriaProducto = new javax.swing.JTextField();
         txtMargenGanancia = new javax.swing.JTextField();
         btnCalcularGanancia = new javax.swing.JButton();
         jcFechaVProducto = new com.toedter.calendar.JDateChooser();
@@ -575,6 +574,7 @@ public class IMenu extends javax.swing.JFrame {
         cmbMonedaVentaProducto = new javax.swing.JComboBox<>();
         jLabel101 = new javax.swing.JLabel();
         lblErrorCodBarra = new javax.swing.JLabel();
+        txtCategoriaProducto = new javax.swing.JTextField();
         btnAgregarLaboratorio = new javax.swing.JButton();
         btnMostrarStockMinimo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -3279,155 +3279,155 @@ public class IMenu extends javax.swing.JFrame {
 
         jPanel33.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel114.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel114.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel114.setForeground(new java.awt.Color(255, 255, 255));
         jLabel114.setText("Total de ventas en efectivo");
 
-        jLabel115.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel115.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel115.setForeground(new java.awt.Color(255, 255, 255));
         jLabel115.setText("Total de ventas con tarjeta");
 
-        jLabel116.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel116.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel116.setForeground(new java.awt.Color(255, 255, 255));
         jLabel116.setText("Total de abonos en efectivo");
 
-        jLabel117.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel117.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel117.setForeground(new java.awt.Color(255, 255, 255));
         jLabel117.setText("Total de abonos con tarjeta");
 
-        jLabel118.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel118.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel118.setForeground(new java.awt.Color(255, 255, 255));
         jLabel118.setText("Ingresos de efectivo");
 
-        jLabel139.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel139.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel139.setForeground(new java.awt.Color(255, 255, 255));
         jLabel139.setText("Créditos");
 
-        jLabel144.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel144.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel144.setForeground(new java.awt.Color(255, 255, 255));
         jLabel144.setText("Salida de efectivo");
 
         jSeparator9.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel146.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel146.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel146.setForeground(new java.awt.Color(255, 255, 255));
         jLabel146.setText("Total vendido");
 
-        jLabel145.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel145.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel145.setForeground(new java.awt.Color(255, 255, 255));
         jLabel145.setText("Total en bancos");
 
-        jLabel147.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel147.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel147.setForeground(new java.awt.Color(255, 255, 255));
         jLabel147.setText("Total de efectivo en caja");
 
         lblTotalEfectivoCajaFiltro.setBackground(new java.awt.Color(138, 192, 84));
-        lblTotalEfectivoCajaFiltro.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        lblTotalEfectivoCajaFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblTotalEfectivoCajaFiltro.setForeground(new java.awt.Color(255, 255, 255));
         lblTotalEfectivoCajaFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTotalEfectivoCajaFiltro.setText("0.0");
         lblTotalEfectivoCajaFiltro.setOpaque(true);
 
-        jLabel158.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel158.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel158.setForeground(new java.awt.Color(255, 255, 255));
         jLabel158.setText("C$");
 
-        jLabel157.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel157.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel157.setForeground(new java.awt.Color(255, 255, 255));
         jLabel157.setText("C$");
 
-        jLabel156.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel156.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel156.setForeground(new java.awt.Color(255, 255, 255));
         jLabel156.setText("C$");
 
         lblTotalVendidoReportFiltro.setBackground(new java.awt.Color(180, 224, 128));
-        lblTotalVendidoReportFiltro.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        lblTotalVendidoReportFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblTotalVendidoReportFiltro.setForeground(new java.awt.Color(255, 255, 255));
         lblTotalVendidoReportFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTotalVendidoReportFiltro.setText("0.0");
         lblTotalVendidoReportFiltro.setOpaque(true);
 
         lblTotalBancosReportFiltro.setBackground(new java.awt.Color(158, 211, 106));
-        lblTotalBancosReportFiltro.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        lblTotalBancosReportFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblTotalBancosReportFiltro.setForeground(new java.awt.Color(255, 255, 255));
         lblTotalBancosReportFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTotalBancosReportFiltro.setText("0.0");
         lblTotalBancosReportFiltro.setOpaque(true);
 
-        jLabel155.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel155.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel155.setForeground(new java.awt.Color(255, 255, 255));
         jLabel155.setText("-C$");
 
         lblSalidaEfectivoFiltro.setBackground(new java.awt.Color(255, 153, 51));
-        lblSalidaEfectivoFiltro.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        lblSalidaEfectivoFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblSalidaEfectivoFiltro.setForeground(new java.awt.Color(255, 255, 255));
         lblSalidaEfectivoFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSalidaEfectivoFiltro.setText("0.0");
         lblSalidaEfectivoFiltro.setOpaque(true);
 
         lblCreditosReportFiltro.setBackground(new java.awt.Color(153, 255, 153));
-        lblCreditosReportFiltro.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        lblCreditosReportFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblCreditosReportFiltro.setForeground(new java.awt.Color(0, 102, 0));
         lblCreditosReportFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCreditosReportFiltro.setText("0.0");
         lblCreditosReportFiltro.setOpaque(true);
 
-        jLabel154.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel154.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel154.setForeground(new java.awt.Color(255, 255, 255));
         jLabel154.setText("C$");
 
-        jLabel153.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel153.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel153.setForeground(new java.awt.Color(255, 255, 255));
         jLabel153.setText("C$");
 
         lblIngresosEfectivo.setBackground(new java.awt.Color(153, 255, 153));
-        lblIngresosEfectivo.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        lblIngresosEfectivo.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblIngresosEfectivo.setForeground(new java.awt.Color(0, 102, 0));
         lblIngresosEfectivo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIngresosEfectivo.setText("0.0");
         lblIngresosEfectivo.setOpaque(true);
 
-        jLabel152.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel152.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel152.setForeground(new java.awt.Color(255, 255, 255));
         jLabel152.setText("C$");
 
         lblAbonosTarjetaFiltro.setBackground(new java.awt.Color(153, 255, 153));
-        lblAbonosTarjetaFiltro.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        lblAbonosTarjetaFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblAbonosTarjetaFiltro.setForeground(new java.awt.Color(0, 102, 0));
         lblAbonosTarjetaFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAbonosTarjetaFiltro.setText("0.0");
         lblAbonosTarjetaFiltro.setOpaque(true);
 
         lblAbonosEfectivoFiltro.setBackground(new java.awt.Color(153, 255, 153));
-        lblAbonosEfectivoFiltro.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        lblAbonosEfectivoFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblAbonosEfectivoFiltro.setForeground(new java.awt.Color(0, 102, 0));
         lblAbonosEfectivoFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAbonosEfectivoFiltro.setText("0.0");
         lblAbonosEfectivoFiltro.setOpaque(true);
 
-        jLabel151.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel151.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel151.setForeground(new java.awt.Color(255, 255, 255));
         jLabel151.setText("C$");
 
-        jLabel150.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel150.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel150.setForeground(new java.awt.Color(255, 255, 255));
         jLabel150.setText("C$");
 
         lblVentasTarjetaFiltro.setBackground(new java.awt.Color(153, 255, 153));
-        lblVentasTarjetaFiltro.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        lblVentasTarjetaFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblVentasTarjetaFiltro.setForeground(new java.awt.Color(0, 102, 0));
         lblVentasTarjetaFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblVentasTarjetaFiltro.setText("0.0");
         lblVentasTarjetaFiltro.setOpaque(true);
 
         lblTotalVentasEfectivoFiltro.setBackground(new java.awt.Color(153, 255, 153));
-        lblTotalVentasEfectivoFiltro.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        lblTotalVentasEfectivoFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblTotalVentasEfectivoFiltro.setForeground(new java.awt.Color(0, 102, 0));
         lblTotalVentasEfectivoFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTotalVentasEfectivoFiltro.setText("0.0");
         lblTotalVentasEfectivoFiltro.setOpaque(true);
 
-        jLabel159.setFont(new java.awt.Font("Segoe WP Light", 1, 18)); // NOI18N
+        jLabel159.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         jLabel159.setForeground(new java.awt.Color(255, 255, 255));
         jLabel159.setText("C$");
 
@@ -4197,9 +4197,6 @@ public class IMenu extends javax.swing.JFrame {
         txtLaboratorioProducto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jPanel2.add(txtLaboratorioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 50, -1));
 
-        txtCategoriaProducto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jPanel2.add(txtCategoriaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, 50, -1));
-
         txtMargenGanancia.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jPanel2.add(txtMargenGanancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 56, -1));
 
@@ -4231,6 +4228,7 @@ public class IMenu extends javax.swing.JFrame {
         lblErrorCodBarra.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         lblErrorCodBarra.setForeground(new java.awt.Color(255, 0, 51));
         jPanel2.add(lblErrorCodBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 57, 200, 10));
+        jPanel2.add(txtCategoriaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(491, 70, 50, 30));
 
         btnAgregarLaboratorio.setBackground(new java.awt.Color(44, 201, 144));
         btnAgregarLaboratorio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -4915,7 +4913,7 @@ public class IMenu extends javax.swing.JFrame {
         lblMenuVentas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblMenuVentas.setForeground(new java.awt.Color(255, 255, 255));
         lblMenuVentas.setText("Facturación");
-        btnVentas.add(lblMenuVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 11, -1, -1));
+        btnVentas.add(lblMenuVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 11, 110, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/charts (1).png"))); // NOI18N
         btnVentas.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 71, -1, -1));

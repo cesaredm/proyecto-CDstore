@@ -97,11 +97,32 @@ public class PrintReportes {
   "-------------------------------------------------\n"+
   "{{producto}}\n"+
    "\n\n\n\n\n";
+  
+  //TICKET DE ABONOS DE CREDITOS
+  private String ReciboPago = ""+
+  "{{tienda}}\n"+
+  "COMPROBANTE DE PAGO\n"+
+  "Fecha : {{fecha}}\n"+
+  "Cliente: {{cliente}}\n"+
+  "N° Credito: {{credito}}\n"+
+  "Monto de pago :{{monto}}\n"+
+  "Saldo: {{saldo}}\n\n";
   //constructor
     PrintReportes() {
 
     }
    
+    public void llenarTicketPago(String tienda, String fecha, String cliente, String credito, String monto, String saldo)
+    {
+        this.ReciboPago = this.ReciboPago.replace("{{tienda}}", tienda);
+        this.ReciboPago = this.ReciboPago.replace("{{fecha}}", fecha);
+        this.ReciboPago = this.ReciboPago.replace("{{cliente}}", cliente);
+        this.ReciboPago = this.ReciboPago.replace("{{credito}}", credito);
+        this.ReciboPago = this.ReciboPago.replace("{{monto}}", monto);
+        this.ReciboPago = this.ReciboPago.replace("{{saldo}}", saldo);
+        System.out.println(this.ReciboPago);
+    }
+    
     public void llenarTicketDiario(String NombreTienda, String fecha, String base, String ventasEfectivo, String ventasT, String pagosE, String pagosT, String ingresosE, String creditos, String egreso, String existCaja, String bancos, String totalV)
     {
         this.contentTicketDiario = this.contentTicketDiario.replace("{{nombreTienda}}", NombreTienda);
@@ -183,17 +204,23 @@ public class PrintReportes {
 
     //Aca convertimos el string(cuerpo del ticket) a bytes tal como
     //lo maneja la impresora(mas bien ticketera :p)
-    if(TipoReport.equals("Diario"))
-    {
-        bytes = this.contentTicketDiario.getBytes();
-    }else if(TipoReport.equals("TotalV"))
-    {
-        bytes = this.ticketTotalV.getBytes();
-    }else if(TipoReport.equals("Global")){
-        bytes = this.contentTicketGlobal.getBytes();
-    }else if(TipoReport.equals("BI"))
-    {
-        bytes = this.BI.getBytes();
+    switch(TipoReport){
+        case "Diario":{
+             bytes = this.contentTicketDiario.getBytes();
+        }break;
+        case "TotalV":{
+            bytes = this.ticketTotalV.getBytes();
+        }break;
+        case "Global":
+        {
+            bytes = this.contentTicketGlobal.getBytes();
+        }break;
+        case "BI":{
+            bytes = this.BI.getBytes();
+        }break;
+        case "Pago":{
+            bytes = this.ReciboPago.getBytes();
+        }break;
     }
     
 

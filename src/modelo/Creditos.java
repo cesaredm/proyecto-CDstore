@@ -226,7 +226,8 @@ public class Creditos extends Conexiondb {
     public DefaultTableModel MostrarFacturasPorCreditdos(int id)
     {
        this.cn = Conexion();
-       String[] titulos = {"Id Fact.","IVA","TotalFactura","Credito","Nombre", "Apellido"};
+       //TODO agregar campo impuestoISV ala consulta y al titulo
+       String[] titulos = {"N° Fact.","TotalFactura","N° Credito","Nombre", "Apellido"};
        resgistros = new String[6];
        this.modelo = new DefaultTableModel(null, titulos);
        this.consulta = "SELECT facturas.id AS Factura, impuestoISV as IVA, totalfactura, creditos.id AS Credito, clientes.nombres,apellidos FROM facturas "
@@ -238,11 +239,11 @@ public class Creditos extends Conexiondb {
             while(rs.next())
             {
                 resgistros[0] = rs.getString("Factura");
-                resgistros[1] = rs.getString("IVA");
-                resgistros[2] = rs.getString("totalFactura");
-                resgistros[3] = rs.getString("Credito");
-                resgistros[4] = rs.getString("nombres");
-                resgistros[5] = rs.getString("apellidos");
+//                resgistros[1] = rs.getString("IVA");
+                resgistros[1] = rs.getString("totalFactura");
+                resgistros[2] = rs.getString("Credito");
+                resgistros[3] = rs.getString("nombres");
+                resgistros[4] = rs.getString("apellidos");
                 this.modelo.addRow(resgistros);
             }
             cn.close();

@@ -79,7 +79,8 @@ public class Productos extends Conexiondb {
     public void Actualizar(String id, String codigoBarra, String nombre, String precioCompra, String monedaCompra, String precioVenta, String monedaVenta, Date fechaVencimiento, String stock, String categoria, String laboratorio, String ubicacion, String descripcion) {
         cn = Conexion();
         this.consulta = "UPDATE productos SET codigoBarra=?, nombre=?, precioCompra=?, monedaCompra=?, precioVenta=?, monedaVenta=?, fechaVencimiento=?, stock=?, categoria=?, marca=?, ubicacion=?, descripcion=? WHERE id = ?";
-        float compra = Float.parseFloat(precioCompra), venta = Float.parseFloat(precioVenta), cantidad = Float.parseFloat(stock);
+        //TODO sustituir el 0 por precioCompra 
+        float compra = Float.parseFloat("0"), venta = Float.parseFloat(precioVenta), cantidad = Float.parseFloat(stock);
         int Idcategoria = Integer.parseInt(categoria), Idlaboratorio = Integer.parseInt(laboratorio);
         try {
             pst = this.cn.prepareStatement(this.consulta);

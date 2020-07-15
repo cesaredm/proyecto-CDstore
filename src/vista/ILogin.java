@@ -143,16 +143,16 @@ public class ILogin extends javax.swing.JFrame {
         jPanel1.add(txtPassUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 220, 30));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 270, 10));
 
-        btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/acceder1.png"))); // NOI18N
+        btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btn1.png"))); // NOI18N
         btnAceptar.setBorder(null);
         btnAceptar.setBorderPainted(false);
         btnAceptar.setContentAreaFilled(false);
         btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAceptar.setFocusPainted(false);
-        btnAceptar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/img/acceder.png"))); // NOI18N
-        btnAceptar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/acceder.png"))); // NOI18N
-        btnAceptar.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/img/acceder1.png"))); // NOI18N
-        btnAceptar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/img/acceder1.png"))); // NOI18N
+        btnAceptar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btn2.png"))); // NOI18N
+        btnAceptar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btn2.png"))); // NOI18N
+        btnAceptar.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btn1.png"))); // NOI18N
+        btnAceptar.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/img/btn2.png"))); // NOI18N
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);

@@ -130,27 +130,27 @@ public class CtrlCreditos implements ActionListener, CaretListener, MouseListene
                 JOptionPane.showMessageDialog(null, err);
             }
         }
-//        if (e.getSource() == menu.tblCreditos) {
-//            int filaseleccionada = menu.tblCreditos.getSelectedRow();
-//            String id;
-//            if (e.getClickCount() == 2) {
-//                try {
-//                    if (filaseleccionada == -1) {
-//
-//                    } else {
-//                        this.modelo = (DefaultTableModel) menu.tblCreditos.getModel();
-//                        id = (String) this.modelo.getValueAt(filaseleccionada, 0);
-//                        MostrarFacturasPorCreditos(id);
-//                        menu.FacturasPorCreditos.setSize(830, 308);
-//                        menu.FacturasPorCreditos.setVisible(true);
-//                        menu.FacturasPorCreditos.setLocationRelativeTo(null);
-//
-//                    }
-//                } catch (Exception err) {
-//                    JOptionPane.showMessageDialog(null, err + "mostrar facturasporcreditos");
-//                }
-//            }
-//        }
+        if (e.getSource() == menu.tblCreditos) {
+            int filaseleccionada = menu.tblCreditos.getSelectedRow();
+            String id;
+            if (e.getClickCount() == 2) {
+                try {
+                    if (filaseleccionada == -1) {
+
+                    } else {
+                        this.modelo = (DefaultTableModel) menu.tblCreditos.getModel();
+                        id = (String) this.modelo.getValueAt(filaseleccionada, 0);
+                        MostrarFacturasPorCreditos(id);
+                        menu.FacturasPorCreditos.setSize(830, 308);
+                        menu.FacturasPorCreditos.setVisible(true);
+                        menu.FacturasPorCreditos.setLocationRelativeTo(null);
+
+                    }
+                } catch (Exception err) {
+                    JOptionPane.showMessageDialog(null, err + "mostrar facturasporcreditos");
+                }
+            }
+        }
 
     }
 

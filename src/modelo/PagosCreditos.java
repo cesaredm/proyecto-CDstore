@@ -168,4 +168,38 @@ public class PagosCreditos extends Conexiondb {
         return credito;
     }
 
+    public String cliente(String id)
+    {
+        this.consulta = "select c.nombres, c.apellidos from clientes as c inner join creditos on(c.id = creditos.cliente) where creditos.id = ?";
+        this.cn = Conexion();
+        String nombre = "";
+        try {
+            this.pst = this.cn.prepareStatement(this.consulta);
+            this.pst.setString(1, id);
+            ResultSet rs = this.pst.executeQuery();
+            while(rs.next()){
+                nombre = rs.getString("nombres")+" "+rs.getString("apellidos");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e+" en la funcion cliente en modelo pagodCreditos");
+        }
+        return nombre;
+    }
+    public float saldo(String id)
+    {
+        this.consulta = "SELECT (SUM(f.totalFactura)-SUM(p.monto)) AS monto FROM facturas AS f INNER JOIN creditos AS c ON(f.credito=c.id) INNER JOIN pagoscreditos AS p ON(c.id=p.credito) WHERE c.id = ?";
+        this.cn = Conexion();
+        float nombre = 0;
+        try {
+            this.pst = this.cn.prepareStatement(this.consulta);
+            this.pst.setString(1, id);
+            ResultSet rs = this.pst.executeQuery();
+            while(rs.next()){
+                nombre = rs.getFloat("monto");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e+" en la funcion saldo en modelo pagodCreditos");
+        }
+        return nombre;
+    }
 }

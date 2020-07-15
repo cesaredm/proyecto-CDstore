@@ -117,72 +117,10 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
             guardarProducto();
         }
         if (e.getSource() == menu.btnCalcularGanancia) {
-            float compra, porcentaje, resultado;
-            if (isNumeric(menu.txtCompraProducto.getText()) && isNumeric(menu.txtGananciaProducto.getText())) {
-                compra = Float.parseFloat(menu.txtCompraProducto.getText());
-                porcentaje = compra * Float.parseFloat(menu.txtGananciaProducto.getText()) / 100;
-                resultado = porcentaje + compra;
-                String precioV = String.valueOf(resultado);
-                menu.txtMargenGanancia.setText(String.valueOf(porcentaje));
-                menu.txtVentaProducto.setText(precioV);
-            } else {
-                JOptionPane.showMessageDialog(null, "Solo Numero en Campo Precio Compra y % Ganacia");
-            }
+           calcularGanancia();
         }
         if (e.getSource() == menu.btnActualizarProducto) {
-            String codigoBarra = menu.txtCodBarraProducto.getText(),
-                    nombre = menu.txtNombreProducto.getText(),
-                    precioCProducto = menu.txtCompraProducto.getText(),
-                    precioVProducto = menu.txtVentaProducto.getText(),
-                    ganancia = menu.txtGananciaProducto.getText(),
-                    cantidad = menu.txtCantidadProducto.getText(),
-                    categoria = menu.txtCategoriaProducto.getText(),
-                    laboratorio = menu.txtLaboratorioProducto.getText(),
-                    ubicacion = menu.txtUbicacionProducto.getText(),
-                    descripcion = menu.txtDescripcionProducto.getText(),
-                    monedaCompra = menu.cmbMonedaCompraProducto.getSelectedItem().toString(),
-                    monedaVenta = menu.cmbMonedaVentaProducto.getSelectedItem().toString();
-            Date fechaVencimiento = menu.jcFechaVProducto.getDate();
-            long fechaV = fechaVencimiento.getTime();
-            java.sql.Date fecha = new java.sql.Date(fechaV);
-            if (nombre.equals("")) {
-                //JOptionPane.showMessageDialog(null, "Llene el campo Nombre", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else if (precioCProducto.equals("")) {
-                JOptionPane.showMessageDialog(null, "Llene el campo Precio Compra", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else if (precioVProducto.equals("")) {
-                JOptionPane.showMessageDialog(null, "Llene el campo Precio Venta", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else if (fechaVencimiento.equals("")) {
-                JOptionPane.showMessageDialog(null, "Llene el campo Fecha Vencimiento", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else if (cantidad.equals("")) {
-                JOptionPane.showMessageDialog(null, "Llene el campo Cantidad", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else if (categoria.equals("")) {
-                JOptionPane.showMessageDialog(null, "Llene el campo Categoria", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else if (laboratorio.equals("")) {
-                JOptionPane.showMessageDialog(null, "Llene el campo Laboratorio", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else {//validacion para ingreso de nuemeros 
-                if (!isNumeric(precioCProducto)) {
-                    JOptionPane.showMessageDialog(null, "Solo numeros campo Precio Compra", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                } else if (!isNumeric(precioVProducto)) {
-                    JOptionPane.showMessageDialog(null, "Solo numeros campo Precio Venta", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                } else if (!isNumeric(ganancia)) {
-                    JOptionPane.showMessageDialog(null, "Solo numeros campo Ganancia", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                } else if (!isNumeric(cantidad)) {
-                    JOptionPane.showMessageDialog(null, "Solo numeros campo Cantidad", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                } else if (!isNumeric(laboratorio)) {
-                    JOptionPane.showMessageDialog(null, "Solo Numeros Campo Laboratorio", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                } else if (!isNumeric(categoria)) {
-                    JOptionPane.showMessageDialog(null, "Solo Numeros Campo Categoria", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                } else {   //funcion Guardar de la clase Productos para guardar productos
-                    productos.Actualizar(this.id, codigoBarra, nombre, precioCProducto, monedaCompra, precioVProducto, monedaVenta, fecha, cantidad, categoria, laboratorio, ubicacion, descripcion);
-                    MostrarProductos("");
-                    MostrarProductosVender("");
-                    LimpiarProducto();
-                    inversion();
-                    menu.btnGuardarProducto.setEnabled(true);
-                    menu.btnActualizarProducto.setEnabled(false);
-                }
-
-            }
+           actualizarProducto();
         }
         if (e.getSource() == menu.btnNuevoProducto) {
             HabilitarProductos();
@@ -190,74 +128,10 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
             menu.txtCodBarraProducto.requestFocus();
         }
         if (e.getSource() == menu.EditarProducto) {
-            int filaseleccionada;
-            String id, codBarra, nombre, precioC, precioV, cantidad, categoria, laboratorio, ubicacion, descripcion, monedaCompra, monedaVenta;
-            Date fechaVencimiento;
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                filaseleccionada = menu.tblProductos.getSelectedRow();
-                if (filaseleccionada == -1) {
-                    JOptionPane.showConfirmDialog(null, "Seleccione una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    modelo = (DefaultTableModel) menu.tblProductos.getModel();
-                    id = (String) modelo.getValueAt(filaseleccionada, 0);
-                    codBarra = (String) modelo.getValueAt(filaseleccionada, 1);
-                    nombre = (String) modelo.getValueAt(filaseleccionada, 2);
-                    precioC = (String) modelo.getValueAt(filaseleccionada, 3);
-                    monedaCompra = (String) modelo.getValueAt(filaseleccionada, 4);
-                    precioV = (String) modelo.getValueAt(filaseleccionada, 5);
-                    monedaVenta = (String) modelo.getValueAt(filaseleccionada, 6);
-                    fechaVencimiento = formatoFecha.parse(modelo.getValueAt(filaseleccionada, 7).toString());
-                    cantidad = (String) modelo.getValueAt(filaseleccionada, 8);
-                    categoria = (String) modelo.getValueAt(filaseleccionada, 9);
-                    laboratorio = (String) modelo.getValueAt(filaseleccionada, 10);
-                    ubicacion = (String) modelo.getValueAt(filaseleccionada, 11);
-                    descripcion = (String) modelo.getValueAt(filaseleccionada, 12);
-                    HabilitarProductos();
-                    LimpiarProducto();
-                    menu.txtCodBarraProducto.setText(codBarra);
-                    menu.txtNombreProducto.setText(nombre);
-                    menu.txtCompraProducto.setText(precioC);
-                    menu.cmbMonedaCompraProducto.setSelectedItem(monedaCompra);
-                    menu.txtVentaProducto.setText(precioV);
-                    menu.cmbMonedaVentaProducto.setSelectedItem(monedaVenta);
-                    menu.jcFechaVProducto.setDate(fechaVencimiento);
-                    menu.txtCantidadProducto.setText(cantidad);
-                    menu.txtCategoriaProducto.setText(productos.ObtenerIdCategoria(categoria));
-                    menu.txtLaboratorioProducto.setText(productos.ObtenerIdMarca(laboratorio));
-                    menu.txtUbicacionProducto.setText(ubicacion);
-                    menu.txtDescripcionProducto.setText(descripcion);
-                    menu.txtGananciaProducto.setText("0");
-                    menu.txtMargenGanancia.setText("");
-                    this.id = id;
-                    menu.btnGuardarProducto.setEnabled(false);
-                    menu.btnActualizarProducto.setEnabled(true);
-                }
-            } catch (Exception err) {
-                JOptionPane.showConfirmDialog(null, err + "en la funcion editar producto");
-            }
+            editarProducto();
         }
         if (e.getSource() == menu.BorrarProducto) {
-            int filaseleccionada = menu.tblProductos.getSelectedRow();
-            String id;
-            try {
-                filaseleccionada = menu.tblProductos.getSelectedRow();
-                if (filaseleccionada == -1) {
-                    JOptionPane.showMessageDialog(null, "Seleccione una Fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                } else {
-                    int confirmar = JOptionPane.showConfirmDialog(null, "Seguro Que Quieres Borrar Este Producto", "Advertencia", JOptionPane.OK_CANCEL_OPTION);
-                    if (confirmar == JOptionPane.YES_OPTION) {
-                        modelo = (DefaultTableModel) menu.tblProductos.getModel();
-                        id = (String) modelo.getValueAt(filaseleccionada, 0);
-                        productos.Eliminar(id);
-                        MostrarProductos("");
-                        inversion();
-                    }
-
-                }
-            } catch (Exception err) {
-                JOptionPane.showMessageDialog(null, err + "borrar producto");
-            }
+           borrarProducto();
         }
         if (e.getSource() == menu.AddProductoStock) {
             int filaseleccionada = menu.tblProductos.getSelectedRow();
@@ -517,6 +391,57 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
         menu.tblAddLaboratorio.getTableHeader().setForeground(new Color(255, 255, 255));
         menu.tblAddLaboratorio.setModel(productos.MostrarMarca(nombre));
     }
+    
+    public void editarProducto()
+    {
+        //TODO descometamos la lineas comentdas y arreglasmo la posiscion de las columas
+            int filaseleccionada;
+            String id, codBarra, nombre, precioC, precioV, cantidad, categoria, laboratorio, ubicacion, descripcion, monedaCompra, monedaVenta;
+            Date fechaVencimiento;
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                filaseleccionada = menu.tblProductos.getSelectedRow();
+                if (filaseleccionada == -1) {
+                    JOptionPane.showConfirmDialog(null, "Seleccione una fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    modelo = (DefaultTableModel) menu.tblProductos.getModel();
+                    id = (String) modelo.getValueAt(filaseleccionada, 0);
+                    codBarra = (String) modelo.getValueAt(filaseleccionada, 1);
+                    nombre = (String) modelo.getValueAt(filaseleccionada, 2);
+//                    precioC = (String) modelo.getValueAt(filaseleccionada, 3);
+//                    monedaCompra = (String) modelo.getValueAt(filaseleccionada, 4);
+                    precioV = (String) modelo.getValueAt(filaseleccionada, 3);
+                    monedaVenta = (String) modelo.getValueAt(filaseleccionada, 4);
+                    fechaVencimiento = formatoFecha.parse(modelo.getValueAt(filaseleccionada, 5).toString());
+                    cantidad = (String) modelo.getValueAt(filaseleccionada, 6);
+                    categoria = (String) modelo.getValueAt(filaseleccionada, 7);
+                    laboratorio = (String) modelo.getValueAt(filaseleccionada, 8);
+                    ubicacion = (String) modelo.getValueAt(filaseleccionada, 9);
+                    descripcion = (String) modelo.getValueAt(filaseleccionada, 10);
+                    HabilitarProductos();
+                    LimpiarProducto();
+                    menu.txtCodBarraProducto.setText(codBarra);
+                    menu.txtNombreProducto.setText(nombre);
+//                    menu.txtCompraProducto.setText(precioC);
+//                    menu.cmbMonedaCompraProducto.setSelectedItem(monedaCompra);
+                    menu.txtVentaProducto.setText(precioV);
+                    menu.cmbMonedaVentaProducto.setSelectedItem(monedaVenta);
+                    menu.jcFechaVProducto.setDate(fechaVencimiento);
+                    menu.txtCantidadProducto.setText(cantidad);
+                    menu.txtCategoriaProducto.setText(productos.ObtenerIdCategoria(categoria));
+                    menu.txtLaboratorioProducto.setText(productos.ObtenerIdMarca(laboratorio));
+                    menu.txtUbicacionProducto.setText(ubicacion);
+                    menu.txtDescripcionProducto.setText(descripcion);
+                    menu.txtGananciaProducto.setText("0");
+                    menu.txtMargenGanancia.setText("");
+                    this.id = id;
+                    menu.btnGuardarProducto.setEnabled(false);
+                    menu.btnActualizarProducto.setEnabled(true);
+                }
+            } catch (Exception err) {
+                JOptionPane.showConfirmDialog(null, err + "en la funcion editar producto");
+            }
+    }
 
     public void guardarProducto() {
         String codigoBarra = menu.txtCodBarraProducto.getText(),
@@ -556,11 +481,13 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
                 JOptionPane.showMessageDialog(null, "Solo numeros campo Precio Venta", "Advertencia", JOptionPane.WARNING_MESSAGE);
             } else if (!isNumeric(cantidad)) {
                 JOptionPane.showMessageDialog(null, "Solo numeros campo Cantidad", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else if (!isNumeric(laboratorio)) {
-                JOptionPane.showMessageDialog(null, "Solo Numeros Campo Laboratorio", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            } else if (!isNumeric(categoria)) {
-                JOptionPane.showMessageDialog(null, "Solo Numeros Campo Categoria", "Advertencia", JOptionPane.WARNING_MESSAGE);
             } else {   //funcion Guardar de la clase Productos para guardar productos
+                if (!isNumeric(categoria)) {
+                    categoria = "1";
+                }
+                if (!isNumeric(laboratorio)) {
+                    laboratorio = "1";
+                }
                 productos.Guardar(codigoBarra, nombre, precioCProducto, monedaCompra, precioVProducto, monedaVenta, fecha, cantidad, categoria, laboratorio, ubicacion, descripcion);
                 MostrarProductos("");
                 LimpiarProducto();
@@ -573,7 +500,101 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
 
         }
     }
+    
+    public void actualizarProducto()
+    {
+         String codigoBarra = menu.txtCodBarraProducto.getText(),
+                    nombre = menu.txtNombreProducto.getText(),
+                    precioCProducto = menu.txtCompraProducto.getText(),
+                    precioVProducto = menu.txtVentaProducto.getText(),
+                    ganancia = menu.txtGananciaProducto.getText(),
+                    cantidad = menu.txtCantidadProducto.getText(),
+                    categoria = menu.txtCategoriaProducto.getText(),
+                    laboratorio = menu.txtLaboratorioProducto.getText(),
+                    ubicacion = menu.txtUbicacionProducto.getText(),
+                    descripcion = menu.txtDescripcionProducto.getText(),
+                    monedaCompra = menu.cmbMonedaCompraProducto.getSelectedItem().toString(),
+                    monedaVenta = menu.cmbMonedaVentaProducto.getSelectedItem().toString();
+            Date fechaVencimiento = menu.jcFechaVProducto.getDate();
+            long fechaV = fechaVencimiento.getTime();
+            java.sql.Date fecha = new java.sql.Date(fechaV);
+            if (nombre.equals("")) {
+                //JOptionPane.showMessageDialog(null, "Llene el campo Nombre", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } /*else if (precioCProducto.equals("")) {
+                JOptionPane.showMessageDialog(null, "Llene el campo Precio Compra", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } */ else if (precioVProducto.equals("")) {
+                JOptionPane.showMessageDialog(null, "Llene el campo Precio Venta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else if (fechaVencimiento.equals("")) {
+                JOptionPane.showMessageDialog(null, "Llene el campo Fecha Vencimiento", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else if (cantidad.equals("")) {
+                JOptionPane.showMessageDialog(null, "Llene el campo Cantidad", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }/* else if (categoria.equals("")) {
+                JOptionPane.showMessageDialog(null, "Llene el campo Categoria", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else if (laboratorio.equals("")) {
+                JOptionPane.showMessageDialog(null, "Llene el campo Laboratorio", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } */ else {//validacion para ingreso de nuemeros 
+                /*if (!isNumeric(precioCProducto)) {
+                    JOptionPane.showMessageDialog(null, "Solo numeros campo Precio Compra", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                } else*/ if (!isNumeric(precioVProducto)) {
+                    JOptionPane.showMessageDialog(null, "Solo numeros campo Precio Venta", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                } else if (!isNumeric(cantidad)) {
+                    JOptionPane.showMessageDialog(null, "Solo numeros campo Cantidad", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                } else {   //funcion Guardar de la clase Productos para guardar productos
+                    if (!isNumeric(categoria)) {
+                        categoria = "1";
+                    }
+                    if (!isNumeric(laboratorio)) {
+                        laboratorio = "1";
+                    }
+                    productos.Actualizar(this.id, codigoBarra, nombre, precioCProducto, monedaCompra, precioVProducto, monedaVenta, fecha, cantidad, categoria, laboratorio, ubicacion, descripcion);
+                    MostrarProductos("");
+                    MostrarProductosVender("");
+                    LimpiarProducto();
+                    inversion();
+                    menu.btnGuardarProducto.setEnabled(true);
+                    menu.btnActualizarProducto.setEnabled(false);
+                }
 
+            }
+    }
+    
+    public void calcularGanancia()
+    {
+         float compra, porcentaje, resultado;
+            if (isNumeric(menu.txtCompraProducto.getText()) && isNumeric(menu.txtGananciaProducto.getText())) {
+                compra = Float.parseFloat(menu.txtCompraProducto.getText());
+                porcentaje = compra * Float.parseFloat(menu.txtGananciaProducto.getText()) / 100;
+                resultado = porcentaje + compra;
+                String precioV = String.valueOf(resultado);
+                menu.txtMargenGanancia.setText(String.valueOf(porcentaje));
+                menu.txtVentaProducto.setText(precioV);
+            } else {
+                JOptionPane.showMessageDialog(null, "Solo Numero en Campo Precio Compra y % Ganacia");
+            }
+    }
+
+    public void borrarProducto(){
+         int filaseleccionada = menu.tblProductos.getSelectedRow();
+            String id;
+            try {
+                filaseleccionada = menu.tblProductos.getSelectedRow();
+                if (filaseleccionada == -1) {
+                    JOptionPane.showMessageDialog(null, "Seleccione una Fila", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    int confirmar = JOptionPane.showConfirmDialog(null, "Seguro Que Quieres Borrar Este Producto", "Advertencia", JOptionPane.OK_CANCEL_OPTION);
+                    if (confirmar == JOptionPane.YES_OPTION) {
+                        modelo = (DefaultTableModel) menu.tblProductos.getModel();
+                        id = (String) modelo.getValueAt(filaseleccionada, 0);
+                        productos.Eliminar(id);
+                        MostrarProductos("");
+                        inversion();
+                    }
+
+                }
+            } catch (Exception err) {
+                JOptionPane.showMessageDialog(null, err + "borrar producto");
+            }
+    }
     @Override
     public void mouseClicked(MouseEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

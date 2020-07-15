@@ -30,6 +30,8 @@ public class CtrlPagos implements ActionListener, CaretListener {
     CtrlCreditos ctrlC;
     Creditos creditos;
     Reportes reportes;
+    PrintReportes print;
+    InfoFactura info;
     DefaultTableModel modelo;
     String id;
     Date fecha;
@@ -42,6 +44,8 @@ public class CtrlPagos implements ActionListener, CaretListener {
         this.ctrlR = new CtrlReportes(menu, reportes);
         this.ctrlC = new CtrlCreditos(menu, creditos);
         this.modelo = new DefaultTableModel();
+        this.print = new PrintReportes();
+        this.info = new InfoFactura();
         this.fecha = new Date();
         this.menu.cmbFormaPagoCredito.setModel(pagos.FormasPago());
         this.menu.btnGuardarPago.addActionListener(this);
@@ -61,37 +65,7 @@ public class CtrlPagos implements ActionListener, CaretListener {
     public void actionPerformed(ActionEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         if (e.getSource() == menu.btnGuardarPago) {
-            int c;
-            float montoPago;
-            String credito = menu.txtCreditoPago.getText(), monto = menu.txtMontoPago.getText(), formaPago = menu.cmbFormaPagoCredito.getSelectedItem().toString();
-            int idFormaPago = Integer.parseInt(pagos.ObtenerFormaPago(formaPago));
-            Date f = menu.jcFechaPago.getDate();
-            long fecha = f.getTime();
-            java.sql.Date fechaPago = new java.sql.Date(fecha);
-            if (!credito.equals("") && !monto.equals("")) {
-                if (isNumeric(credito) && isNumeric(monto)) {
-                    c = Integer.parseInt(credito);
-                    montoPago = Float.parseFloat(monto);
-                    pagos.Guardar(c, montoPago, fechaPago, idFormaPago);
-                    MostrarPagos("");
-                    LimpiarPago();
-                    ctrlC.MostrarCreditos("");
-                    ctrlC.ActualizarEstadoCreditoApendiente();
-                    ctrlC.ActualizarEstadoCreditoAabierto();
-                    ctrlC.MostrarCreditos("");
-                    ctrlR.reportesDiarios(this.fecha);
-                    ctrlR.MostrarReportesDario(this.fecha);
-                    ctrlR.ReporteGlobal();
-                    ctrlR.SumaTotalFiltroReporte(this.fecha, this.fecha);
-                    MostrarPagos("");
-                    ctrlC.MostrarCreditosCreados("");
-                    ctrlC.MostrarCreditosAddFactura("");
-                    menu.btnGuardarPago.setEnabled(true);
-                    menu.btnActualizarPago.setEnabled(false);
-                }
-            } else {
-
-            }
+            guardarPago();
         }
         if (e.getSource() == menu.btnActualizarPago) {
             int c;
@@ -227,6 +201,51 @@ public class CtrlPagos implements ActionListener, CaretListener {
             float credito = Float.parseFloat(menu.lblCredito.getText()), pago = Float.parseFloat(menu.lblPago.getText()), total = 0;
             total = credito - pago;
             menu.lblSaldo.setText("" + total);
+        } else {
+
+        }
+    }
+
+    public void guardarPago() {
+        int c;
+        float montoPago, saldo = 0;
+        String fechaString = "", credito = menu.txtCreditoPago.getText(), monto = menu.txtMontoPago.getText(), formaPago = menu.cmbFormaPagoCredito.getSelectedItem().toString();
+        int idFormaPago = Integer.parseInt(pagos.ObtenerFormaPago(formaPago));
+        Date f = menu.jcFechaPago.getDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd");
+        long fecha = f.getTime();
+        java.sql.Date fechaPago = new java.sql.Date(fecha);
+        fechaString = sdf.format(fecha);
+        if (!credito.equals("") && !monto.equals("")) {
+            if (isNumeric(credito) && isNumeric(monto)) {
+                try {
+                    c = Integer.parseInt(credito);
+                    montoPago = Float.parseFloat(monto);
+                    pagos.Guardar(c, montoPago, fechaPago, idFormaPago);
+                    saldo = pagos.saldo(credito) - montoPago;
+                    info.obtenerInfoFactura();
+                    print.llenarTicketPago(info.getNombre(), fechaString, this.pagos.cliente(credito), credito, monto, String.valueOf(saldo));
+                    MostrarPagos("");
+                    LimpiarPago();
+                    ctrlC.MostrarCreditos("");
+                    ctrlC.ActualizarEstadoCreditoApendiente();
+                    ctrlC.ActualizarEstadoCreditoAabierto();
+                    ctrlC.MostrarCreditos("");
+                    ctrlR.reportesDiarios(this.fecha);
+                    ctrlR.MostrarReportesDario(this.fecha);
+                    ctrlR.ReporteGlobal();
+                    ctrlR.SumaTotalFiltroReporte(this.fecha, this.fecha);
+                    MostrarPagos("");
+                    ctrlC.MostrarCreditosCreados("");
+                    ctrlC.MostrarCreditosAddFactura("");
+                    menu.btnGuardarPago.setEnabled(true);
+                    menu.btnActualizarPago.setEnabled(false);
+                    //el try catch es para el metodo de imprimir
+                    print.print("Pago");
+                } catch (Exception e) {
+
+                }
+            }
         } else {
 
         }
