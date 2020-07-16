@@ -238,7 +238,8 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
         try {
             this.modelo = (DefaultTableModel) menu.tblFactura.getModel();//obtengo el modelo de tabla factura y sus datos
             int filas = this.modelo.getRowCount();//Cuento las filas de la tabla Factura
-            if (filas > 0) {
+            //guardara la factura solo si el boton guardar factura esta habilatado
+            if (menu.btnGuardarFactura.isEnabled()) {
                 Date fecha;
                 String[] ArregloImprimir = new String[filas];
                 String factura = "", id, cantidad, precio, totalDetalle, idCredito, iva, totalFactura, formaPago, idFormaPago, comprador, cliente, subtotal, nombreProduct, tipoVenta;//variables para capturar los datos a guardar
@@ -889,19 +890,20 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
             //obtengo la fecha de la factura
             fecha = menu.tblReporte.getValueAt(filaseleccionada, 1).toString();
             //obtengo el nombre comprador
-            comprador = menu.tblReporte.getValueAt(filaseleccionada, 4).toString();
+            comprador = menu.tblReporte.getValueAt(filaseleccionada, 3).toString();//antes 4
             //obtengo el impuesto
-            iva = Float.parseFloat(menu.tblReporte.getValueAt(filaseleccionada, 2).toString());
+            //TODO descomentar isv
+            //iva = Float.parseFloat(menu.tblReporte.getValueAt(filaseleccionada, 2).toString());
             //obtengo el total de factura
-            totalFactura = Float.parseFloat(menu.tblReporte.getValueAt(filaseleccionada, 3).toString());
+            totalFactura = Float.parseFloat(menu.tblReporte.getValueAt(filaseleccionada, 2).toString());//antes 3
             //obtengo el credito
-            credito = (String) menu.tblReporte.getValueAt(filaseleccionada, 6);
+            credito = (String) menu.tblReporte.getValueAt(filaseleccionada, 5);//antes 6
             nombre = r.nombreCliente(credito);//obtengo el nombre de credito
             apellido = r.apellidoCliente(credito);//obtengo el apellido de credito
             //obtengo la forma de pago
-            pago = menu.tblReporte.getValueAt(filaseleccionada, 5).toString();
+            pago = menu.tblReporte.getValueAt(filaseleccionada, 4).toString();//antes 5
             //realiza el calculo para obtener el subtotal
-            subTotal = totalFactura - iva;
+           // subTotal = totalFactura - iva;
             //validacion de lo que estoy obteniendo en la variable credito
             if (credito == null) {
                 credito = "";
@@ -909,9 +911,9 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
             //lleno los campos del formulario factura
             menu.txtCreditoFactura.setText(credito);
             menu.jcFechaFactura.setDate(spf.parse(fecha));
-            menu.txtSubTotal.setText("" + subTotal);
+            //menu.txtSubTotal.setText("" + subTotal);
             menu.txtTotal.setText("" + totalFactura);
-            menu.txtImpuesto.setText("" + iva);
+            menu.txtImpuesto.setText("0.0" /*+ iva*/);
             menu.txtNumeroFactura.setText(idFactura);
             menu.txtCompradorFactura.setText(comprador);
             menu.txtNClienteFactura.setText(nombre);

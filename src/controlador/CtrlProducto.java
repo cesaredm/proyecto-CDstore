@@ -270,10 +270,18 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
         }
         if (e.getSource() == menu.txtCodBarraProducto) {
             String cod = menu.txtCodBarraProducto.getText();
+            //el metodod ExistCodBarra no devuelve true si ya existe y false si no existe
             this.productos.ExitsCodBarra(cod);
+            //validamos si el codBarra no existe va a habilitar el boton guardar si ya existe el deshabilitara el boton guardar
             if (!this.productos.isExiste()) {
                 menu.lblErrorCodBarra.setText("");
-                menu.btnGuardarProducto.setEnabled(true);
+                //si el boton actualizar esta deshabilitado el boton guardar se habilitara de lo contrario se deshabilitara
+                if(!menu.btnActualizarProducto.isEnabled())
+                {
+                     menu.btnGuardarProducto.setEnabled(true);
+                }else{
+                    menu.btnGuardarProducto.setEnabled(false);
+                }
             } else {
                 menu.lblErrorCodBarra.setText("Oops. el código ya existe..");
                 menu.btnGuardarProducto.setEnabled(false);
@@ -704,7 +712,10 @@ public class CtrlProducto implements ActionListener, CaretListener, MouseListene
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.VK_ENTER == e.getKeyCode()) {
-            guardarProducto();
+            //guardara solo si el boton guardar esta habilitado
+            if(menu.btnGuardarProducto.isEnabled()){
+                guardarProducto();
+            }
         }
     }
 
