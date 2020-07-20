@@ -226,13 +226,6 @@ public class IMenu extends javax.swing.JFrame {
         btnGuardarPago = new javax.swing.JButton();
         jScrollPane24 = new javax.swing.JScrollPane();
         tblPagos = new javax.swing.JTable();
-        lblCredito = new javax.swing.JLabel();
-        lblPago = new javax.swing.JLabel();
-        jLabel83 = new javax.swing.JLabel();
-        jLabel84 = new javax.swing.JLabel();
-        jLabel85 = new javax.swing.JLabel();
-        lblSaldo = new javax.swing.JLabel();
-        jSeparator6 = new javax.swing.JSeparator();
         jLabel34 = new javax.swing.JLabel();
         txtBuscarPago = new javax.swing.JTextField();
         jLabel41 = new javax.swing.JLabel();
@@ -1611,25 +1604,6 @@ public class IMenu extends javax.swing.JFrame {
 
         jPanel20.add(jScrollPane24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 830, 160));
 
-        lblCredito.setText("0.0");
-        jPanel20.add(lblCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 60, -1, -1));
-
-        lblPago.setText("0.0");
-        jPanel20.add(lblPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, -1, -1));
-
-        jLabel83.setText("Credito");
-        jPanel20.add(jLabel83, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 60, -1, -1));
-
-        jLabel84.setText("Pago");
-        jPanel20.add(jLabel84, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, -1, -1));
-
-        jLabel85.setText("saldo");
-        jPanel20.add(jLabel85, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 110, -1, -1));
-
-        lblSaldo.setText("0.0");
-        jPanel20.add(lblSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 110, -1, -1));
-        jPanel20.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 100, 118, 5));
-
         jLabel34.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel34.setText("Buscar:");
         jLabel34.setToolTipText("");
@@ -2317,7 +2291,7 @@ public class IMenu extends javax.swing.JFrame {
 
         pnlContenedor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(72, 72, 72), 2));
         pnlContenedor.setMinimumSize(new java.awt.Dimension(1260, 608));
-        pnlContenedor.setPreferredSize(new java.awt.Dimension(1262, 607));
+        pnlContenedor.setPreferredSize(new java.awt.Dimension(1310, 610));
 
         pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         pnlPrincipal.setOpaque(false);
@@ -2670,7 +2644,7 @@ public class IMenu extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(jLabel108)
                         .addGap(3, 3, 3)
-                        .addComponent(txtCodBarraFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                        .addComponent(txtCodBarraFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
@@ -2685,7 +2659,7 @@ public class IMenu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVentasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel29, javax.swing.GroupLayout.DEFAULT_SIZE, 1083, Short.MAX_VALUE)
+                    .addComponent(jPanel29, javax.swing.GroupLayout.DEFAULT_SIZE, 1084, Short.MAX_VALUE)
                     .addComponent(jScrollPane10))
                 .addContainerGap())
         );
@@ -3812,7 +3786,7 @@ public class IMenu extends javax.swing.JFrame {
                                 .addGap(30, 30, 30)
                                 .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52))
                     .addGroup(jPanel30Layout.createSequentialGroup()
@@ -4307,7 +4281,7 @@ public class IMenu extends javax.swing.JFrame {
             pnlInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInventarioLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1083, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1084, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
             .addGroup(pnlInventarioLayout.createSequentialGroup()
                 .addContainerGap()
@@ -4319,7 +4293,7 @@ public class IMenu extends javax.swing.JFrame {
                             .addComponent(btnAgregarLaboratorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnMostrarStockMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAgregarCategorias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnVerificarVencimientos, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)))
+                            .addComponent(btnVerificarVencimientos, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)))
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21)
                     .addGroup(pnlInventarioLayout.createSequentialGroup()
@@ -4423,7 +4397,7 @@ public class IMenu extends javax.swing.JFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE))
+                .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE))
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
@@ -4638,7 +4612,7 @@ public class IMenu extends javax.swing.JFrame {
                                 .addComponent(btnGuardarGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
                                 .addComponent(btnActualizarGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 282, Short.MAX_VALUE)))
+                        .addGap(0, 326, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel17Layout.setVerticalGroup(
@@ -4748,7 +4722,7 @@ public class IMenu extends javax.swing.JFrame {
                                     .addComponent(jLabel54)))
                             .addGroup(jPanel24Layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
-                                .addComponent(jLabel56, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
+                                .addComponent(jLabel56, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -4760,7 +4734,7 @@ public class IMenu extends javax.swing.JFrame {
                     .addComponent(txtNombreTienda, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTelefonoTienda)
                     .addComponent(jScrollPane27, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addGap(238, 238, 238)
                 .addComponent(btnActualizarInfoFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4834,7 +4808,7 @@ public class IMenu extends javax.swing.JFrame {
         pnlBlanco.setLayout(pnlBlancoLayout);
         pnlBlancoLayout.setHorizontalGroup(
             pnlBlancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1103, Short.MAX_VALUE)
+            .addGap(0, 1104, Short.MAX_VALUE)
         );
         pnlBlancoLayout.setVerticalGroup(
             pnlBlancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4900,7 +4874,7 @@ public class IMenu extends javax.swing.JFrame {
         pnlEncabezadoLayout.setHorizontalGroup(
             pnlEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlEncabezadoLayout.createSequentialGroup()
-                .addComponent(lblTituloDeVentanas, javax.swing.GroupLayout.DEFAULT_SIZE, 967, Short.MAX_VALUE)
+                .addComponent(lblTituloDeVentanas, javax.swing.GroupLayout.DEFAULT_SIZE, 1015, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(btnMinimizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnlEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -5080,7 +5054,7 @@ public class IMenu extends javax.swing.JFrame {
                 .addComponent(pnlMenuLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addGroup(pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, 1104, Short.MAX_VALUE)
+                    .addComponent(pnlEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, 1105, Short.MAX_VALUE)
                     .addGroup(pnlContenedorLayout.createSequentialGroup()
                         .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(1, 1, 1))))
@@ -5099,12 +5073,12 @@ public class IMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 1309, Short.MAX_VALUE)
+                .addComponent(pnlContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(1, 1, 1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+            .addComponent(pnlContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -5485,9 +5459,6 @@ public class IMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel82;
-    public javax.swing.JLabel jLabel83;
-    public javax.swing.JLabel jLabel84;
-    public javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
     private javax.swing.JLabel jLabel87;
     private javax.swing.JLabel jLabel88;
@@ -5576,7 +5547,6 @@ public class IMenu extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
@@ -5600,7 +5570,6 @@ public class IMenu extends javax.swing.JFrame {
     public javax.swing.JLabel lblAbonosEfectivoFiltro;
     public javax.swing.JLabel lblAbonosTarjetaFiltro;
     public javax.swing.JLabel lblBase;
-    public javax.swing.JLabel lblCredito;
     public javax.swing.JLabel lblCreditosDiarios;
     public javax.swing.JLabel lblCreditosFiltro;
     public javax.swing.JLabel lblCreditosReportFiltro;
@@ -5642,8 +5611,6 @@ public class IMenu extends javax.swing.JFrame {
     public javax.swing.JLabel lblMenuVentas;
     public javax.swing.JLabel lblNombreProductStock;
     public javax.swing.JLabel lblNumeroNotificaciones;
-    public javax.swing.JLabel lblPago;
-    public javax.swing.JLabel lblSaldo;
     public javax.swing.JLabel lblSalidaEfectivoFiltro;
     public javax.swing.JLabel lblSubTotalFactura;
     public javax.swing.JLabel lblTituloDeVentanas;

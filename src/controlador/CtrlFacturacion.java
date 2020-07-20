@@ -147,7 +147,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
             limpiarFormularioClienteFactura();
         }
         if (e.getSource() == menu.btnAgregar) {
-            agregarProductoBoton();
+            AgregarProductoFacturaEnter();
         }
         if (e.getSource() == menu.addDescuento) {
             addDescuento();

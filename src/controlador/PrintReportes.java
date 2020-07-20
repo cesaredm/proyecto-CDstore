@@ -120,7 +120,7 @@ public class PrintReportes {
         this.ReciboPago = this.ReciboPago.replace("{{credito}}", credito);
         this.ReciboPago = this.ReciboPago.replace("{{monto}}", monto);
         this.ReciboPago = this.ReciboPago.replace("{{saldo}}", saldo);
-        System.out.println(this.ReciboPago);
+        //System.out.println(this.ReciboPago);
     }
     
     public void llenarTicketDiario(String NombreTienda, String fecha, String base, String ventasEfectivo, String ventasT, String pagosE, String pagosT, String ingresosE, String creditos, String egreso, String existCaja, String bancos, String totalV)
@@ -138,7 +138,7 @@ public class PrintReportes {
         this.contentTicketDiario = this.contentTicketDiario.replace("{{existCaja}}",existCaja);
         this.contentTicketDiario = this.contentTicketDiario.replace("{{bancos}}",bancos);
         this.contentTicketDiario = this.contentTicketDiario.replace("{{totalV}}",totalV);
-        System.out.println(this.contentTicketDiario);
+        //System.out.println(this.contentTicketDiario);
     }
     public void llenarTicketTotalV(String[] datos, String tienda)
     {
@@ -149,7 +149,7 @@ public class PrintReportes {
         }
         this.ticketTotalV = this.ticketTotalV.replace("{{nombreTienda}}", tienda);
         this.ticketTotalV = this.ticketTotalV.replace("{{datos}}",a);
-        System.out.println(this.ticketTotalV);
+       // System.out.println(this.ticketTotalV);
     }
     //bussines 
     public void BIP(String tienda, String fecha1, String fecha2 ,String[] P)
@@ -164,7 +164,7 @@ public class PrintReportes {
         this.BI = this.BI.replace("{{fecha1}}", fecha1);
         this.BI = this.BI.replace("{{fecha2}}", fecha2);
         this.BI = this.BI.replace("{{producto}}",Producto);
-        System.out.println(this.BI);
+        //System.out.println(this.BI);
     }
     public void llenarTicketGlobal(String NombreTienda, String ventasEfectivo, String ventasT, String pagosE, String pagosT, String ingresosE, String creditos, String egreso, String existCaja, String bancos, String totalV)
     {
@@ -179,7 +179,7 @@ public class PrintReportes {
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{existCaja}}",existCaja);
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{bancos}}",bancos);
         this.contentTicketGlobal = this.contentTicketGlobal.replace("{{totalV}}",totalV);
-        System.out.println(this.contentTicketGlobal);
+       // System.out.println(this.contentTicketGlobal);
     }
   public void print(String TipoReport) {
     //Especificamos el tipo de dato a imprimir

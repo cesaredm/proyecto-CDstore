@@ -442,7 +442,6 @@ public class CtrlCreditos implements ActionListener, CaretListener, MouseListene
                 menu.txtCreditoPago.setText(credito);
                 menu.txtMontoPago.setText("0.0");
                 menu.txtMontoPago.requestFocus();
-                menu.lblCredito.setText(totalCredito);
                 menu.pagosAcreditos.setSize(860, 400);
                 menu.pagosAcreditos.setVisible(true);
                 menu.pagosAcreditos.setLocationRelativeTo(null);

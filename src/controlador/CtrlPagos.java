@@ -53,7 +53,6 @@ public class CtrlPagos implements ActionListener, CaretListener {
         this.menu.btnNuevoPago.addActionListener(this);
         this.menu.EditarPago.addActionListener(this);
         this.menu.BorrarPago.addActionListener(this);
-        this.menu.txtMontoPago.addCaretListener(this);
         this.menu.txtBuscarPago.addCaretListener(this);
         this.menu.btnMostrarPagosRegistrados.addActionListener(this);
         MostrarPagos("");
@@ -195,16 +194,6 @@ public class CtrlPagos implements ActionListener, CaretListener {
         menu.btnGuardarPago.setEnabled(false);
     }//lbls para hacer visible el pago en la ventana pago
 
-    public void pago(String valor) {
-        menu.lblPago.setText(valor);
-        if (!valor.equals("")) {
-            float credito = Float.parseFloat(menu.lblCredito.getText()), pago = Float.parseFloat(menu.lblPago.getText()), total = 0;
-            total = credito - pago;
-            menu.lblSaldo.setText("" + total);
-        } else {
-
-        }
-    }
 
     public void guardarPago() {
         int c;
@@ -254,10 +243,6 @@ public class CtrlPagos implements ActionListener, CaretListener {
 
     @Override
     public void caretUpdate(CaretEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        if (e.getSource() == menu.txtMontoPago) {
-            pago(menu.txtMontoPago.getText());
-        }
         if (e.getSource() == menu.txtBuscarPago) {
             String valor = menu.txtBuscarPago.getText();
             MostrarPagos(valor);
