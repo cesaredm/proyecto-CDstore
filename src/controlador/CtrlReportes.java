@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -224,13 +225,14 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
 
     //para la inversion
     public void inversion() {
+        DecimalFormat formato = new DecimalFormat("#############.##");
         float cordobas = this.reportes.inversionCordobas(),
                 dolar = this.reportes.inversionDolar(),
                 precioDolar = Float.parseFloat(menu.txtPrecioDolar.getText()),
                 total = 0;
         if(menu.isNumeric(String.valueOf(precioDolar))){
             total = cordobas + (dolar * precioDolar);
-            menu.lblInversion.setText("" + total);
+            menu.lblInversion.setText("" + formato.format(total));
         }
     }
 
@@ -489,7 +491,7 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
 
         }
         if(e.VK_SPACE == e.getKeyCode()){
-            GuardarAperturas();
+            //GuardarAperturas();
         }
     }
 

@@ -7,6 +7,7 @@ package modelo;
 
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 
 /**
@@ -100,6 +101,7 @@ public class Creditos extends Conexiondb {
                 return false;
             }
         };
+        DecimalFormat formato = new DecimalFormat("#############.##");
         try {
             pst = this.cn.prepareStatement(this.consulta);
             ResultSet rs = pst.executeQuery();
@@ -109,7 +111,7 @@ public class Creditos extends Conexiondb {
                 //en la variable saldo obtengo lo que queda de la resta de lo que debe el cliente menos total de pagos que ha hecho
                 saldo = Float.parseFloat(rs.getString("totalCredito")) - monto;
                 this.resgistros[0] = rs.getString("id");
-                this.resgistros[1] = String.valueOf(saldo);
+                this.resgistros[1] = String.valueOf(formato.format(saldo));
                 this.resgistros[2] = rs.getString("idCliente");
                 this.resgistros[3] = rs.getString("nombres");
                 this.resgistros[4] = rs.getString("apellidos");

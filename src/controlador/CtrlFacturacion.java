@@ -226,6 +226,8 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
         }
         if (e.VK_SPACE == e.getKeyCode()) {
             guardarFactura();
+            menu.txtCodBarraFactura.setText("");
+               // menu.txtCodBarraFactura.requestFocus();
         }
     }
 
@@ -277,6 +279,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     ArregloImprimir[cont] = nombreProduct + " " + cantidad + "   " + precio + "  " + totalDetalle + "\n";
                 }
                 menu.txtNumeroFactura.setText(this.factura.ObtenerIdFactura());//Actualizo el campo numero de factura con la funcion obtenerIdFactura 
+                menu.txtCodBarraFactura.setText("");
                 menu.txtCodBarraFactura.requestFocus();
                 LimpiarTablaFactura();//limpio la factura
                 DeshabilitarBtnGuardarFactura();
@@ -623,9 +626,11 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
     }
 
     public void addMasProducto() {
-        String nombre = "", id = "", codBarra = "";
+        String nombre = "", id = "", codBarra = "", iu;
         float cantidadIngresar = 0, cantidadActual = 0, precio = 0, cantidadUpdate = 0, importeUpdate = 0, totalImports = 0, precioDolar = 0, sacarImpuesto = 0, porcentajeImp = 0;
         int filas = 0, filaseleccionada = 0;
+        //fromato para los totales
+        DecimalFormat formato = new DecimalFormat("#############.##");
         try {
             this.modelo = (DefaultTableModel) menu.tblFactura.getModel();
             filaseleccionada = menu.tblFactura.getSelectedRow();
@@ -648,8 +653,12 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     cantidadUpdate = cantidadActual + cantidadIngresar;
                     if (this.factura.getMonedaVenta().equalsIgnoreCase("Dolar")) {
                         importeUpdate = (cantidadUpdate * precio) * precioDolar;
+                        iu = formato.format(importeUpdate);
+                        importeUpdate = Float.parseFloat(iu);
                     } else if (this.factura.getMonedaVenta().equalsIgnoreCase("Córdobas")) {
                         importeUpdate = (cantidadUpdate * precio);
+                        iu = formato.format(importeUpdate);
+                        importeUpdate = Float.parseFloat(iu);
                     }
                     this.modelo.setValueAt(String.valueOf(cantidadUpdate), filaseleccionada, 2);
                     this.modelo.setValueAt(String.valueOf(importeUpdate), filaseleccionada, 5);
@@ -657,8 +666,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     for (int i = 0; i < filas; i++) {
                         totalImports += Float.parseFloat(this.modelo.getValueAt(i, 5).toString());
                     }
-                    //fromato para los totales
-                    DecimalFormat formato = new DecimalFormat("#############.##");
+                    
                     //formatreo de le inpuesto IVA
                     sacarImpuesto = Float.parseFloat(1 + "." + menu.lblImpuestoISV.getText());//concatenacion para sacar el valor 1.xx para sacar el iva
                     //TOTAL DE FACTURA
@@ -671,7 +679,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     //setear los campos total, subtotal, IVA
                     menu.txtSubTotal.setText("" + formato.format(this.subTotal));
                     menu.txtImpuesto.setText("" + formato.format(this.isv));
-                    menu.txtTotal.setText("" + this.total);
+                    menu.txtTotal.setText("" + formato.format(this.total));
                     menu.txtCodBarraFactura.requestFocus();
                     spiner.setValue(0.00);
                     productos.MostrarProductosVender("");
@@ -741,7 +749,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     //setear los campos total, subtotal, IVA
                     menu.txtSubTotal.setText("" + formato.format(this.subTotal));
                     menu.txtImpuesto.setText("" + formato.format(this.isv));
-                    menu.txtTotal.setText("" + this.total);
+                    menu.txtTotal.setText("" + formato.format(this.total));
                     menu.txtCodBarraFactura.requestFocus();
                     spiner.setValue(0.00);
                 }
