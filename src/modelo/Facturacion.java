@@ -1,6 +1,7 @@
 package modelo;
 
 import java.sql.*;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultComboBoxModel;
@@ -354,6 +355,7 @@ public class Facturacion extends Conexiondb {
     }
 
     public void obtenerPorCodBarra(String codBarra) {
+        DecimalFormat formato = new DecimalFormat("#############.00");
         this.producto = new String[6];
         float importe;
         this.cn = Conexion();
@@ -379,7 +381,7 @@ public class Facturacion extends Conexiondb {
                 if (this.monedaVenta.equals("Dolar")) {
                     importe = importe * precioDolar;
                 }
-                producto[5] = String.valueOf(importe);
+                producto[5] = formato.format(importe);
             }
             this.cn.close();
         } catch (SQLException e) {

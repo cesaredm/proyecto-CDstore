@@ -1847,38 +1847,38 @@ public class IMenu extends javax.swing.JFrame {
         jPanel9.add(btnImprimirTotalV, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, -1, -1));
 
         lblTotalVendidoFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblTotalVendidoFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTotalVendidoFiltro.setText("0");
+        lblTotalVendidoFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTotalVendidoFiltro.setText("0.00");
         lblTotalVendidoFiltro.setToolTipText("");
         jPanel9.add(lblTotalVendidoFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 250, 150, 30));
 
         lblIngresosCajaMes.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblIngresosCajaMes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIngresosCajaMes.setText("0");
+        lblIngresosCajaMes.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblIngresosCajaMes.setText("0.00");
         lblIngresosCajaMes.setToolTipText("");
         jPanel9.add(lblIngresosCajaMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 80, 150, 20));
 
         lblIngresosBancoFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblIngresosBancoFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIngresosBancoFiltro.setText("0");
+        lblIngresosBancoFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblIngresosBancoFiltro.setText("0.00");
         lblIngresosBancoFiltro.setToolTipText("");
         jPanel9.add(lblIngresosBancoFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 280, 150, 20));
 
         lblCreditosFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblCreditosFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCreditosFiltro.setText("0");
+        lblCreditosFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblCreditosFiltro.setText("0.00");
         lblCreditosFiltro.setToolTipText("");
         jPanel9.add(lblCreditosFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 200, 150, 20));
 
         lblEgresosFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblEgresosFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblEgresosFiltro.setText("0");
+        lblEgresosFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblEgresosFiltro.setText("0.00");
         lblEgresosFiltro.setToolTipText("");
         jPanel9.add(lblEgresosFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 220, 150, 20));
 
         lblExistenciaCajaFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblExistenciaCajaFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblExistenciaCajaFiltro.setText("0");
+        lblExistenciaCajaFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblExistenciaCajaFiltro.setText("0.00");
         lblExistenciaCajaFiltro.setToolTipText("");
         jPanel9.add(lblExistenciaCajaFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 300, 150, 20));
 
@@ -1887,8 +1887,8 @@ public class IMenu extends javax.swing.JFrame {
         jPanel9.add(jLabel140, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 145, -1, 30));
 
         lblIngresosPagosTarjetaMes.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblIngresosPagosTarjetaMes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIngresosPagosTarjetaMes.setText("0");
+        lblIngresosPagosTarjetaMes.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblIngresosPagosTarjetaMes.setText("0.00");
         lblIngresosPagosTarjetaMes.setToolTipText("");
         jPanel9.add(lblIngresosPagosTarjetaMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 150, 150, 20));
 
@@ -1897,8 +1897,8 @@ public class IMenu extends javax.swing.JFrame {
         jPanel9.add(jLabel141, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 125, -1, -1));
 
         lblIngresosPagosEfectivoMes.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblIngresosPagosEfectivoMes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIngresosPagosEfectivoMes.setText("0");
+        lblIngresosPagosEfectivoMes.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblIngresosPagosEfectivoMes.setText("0.00");
         lblIngresosPagosEfectivoMes.setToolTipText("");
         jPanel9.add(lblIngresosPagosEfectivoMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 125, 150, 20));
 
@@ -1907,8 +1907,8 @@ public class IMenu extends javax.swing.JFrame {
         jPanel9.add(jLabel142, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, -1, -1));
 
         lblIngresosVentasTarjetaMes.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblIngresosVentasTarjetaMes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIngresosVentasTarjetaMes.setText("0");
+        lblIngresosVentasTarjetaMes.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblIngresosVentasTarjetaMes.setText("0.00");
         lblIngresosVentasTarjetaMes.setToolTipText("");
         jPanel9.add(lblIngresosVentasTarjetaMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 100, 150, 20));
 
@@ -1976,8 +1976,8 @@ public class IMenu extends javax.swing.JFrame {
         jPanel9.add(jLabel111, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 175, 150, -1));
 
         lblIngresoEfectivoGlobal.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
-        lblIngresoEfectivoGlobal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIngresoEfectivoGlobal.setText("0");
+        lblIngresoEfectivoGlobal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblIngresoEfectivoGlobal.setText("0.00");
         jPanel9.add(lblIngresoEfectivoGlobal, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 170, 150, -1));
 
         javax.swing.GroupLayout ventanaMasReportesLayout = new javax.swing.GroupLayout(ventanaMasReportes.getContentPane());
@@ -2276,7 +2276,10 @@ public class IMenu extends javax.swing.JFrame {
         mnTablaFactura.add(addMasProducto);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1310, 610));
+        setMinimumSize(new java.awt.Dimension(1310, 610));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1310, 610));
         setSize(new java.awt.Dimension(1310, 610));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -2290,7 +2293,8 @@ public class IMenu extends javax.swing.JFrame {
         });
 
         pnlContenedor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(72, 72, 72), 2));
-        pnlContenedor.setMinimumSize(new java.awt.Dimension(1260, 608));
+        pnlContenedor.setMaximumSize(new java.awt.Dimension(1310, 610));
+        pnlContenedor.setMinimumSize(new java.awt.Dimension(1310, 610));
         pnlContenedor.setPreferredSize(new java.awt.Dimension(1310, 610));
 
         pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
@@ -2914,49 +2918,49 @@ public class IMenu extends javax.swing.JFrame {
         lblBase.setBackground(new java.awt.Color(255, 255, 255));
         lblBase.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblBase.setForeground(new java.awt.Color(153, 255, 153));
-        lblBase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBase.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblBase.setText("0.00");
 
         lblVentasEfectivoDiario.setBackground(new java.awt.Color(255, 255, 255));
         lblVentasEfectivoDiario.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblVentasEfectivoDiario.setForeground(new java.awt.Color(153, 255, 153));
-        lblVentasEfectivoDiario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblVentasEfectivoDiario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblVentasEfectivoDiario.setText("0.00");
 
         lblVentasTarjetaDiario.setBackground(new java.awt.Color(255, 255, 255));
         lblVentasTarjetaDiario.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblVentasTarjetaDiario.setForeground(new java.awt.Color(153, 255, 153));
-        lblVentasTarjetaDiario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblVentasTarjetaDiario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblVentasTarjetaDiario.setText("0.00");
 
         lblIngresosPagosEfectivoDiario.setBackground(new java.awt.Color(255, 255, 255));
         lblIngresosPagosEfectivoDiario.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblIngresosPagosEfectivoDiario.setForeground(new java.awt.Color(153, 255, 153));
-        lblIngresosPagosEfectivoDiario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIngresosPagosEfectivoDiario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblIngresosPagosEfectivoDiario.setText("0.00");
 
         lblIngresosPagosTarjetaDiario.setBackground(new java.awt.Color(255, 255, 255));
         lblIngresosPagosTarjetaDiario.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblIngresosPagosTarjetaDiario.setForeground(new java.awt.Color(153, 255, 153));
-        lblIngresosPagosTarjetaDiario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIngresosPagosTarjetaDiario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblIngresosPagosTarjetaDiario.setText("0.00");
 
         lblIngresoEfectivo.setBackground(new java.awt.Color(255, 255, 255));
         lblIngresoEfectivo.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblIngresoEfectivo.setForeground(new java.awt.Color(153, 255, 153));
-        lblIngresoEfectivo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIngresoEfectivo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblIngresoEfectivo.setText("0.00");
 
         lblCreditosDiarios.setBackground(new java.awt.Color(255, 255, 255));
         lblCreditosDiarios.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblCreditosDiarios.setForeground(new java.awt.Color(153, 255, 153));
-        lblCreditosDiarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCreditosDiarios.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCreditosDiarios.setText("0.00");
 
         lblEgresosDiarios.setBackground(new java.awt.Color(255, 255, 255));
         lblEgresosDiarios.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblEgresosDiarios.setForeground(new java.awt.Color(255, 153, 51));
-        lblEgresosDiarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEgresosDiarios.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblEgresosDiarios.setText("0.00");
 
         jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
@@ -2969,19 +2973,19 @@ public class IMenu extends javax.swing.JFrame {
         lbltotalVendidoDiario.setBackground(new java.awt.Color(255, 255, 255));
         lbltotalVendidoDiario.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lbltotalVendidoDiario.setForeground(new java.awt.Color(180, 224, 128));
-        lbltotalVendidoDiario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbltotalVendidoDiario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbltotalVendidoDiario.setText("0.00");
 
         lblIngresosBancosDiario.setBackground(new java.awt.Color(255, 255, 255));
         lblIngresosBancosDiario.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblIngresosBancosDiario.setForeground(new java.awt.Color(158, 211, 106));
-        lblIngresosBancosDiario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIngresosBancosDiario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblIngresosBancosDiario.setText("0.00");
 
         lblTotalExistenciaCajaDiario.setBackground(new java.awt.Color(255, 255, 255));
         lblTotalExistenciaCajaDiario.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblTotalExistenciaCajaDiario.setForeground(new java.awt.Color(138, 192, 84));
-        lblTotalExistenciaCajaDiario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTotalExistenciaCajaDiario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblTotalExistenciaCajaDiario.setText("0.00");
 
         javax.swing.GroupLayout jPanel34Layout = new javax.swing.GroupLayout(jPanel34);
@@ -3301,8 +3305,8 @@ public class IMenu extends javax.swing.JFrame {
         lblTotalEfectivoCajaFiltro.setBackground(new java.awt.Color(138, 192, 84));
         lblTotalEfectivoCajaFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblTotalEfectivoCajaFiltro.setForeground(new java.awt.Color(255, 255, 255));
-        lblTotalEfectivoCajaFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTotalEfectivoCajaFiltro.setText("0.0");
+        lblTotalEfectivoCajaFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTotalEfectivoCajaFiltro.setText("0.00");
         lblTotalEfectivoCajaFiltro.setOpaque(true);
 
         jLabel158.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
@@ -3320,15 +3324,15 @@ public class IMenu extends javax.swing.JFrame {
         lblTotalVendidoReportFiltro.setBackground(new java.awt.Color(180, 224, 128));
         lblTotalVendidoReportFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblTotalVendidoReportFiltro.setForeground(new java.awt.Color(255, 255, 255));
-        lblTotalVendidoReportFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTotalVendidoReportFiltro.setText("0.0");
+        lblTotalVendidoReportFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTotalVendidoReportFiltro.setText("0.00");
         lblTotalVendidoReportFiltro.setOpaque(true);
 
         lblTotalBancosReportFiltro.setBackground(new java.awt.Color(158, 211, 106));
         lblTotalBancosReportFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblTotalBancosReportFiltro.setForeground(new java.awt.Color(255, 255, 255));
-        lblTotalBancosReportFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTotalBancosReportFiltro.setText("0.0");
+        lblTotalBancosReportFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTotalBancosReportFiltro.setText("0.00");
         lblTotalBancosReportFiltro.setOpaque(true);
 
         jLabel155.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
@@ -3338,15 +3342,15 @@ public class IMenu extends javax.swing.JFrame {
         lblSalidaEfectivoFiltro.setBackground(new java.awt.Color(255, 153, 51));
         lblSalidaEfectivoFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblSalidaEfectivoFiltro.setForeground(new java.awt.Color(255, 255, 255));
-        lblSalidaEfectivoFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSalidaEfectivoFiltro.setText("0.0");
+        lblSalidaEfectivoFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblSalidaEfectivoFiltro.setText("0.00");
         lblSalidaEfectivoFiltro.setOpaque(true);
 
         lblCreditosReportFiltro.setBackground(new java.awt.Color(153, 255, 153));
         lblCreditosReportFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblCreditosReportFiltro.setForeground(new java.awt.Color(0, 102, 0));
-        lblCreditosReportFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCreditosReportFiltro.setText("0.0");
+        lblCreditosReportFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblCreditosReportFiltro.setText("0.00");
         lblCreditosReportFiltro.setOpaque(true);
 
         jLabel154.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
@@ -3360,8 +3364,8 @@ public class IMenu extends javax.swing.JFrame {
         lblIngresosEfectivo.setBackground(new java.awt.Color(153, 255, 153));
         lblIngresosEfectivo.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblIngresosEfectivo.setForeground(new java.awt.Color(0, 102, 0));
-        lblIngresosEfectivo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIngresosEfectivo.setText("0.0");
+        lblIngresosEfectivo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblIngresosEfectivo.setText("0.00");
         lblIngresosEfectivo.setOpaque(true);
 
         jLabel152.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
@@ -3371,15 +3375,15 @@ public class IMenu extends javax.swing.JFrame {
         lblAbonosTarjetaFiltro.setBackground(new java.awt.Color(153, 255, 153));
         lblAbonosTarjetaFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblAbonosTarjetaFiltro.setForeground(new java.awt.Color(0, 102, 0));
-        lblAbonosTarjetaFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAbonosTarjetaFiltro.setText("0.0");
+        lblAbonosTarjetaFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblAbonosTarjetaFiltro.setText("0.00");
         lblAbonosTarjetaFiltro.setOpaque(true);
 
         lblAbonosEfectivoFiltro.setBackground(new java.awt.Color(153, 255, 153));
         lblAbonosEfectivoFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblAbonosEfectivoFiltro.setForeground(new java.awt.Color(0, 102, 0));
-        lblAbonosEfectivoFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAbonosEfectivoFiltro.setText("0.0");
+        lblAbonosEfectivoFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblAbonosEfectivoFiltro.setText("0.00");
         lblAbonosEfectivoFiltro.setOpaque(true);
 
         jLabel151.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
@@ -3393,15 +3397,15 @@ public class IMenu extends javax.swing.JFrame {
         lblVentasTarjetaFiltro.setBackground(new java.awt.Color(153, 255, 153));
         lblVentasTarjetaFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblVentasTarjetaFiltro.setForeground(new java.awt.Color(0, 102, 0));
-        lblVentasTarjetaFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVentasTarjetaFiltro.setText("0.0");
+        lblVentasTarjetaFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblVentasTarjetaFiltro.setText("0.00");
         lblVentasTarjetaFiltro.setOpaque(true);
 
         lblTotalVentasEfectivoFiltro.setBackground(new java.awt.Color(153, 255, 153));
         lblTotalVentasEfectivoFiltro.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
         lblTotalVentasEfectivoFiltro.setForeground(new java.awt.Color(0, 102, 0));
-        lblTotalVentasEfectivoFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTotalVentasEfectivoFiltro.setText("0.0");
+        lblTotalVentasEfectivoFiltro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTotalVentasEfectivoFiltro.setText("0.00");
         lblTotalVentasEfectivoFiltro.setOpaque(true);
 
         jLabel159.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
@@ -5018,8 +5022,8 @@ public class IMenu extends javax.swing.JFrame {
 
         pnlMenuLateral.add(btnTransacciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 200, 47));
 
-        logoClothing.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoKamell.png"))); // NOI18N
-        pnlMenuLateral.add(logoClothing, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 5, 130, -1));
+        logoClothing.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/CDst.png"))); // NOI18N
+        pnlMenuLateral.add(logoClothing, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 15, 180, -1));
 
         btnInfoFactura.setBackground(new java.awt.Color(72, 72, 72));
         btnInfoFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -5040,7 +5044,7 @@ public class IMenu extends javax.swing.JFrame {
         lblUsuarioSistema.setForeground(new java.awt.Color(255, 255, 255));
         lblUsuarioSistema.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUsuarioSistema.setText("Usuario");
-        pnlMenuLateral.add(lblUsuarioSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 20));
+        pnlMenuLateral.add(lblUsuarioSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 150, 30));
 
         jSeparator8.setBackground(new java.awt.Color(56, 56, 56));
         jSeparator8.setForeground(new java.awt.Color(56, 56, 56));

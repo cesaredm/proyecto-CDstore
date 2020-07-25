@@ -42,6 +42,7 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
     Date fecha;
     DefaultTableModel modelo;
     String idCliente = "";
+    DecimalFormat formato;
     private boolean estadoC = true;
 
     public CtrlReportes(IMenu menu, Reportes reportes) {
@@ -80,6 +81,7 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         this.menu.btnBuscarFiltroReporte.addActionListener(this);
         this.menu.txtBuscarFactura.addKeyListener(this);
         EstiloTablaTotalV();
+        formato = new DecimalFormat("##############0.00");
         iniciar();
     }
 
@@ -98,6 +100,7 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         this.menu.jcFacturasEmitidas.setDate(this.fecha);
         SumaTotalFiltroReporte(this.fecha, this.fecha);
         inversion();
+        
     }
 
     public boolean getEstadoC() {
@@ -225,14 +228,14 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
 
     //para la inversion
     public void inversion() {
-        DecimalFormat formato = new DecimalFormat("#############.##");
+        
         float cordobas = this.reportes.inversionCordobas(),
                 dolar = this.reportes.inversionDolar(),
                 precioDolar = Float.parseFloat(menu.txtPrecioDolar.getText()),
                 total = 0;
         if(menu.isNumeric(String.valueOf(precioDolar))){
             total = cordobas + (dolar * precioDolar);
-            menu.lblInversion.setText("" + formato.format(total));
+            menu.lblInversion.setText("" + this.formato.format(total));
         }
     }
 
@@ -264,17 +267,17 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         //existencia real en caja
         exisCaja = (ingresosEfectivo + base) - egresos;
         //llenar los lbls
-        menu.lblBase.setText("" + base);
-        menu.lblVentasEfectivoDiario.setText("" + ingresosVentaE);
-        menu.lblVentasTarjetaDiario.setText("" + ingresosVentasT);
-        menu.lblIngresosPagosEfectivoDiario.setText("" + ingresosPagosE);
-        menu.lblIngresosPagosTarjetaDiario.setText("" + ingresosPagoT);
-        menu.lblIngresoEfectivo.setText(""+reportes.ingresoDiarioEfectivo(fechaInicio));
-        menu.lblCreditosDiarios.setText("" + creditos);
-        menu.lblEgresosDiarios.setText("" + egresos);
-        menu.lblTotalExistenciaCajaDiario.setText("" + exisCaja);
-        menu.lblIngresosBancosDiario.setText("" + Ingresosbancos);
-        menu.lbltotalVendidoDiario.setText("" + totalVendidio);
+        menu.lblBase.setText("" + this.formato.format(base));
+        menu.lblVentasEfectivoDiario.setText("" + this.formato.format(ingresosVentaE));
+        menu.lblVentasTarjetaDiario.setText("" + this.formato.format(ingresosVentasT));
+        menu.lblIngresosPagosEfectivoDiario.setText("" + this.formato.format(ingresosPagosE));
+        menu.lblIngresosPagosTarjetaDiario.setText("" + this.formato.format(ingresosPagoT));
+        menu.lblIngresoEfectivo.setText(""+this.formato.format(reportes.ingresoDiarioEfectivo(fechaInicio)));
+        menu.lblCreditosDiarios.setText("" + this.formato.format(creditos));
+        menu.lblEgresosDiarios.setText("" + this.formato.format(egresos));
+        menu.lblTotalExistenciaCajaDiario.setText("" + this.formato.format(exisCaja));
+        menu.lblIngresosBancosDiario.setText("" + this.formato.format(Ingresosbancos));
+        menu.lbltotalVendidoDiario.setText("" + this.formato.format(totalVendidio));
 
     }
     //funcion para filtros de reportes por rangos
@@ -284,31 +287,31 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         java.sql.Date fechaInicio = new java.sql.Date(f1);//convertir la fecha a formato sql
         java.sql.Date fechaFinal = new java.sql.Date(f2);//convertir la fecha a formato sql
         //ventas en efectivo
-        menu.lblTotalVentasEfectivoFiltro.setText(""+reportes.ingresoEfectivoCaja(fechaInicio, fechaFinal));
+        menu.lblTotalVentasEfectivoFiltro.setText(""+this.formato.format(reportes.ingresoEfectivoCaja(fechaInicio, fechaFinal)));
         //ingreso de efectivo a caja
         ingresosEfectivo = reportes.ingresoEfectivoCaja(fechaInicio, fechaFinal) + reportes.totalPagosEfectivo(fechaInicio, fechaFinal) + reportes.ingresoEfecitivoRango(fechaInicio, fechaFinal);
-        menu.lblIngresosEfectivo.setText(""+reportes.ingresoEfecitivoRango(fechaInicio, fechaFinal));
+        menu.lblIngresosEfectivo.setText(""+this.formato.format(reportes.ingresoEfecitivoRango(fechaInicio, fechaFinal)));
         //ingresos ventas con tarjetas
-        menu.lblVentasTarjetaFiltro.setText(""+reportes.IngresoAbancos(fechaInicio, fechaFinal));
+        menu.lblVentasTarjetaFiltro.setText(""+this.formato.format(reportes.IngresoAbancos(fechaInicio, fechaFinal)));
         //ingreso´por abonos en efectivo
-        menu.lblAbonosEfectivoFiltro.setText(""+reportes.totalPagosEfectivo(fechaInicio, fechaFinal));
+        menu.lblAbonosEfectivoFiltro.setText(""+this.formato.format(reportes.totalPagosEfectivo(fechaInicio, fechaFinal)));
         //ingreso por abonos con tarjeta
-        menu.lblAbonosTarjetaFiltro.setText(""+reportes.totalPagosTarjeta(fechaInicio, fechaFinal));
+        menu.lblAbonosTarjetaFiltro.setText(""+this.formato.format(reportes.totalPagosTarjeta(fechaInicio, fechaFinal)));
         //ingresos a bancos
         Ingresosbancos = reportes.IngresoAbancos(fechaInicio, fechaFinal) + reportes.totalPagosTarjeta(fechaInicio, fechaFinal);
-        menu.lblTotalBancosReportFiltro.setText(""+Ingresosbancos);
+        menu.lblTotalBancosReportFiltro.setText(""+this.formato.format(Ingresosbancos));
         //creditos realizados
         creditos = reportes.TotalCreditosMensual(fechaInicio, fechaFinal)-(reportes.totalPagosEfectivo(fechaInicio, fechaFinal) + reportes.totalPagosTarjeta(fechaInicio, fechaFinal));
-        menu.lblCreditosReportFiltro.setText(""+creditos);
+        menu.lblCreditosReportFiltro.setText(""+this.formato.format(creditos));
         //salida de efectivo
         Egresos = reportes.TotalGastos(fechaInicio, fechaFinal);
-        menu.lblSalidaEfectivoFiltro.setText(""+Egresos);
+        menu.lblSalidaEfectivoFiltro.setText(""+this.formato.format(Egresos));
         //total vendido
         totalVendidio = reportes.IngresosTotales(fechaInicio, fechaFinal);
-        menu.lblTotalVendidoReportFiltro.setText(""+totalVendidio);
+        menu.lblTotalVendidoReportFiltro.setText(""+this.formato.format(totalVendidio));
         //total existencia en caja
         exisCaja = ingresosEfectivo - Egresos;
-        menu.lblTotalEfectivoCajaFiltro.setText(""+exisCaja);
+        menu.lblTotalEfectivoCajaFiltro.setText(""+this.formato.format(exisCaja));
     }
 
     public void ReporteGlobal() {
@@ -317,34 +320,34 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         apertura = reportes.TotalAperturasCajaGlobal() - reportes.PrimeraApertura();
         //ingreso de efectivo a caja
         ingresosVentasE = reportes.ingresoEfectivoCajaGlobal();
-        menu.lblIngresosCajaMes.setText("" + ingresosVentasE);
+        menu.lblIngresosCajaMes.setText("" + this.formato.format(ingresosVentasE));
         //ingresos por ventas con tarjeta
         IngresosVentasT = reportes.IngresoAbancosGlobal();
-        menu.lblIngresosVentasTarjetaMes.setText("" + IngresosVentasT);
+        menu.lblIngresosVentasTarjetaMes.setText("" + this.formato.format(IngresosVentasT));
         //ingresos por pagos en efectivo
         IngresosPagosE = reportes.totalPagosEfectivoGlobal();
-        menu.lblIngresosPagosEfectivoMes.setText("" + IngresosPagosE);
+        menu.lblIngresosPagosEfectivoMes.setText("" + this.formato.format(IngresosPagosE));
         //Ingresos por pagos con tarjeta
         IngresosPagosT = reportes.totalPagosTarjetaGlobal();
-        menu.lblIngresosPagosTarjetaMes.setText("" + IngresosPagosT);
+        menu.lblIngresosPagosTarjetaMes.setText("" + this.formato.format(IngresosPagosT));
         //
         IngresoEfectivo = reportes.TotalIngresoEfectivoGlobal();
-        menu.lblIngresoEfectivoGlobal.setText(""+IngresoEfectivo);
+        menu.lblIngresoEfectivoGlobal.setText(""+this.formato.format(IngresoEfectivo));
         //ingresos a bancos
         Ingresosbancos = reportes.IngresoAbancosGlobal() + reportes.totalPagosTarjetaGlobal();
-        menu.lblIngresosBancoFiltro.setText("" + Ingresosbancos);
+        menu.lblIngresosBancoFiltro.setText("" + this.formato.format(Ingresosbancos));
         //creditos realizados
         creditos = reportes.TotalCreditosGlobal() - (reportes.totalPagosEfectivoGlobal() + reportes.totalPagosTarjetaGlobal());
-        menu.lblCreditosFiltro.setText("" + creditos);
+        menu.lblCreditosFiltro.setText("" + this.formato.format(creditos));
         //salida de efectivo
         Egresos = reportes.TotalGastosGlobal();
-        menu.lblEgresosFiltro.setText("" + Egresos);
+        menu.lblEgresosFiltro.setText("" + this.formato.format(Egresos));
         //total vendido
         totalVendidio = reportes.IngresosTotalesGlobal();
-        menu.lblTotalVendidoFiltro.setText("" + totalVendidio);
+        menu.lblTotalVendidoFiltro.setText("" + this.formato.format(totalVendidio));
         //total existencia en caja
         exisCaja =(IngresosPagosE + ingresosVentasE + IngresoEfectivo) - Egresos;
-        menu.lblExistenciaCajaFiltro.setText("" + exisCaja);
+        menu.lblExistenciaCajaFiltro.setText("" + this.formato.format(exisCaja));
     }
 
     public void MostrarReportesDario(Date fecha1)//metodo para llenar la tabla de reortes por rango o mensual del menu reportes

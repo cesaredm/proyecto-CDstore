@@ -41,6 +41,8 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
     CtrlCreditos creditos;
     CtrlReportes reportes;
     Productos modelProduct;
+    //formato para los totales
+    DecimalFormat formato;
     Reportes r;
     Creditos c;
     SpinnerNumberModel sModel;
@@ -58,6 +60,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
         this.menu = menu;
         this.factura = factura;
         this.menu.cmbFormaPago.setModel(factura.FormasPago());
+        this.formato = new DecimalFormat("#############.00");
         this.c = new Creditos();
         this.r = new Reportes();
         this.modelo = new DefaultTableModel();
@@ -342,13 +345,12 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     sacarImpuesto = Float.parseFloat(1 + "." + menu.lblImpuestoISV.getText());//concatenacion para sacar el valor 1.xx para sacar el iva
                     //obtengo el IVA en entero "15" o cualquier que sea el impuesto
                     porcentajeImp = Float.parseFloat(menu.lblImpuestoISV.getText());// "descProduct = descuento de producto"
-                    DecimalFormat formato = new DecimalFormat("#############.##");
                     this.total = totalImports;
                     this.isv = ((this.total / sacarImpuesto) * porcentajeImp) / 100;
                     this.subTotal = this.total - this.isv;
                     menu.txtSubTotal.setText("" + formato.format(this.subTotal));
                     menu.txtImpuesto.setText("" + formato.format(this.isv));
-                    menu.txtTotal.setText("" + this.total);
+                    menu.txtTotal.setText("" + formato.format(this.total));
                     menu.txtCodBarraFactura.setText("");
                     DeshabilitarBtnGuardarFactura();
                     productos.MostrarProductosVender("");
@@ -496,9 +498,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                         } else if (monedaVenta.equals("Dolar")) {
                             imp = (Float.parseFloat(precio) * cantidadPVender) * precioDolar;//importe total de compra de producto
                         }
-                        //formato para los totales
-                        DecimalFormat formato = new DecimalFormat("#############.##");
-                        importe = String.valueOf(imp);
+                        importe = formato.format(imp);
                         //realizando los calculos de importe
                         this.modelo = (DefaultTableModel) menu.tblFactura.getModel();
                         //pasar producto de tabla productos a tabla de factura
@@ -517,7 +517,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
 
                         menu.txtImpuesto.setText("" + formato.format(this.isv));//establecer el valor impuesto en el campo impuesto de factura
                         menu.txtSubTotal.setText("" + formato.format(this.subTotal));//establecer el valor impuesto en el campo sub total de factura
-                        menu.txtTotal.setText("" + this.total);//establecer el valor impuesto en el campo Total de factura
+                        menu.txtTotal.setText("" + formato.format(this.total));//establecer el valor impuesto en el campo Total de factura
                         this.factura.Vender(id, cantidad);//llamar procedimiento sql para vender
                         productos.MostrarProductosVender("");
                         menu.txtBuscarPorNombre.selectAll();
@@ -629,8 +629,6 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
         String nombre = "", id = "", codBarra = "", iu;
         float cantidadIngresar = 0, cantidadActual = 0, precio = 0, cantidadUpdate = 0, importeUpdate = 0, totalImports = 0, precioDolar = 0, sacarImpuesto = 0, porcentajeImp = 0;
         int filas = 0, filaseleccionada = 0;
-        //fromato para los totales
-        DecimalFormat formato = new DecimalFormat("#############.##");
         try {
             this.modelo = (DefaultTableModel) menu.tblFactura.getModel();
             filaseleccionada = menu.tblFactura.getSelectedRow();
@@ -653,15 +651,11 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                     cantidadUpdate = cantidadActual + cantidadIngresar;
                     if (this.factura.getMonedaVenta().equalsIgnoreCase("Dolar")) {
                         importeUpdate = (cantidadUpdate * precio) * precioDolar;
-                        iu = formato.format(importeUpdate);
-                        importeUpdate = Float.parseFloat(iu);
                     } else if (this.factura.getMonedaVenta().equalsIgnoreCase("Córdobas")) {
                         importeUpdate = (cantidadUpdate * precio);
-                        iu = formato.format(importeUpdate);
-                        importeUpdate = Float.parseFloat(iu);
                     }
                     this.modelo.setValueAt(String.valueOf(cantidadUpdate), filaseleccionada, 2);
-                    this.modelo.setValueAt(String.valueOf(importeUpdate), filaseleccionada, 5);
+                    this.modelo.setValueAt(formato.format(importeUpdate), filaseleccionada, 5);
                     this.factura.Vender(id, String.valueOf(cantidadIngresar));
                     for (int i = 0; i < filas; i++) {
                         totalImports += Float.parseFloat(this.modelo.getValueAt(i, 5).toString());
@@ -729,14 +723,12 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                         importeUpdate = precioUpdate * cantidad;
                     }
                     //actualizar el importe y el precio
-                    this.modelo.setValueAt(String.valueOf(precioUpdate), filaseleccionada, 4);
-                    this.modelo.setValueAt(String.valueOf(importeUpdate), filaseleccionada, 5);
+                    this.modelo.setValueAt(formato.format(precioUpdate), filaseleccionada, 4);
+                    this.modelo.setValueAt(formato.format(importeUpdate), filaseleccionada, 5);
                     //recorrer la colummna importe para sacar el total de factura
                     for (int i = 0; i < filas; i++) {
                         totalImports += Float.parseFloat(this.modelo.getValueAt(i, 5).toString());
                     }
-                    //fromato para los totales
-                    DecimalFormat formato = new DecimalFormat("#############.##");
                     //formatreo de le inpuesto IVA
                     sacarImpuesto = Float.parseFloat(1 + "." + menu.lblImpuestoISV.getText());//concatenacion para sacar el valor 1.xx para sacar el iva
                     //TOTAL DE FACTURA
@@ -781,13 +773,12 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                 sacarImpuesto = Float.parseFloat(1 + "." + menu.lblImpuestoISV.getText());//concatenacion para sacar el valor 1.xx para sacar el iva
                 //obtengo el IVA en entero "15" o cualquier que sea el impuesto
                 porcentajeImp = Float.parseFloat(menu.lblImpuestoISV.getText());// "descProduct = descuento de producto"
-                DecimalFormat formato = new DecimalFormat("#############.##");
                 this.total = totalImports;
                 this.isv = ((this.total / sacarImpuesto) * porcentajeImp) / 100;
                 this.subTotal = this.total - this.isv;
                 menu.txtSubTotal.setText("" + formato.format(this.subTotal));
                 menu.txtImpuesto.setText("" + formato.format(this.isv));
-                menu.txtTotal.setText("" + this.total);
+                menu.txtTotal.setText("" + formato.format(this.total));
                 menu.txtCodBarraFactura.setText("");
                 DeshabilitarBtnGuardarFactura();
                 menu.txtCodBarraFactura.requestFocus();
@@ -979,8 +970,6 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                 cantidad = (String) modelo.getValueAt(filaseleccionada, 2);
                 importe = Float.parseFloat(modelo.getValueAt(filaseleccionada, 5).toString());
                 totalActual = Float.parseFloat(menu.txtTotal.getText());
-                //fromato para los totales
-                DecimalFormat formato = new DecimalFormat("#############.##");
                 //formatreo de le inpuesto IVA
                 sacarImpuesto = Float.parseFloat(1 + "." + menu.lblImpuestoISV.getText());//concatenacion para sacar el valor 1.xx para sacar el iva
                 //obtengo el IVA en entero "15" o cualquier que sea el impuesto
@@ -988,7 +977,7 @@ public class CtrlFacturacion implements ActionListener, CaretListener, MouseList
                 this.total = totalActual - importe;
                 this.isv = ((this.total / sacarImpuesto) * porcentajeImp) / 100;
                 this.subTotal = this.total - isv;
-                menu.txtTotal.setText("" + this.total);
+                menu.txtTotal.setText("" + formato.format(this.total));
                 menu.txtSubTotal.setText("" + formato.format(this.subTotal));
                 menu.txtImpuesto.setText("" + formato.format(this.isv));
                 modelProduct.AgregarProductoStock(id, cantidad);
