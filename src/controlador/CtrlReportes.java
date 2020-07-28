@@ -16,6 +16,16 @@ import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -26,6 +36,7 @@ import vista.IMenu;
 import javax.swing.table.DefaultTableModel;
 import modelo.PagosCreditos;
 import modelo.AperturasYcierres;
+import modelo.InfoFactura;
 
 /**
  *
@@ -43,6 +54,7 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
     DefaultTableModel modelo;
     String idCliente = "";
     DecimalFormat formato;
+    InfoFactura info;
     private boolean estadoC = true;
 
     public CtrlReportes(IMenu menu, Reportes reportes) {
@@ -51,6 +63,7 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         this.pagosC = new PagosCreditos();
         this.aperturas = new AperturasYcierres();
         this.fecha = new Date();
+        this.info = new InfoFactura();
         this.menu.btnReporteDiario.addActionListener(this);
         this.menu.btnReporteDiario.setActionCommand("REPORTE-DIARIO");
         this.menu.btnMostraTotalFacturado.addActionListener(this);
@@ -80,6 +93,8 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         this.menu.btnDevolverProducto.setActionCommand("DEVOLVER-PRODUCTO");
         this.menu.btnBuscarFiltroReporte.addActionListener(this);
         this.menu.txtBuscarFactura.addKeyListener(this);
+        this.menu.btnEnviarRD.addActionListener(this);
+        this.menu.btnEnviarCorreo.addActionListener(this);
         EstiloTablaTotalV();
         formato = new DecimalFormat("##############0.00");
         iniciar();
@@ -178,6 +193,22 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         {
             Date fecha1 = menu.jcFechaReport1.getDate(), fecha2 = menu.jcFechaReport2.getDate();
             SumaTotalFiltroReporte(fecha1, fecha2);
+        }
+        if(e.getSource() == menu.btnEnviarRD){
+            menu.EnviarRD.setSize(460, 111);
+            menu.EnviarRD.setLocationRelativeTo(null);
+            menu.EnviarRD.setVisible(true);
+        }
+        if(e.getSource() == menu.btnEnviarCorreo){
+            
+            
+            String correo = menu.txtCorreo.getText();
+            if(!correo.equals("")){
+                EnviarCorreoRD();
+                menu.txtCorreo.setText("");
+            }else{
+                
+            }
         }
     }
 
@@ -469,6 +500,147 @@ public class CtrlReportes implements ActionListener, MouseListener, KeyListener 
         java.sql.Date ff1 = new java.sql.Date(f1);
         java.sql.Date ff2 = new java.sql.Date(f2);
         menu.tblProductosMasVendidos.setModel(reportes.productosMasVendidos(ff1, ff2));
+    }
+    
+    public void EnviarCorreoRD(){
+        try {
+            int nfilas = menu.tblProductosMasVendidos.getRowCount();
+            String nombre = "", marca ="", cantidad = "" , fila = "";
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM YYYY");
+            Properties props = new Properties();
+            //servidor de correo
+            props.setProperty("mail.smtp.host", "smtp.gmail.com");
+            //si va a usar tls en este caso sera true
+            props.setProperty("mail.smtp.starttls.enable", "true");
+            //cual sera el puerto en este caso gmail usa el puerto 587
+            props.setProperty("mail.smtp.port", "587");
+            //si se va autenticar en servidor de gmail en este caso si
+            props.setProperty("mail.smtp.auth", "true");
+            
+            Session sesion = Session.getDefaultInstance(props);
+            this.info.obtenerInfoFactura();
+            
+            String correoRemitente = "cdsoft00@gmail.com";
+            String passwordRemitente = "19199697tsoCD";
+            String correoReceptor = menu.txtCorreo.getText();
+            String asunto = "Reporte del "+sdf.format(menu.jcFechaReporteDario.getDate());
+            String mensaje = "<!DOCTYPE html>\n" +
+"<html lang=\"en\">\n" +
+"    <head>\n" +
+"        <meta charset=\"UTF-8\">\n" +
+"        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+"        <title></title>\n" +
+"    </head>\n" +
+"    <body>\n" +
+"        <div class=\"col-sm-12\" style=\"width:98%; margin: auto; padding: 0;\">\n" +
+"            <div class=\"card border-success\" style=\"border:1px solid lime\">\n" +
+"                <div class=\"card-header text-center bg-dark\" style=\"margin-top: -2%; border-bottom: 1px solid gray; background-color: #383838; text-align: center; padding-top: 1%;\">\n" +
+"                    <h4 class=\"text-white\" style=\"color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\">"+info.getNombre().toUpperCase()+"</h4>\n" +
+"                </div>\n" +
+"                <div class=\"card-body\" style=\"padding: 1%;\">\n" +
+"                    <h4 class=\"card-title text-center\" style=\"font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; color:black\">REPORTE DIARIO</h4>\n" +
+"                    <table class=\"table table-striped\" style=\"width: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:black; border:1px solid #dddddd; padding: 1%; font-size: 14px;\">\n" +
+"                        <tbody>\n" +
+"                            <tr style=\"padding: 10%; background-color: aliceblue;\">\n" +
+"                                <td style=\"padding: 1.5%; text-align: left;\">EFECTIVO APERTURA EN CAJA</td>\n" +
+"                                <td style=\"text-align: right; padding-right: 3%;\">C$ "+menu.lblBase.getText()+"</td>\n" +
+"                            </tr>\n" +
+"                            <tr style=\"padding: 2%;\">\n" +
+"                                <td style=\"padding: 1.5%; text-align: left;\">INGRESOS POR VENTAS EN EFECTIVO</td>\n" +
+"                                <td style=\"text-align: right; padding-right: 3%;\">C$ "+menu.lblVentasEfectivoDiario.getText()+"</td>\n" +
+"                            </tr>\n" +
+"                            <tr style=\"background-color: aliceblue;\">\n" +
+"                                <td style=\"padding: 1.5%; text-align: left;\">INGRESOSO POR VENTAS CON TARJETA</td>\n" +
+"                                <td style=\"text-align: right; padding-right: 3%;\">C$ "+menu.lblVentasTarjetaDiario.getText()+"</td>\n" +
+"                            </tr>\n" +
+"                            <tr style=\"background-color: white;\">\n" +
+"                                <td style=\"padding: 1.5%; text-align: left;\">INGRESOS POR ABONOS EN EFECTIVO</td>\n" +
+"                                <td style=\"text-align: right; padding-right: 3%;\">C$ "+menu.lblIngresosPagosEfectivoDiario.getText()+"</td>\n" +
+"                            </tr>\n" +
+"                            <tr style=\"background-color: aliceblue;\">\n" +
+"                                <td style=\"padding: 1.5%; text-align: left;\">INGRESOS POR ABONOS CON TARJERTA</td>\n" +
+"                                <td style=\"text-align: right; padding-right: 3%;\">C$ "+menu.lblIngresosPagosTarjetaDiario.getText()+"</td>\n" +
+"                            </tr>\n" +
+"                            <tr style=\"background-color: white;\">\n" +
+"                                <td style=\"padding: 1.5%; text-align: left;\">INGRESOS DE EFECTIVO</td>\n" +
+"                                <td style=\"text-align: right; padding-right: 3%;\">C$ "+menu.lblIngresoEfectivo.getText()+"</td>\n" +
+"                            </tr>\n" +
+"                            <tr style=\"background-color: aliceblue;\">\n" +
+"                                <td style=\"padding: 1.5%; text-align: left;\">CREDITOS</td>\n" +
+"                                <td style=\"text-align: right; padding-right: 3%;\">C$ "+menu.lblCreditosDiarios.getText()+"</td>\n" +
+"                            </tr>\n" +
+"                            <tr style=\"background-color: white;\">\n" +
+"                                <td style=\"padding: 1.5%; text-align: left;\">SALIDA DE AFECTIVO</td>\n" +
+"                                <td style=\"text-align: right; padding-right: 3%;\">C$ "+menu.lblEgresosDiarios.getText()+"</td>\n" +
+"                            </tr>\n" +
+"                            <tr style=\"background-color: #b4f1b5;\">\n" +
+"                                <td style=\"padding: 1.5%; text-align: left;\">TOTAL VENDIDO</td>\n" +
+"                                <td style=\"text-align: right; padding-right: 3%;\">C$ "+menu.lbltotalVendidoDiario.getText()+"</td>\n" +
+"                            </tr>\n" +
+"                            <tr style=\"background-color: #b4f1b5;\">\n" +
+"                                <td style=\"padding: 1.5%; text-align: left;\">BANCOS</td>\n" +
+"                                <td style=\"text-align: right; padding-right: 3%;\">C$ "+menu.lblIngresosBancosDiario.getText()+"</td>\n" +
+"                            </tr>\n" +
+"                            <tr style=\"background-color: #b4f1b5;\">\n" +
+"                                <td style=\"padding: 1.5%; text-align: left;\">TOTAL EXISTENCIA EN CAJA</td>\n" +
+"                                <td style=\"text-align: right; padding-right: 3%;\">C$ "+menu.lblTotalExistenciaCajaDiario.getText()+"</td>\n" +
+"                            </tr>\n" +
+"                        </tbody>\n" +
+"                    </table>\n" +
+"                </div>\n" +
+"            </div>\n" +
+"        </div>\n"+
+"        <div class=\"col-sm-12\" style=\"width:98%; margin: auto; padding: 0;\">\n" +
+"            <div class=\"card border-success\" style=\"border:1px solid lime; border-top: none;\">\n" +
+"                <div class=\"card-body\" style=\"padding: 1%;\">\n" +
+"                    <h4 class=\"card-title text-center\" style=\"font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center;\">PRODUCTOS MAS VENDIDOS</h4>\n" +
+"                    <table class=\"table table-striped\" style=\"width: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:black; border:1px solid #dddddd; padding: 1%; font-size: 14px;\">\n" +
+"                        <tbody>";
+            if(nfilas > 10){
+                nfilas = 10;
+            }else{
+                
+            }
+            for(int i=0; i<nfilas;i++){
+                nombre = (String) menu.tblProductosMasVendidos.getValueAt(i, 1);
+                marca = (String) menu.tblProductosMasVendidos.getValueAt(i, 2);
+                cantidad = (String) menu.tblProductosMasVendidos.getValueAt(i, 4);
+                mensaje += "<tr style=\"padding: 10%; background-color: aliceblue;\">\n" +
+"                                <td style=\"padding: 1.5%; text-align: left;\">"+nombre+" "+marca+"</td>\n" +
+"                                <td style=\"text-align: right; padding-right: 3%;\">"+cantidad+"</td>\n" +
+"                            </tr>";
+            }
+            
+            mensaje += "</tbody>\n" +
+"                    </table>\n" +
+"                </div>\n" +
+"            </div>\n" +
+"        </div>\n" +
+"    </body>\n" +
+"</html>";
+            
+            MimeMessage message = new MimeMessage(sesion);
+            message.setFrom(new InternetAddress(correoRemitente));
+            
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoReceptor));
+            //incluimos el asunto
+            message.setSubject(asunto);
+            //incluimos el cuerpo osea el mensaje
+            message.setText(mensaje, "ISO-8859-1", "html");
+            Transport t = sesion.getTransport("smtp");
+            t.connect(correoRemitente, passwordRemitente);
+            t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
+            t.close();
+            
+            JOptionPane.showMessageDialog(null, "Correo enviado correctamente.!");
+        } catch (AddressException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+            //Logger.getLogger(envio.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+            //Logger.getLogger(envio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @Override

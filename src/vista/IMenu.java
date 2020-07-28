@@ -345,6 +345,11 @@ public class IMenu extends javax.swing.JFrame {
         mnTablaFactura = new javax.swing.JPopupMenu();
         addDescuento = new javax.swing.JMenuItem();
         addMasProducto = new javax.swing.JMenuItem();
+        EnviarRD = new javax.swing.JDialog();
+        jPanel35 = new javax.swing.JPanel();
+        jLabel83 = new javax.swing.JLabel();
+        txtCorreo = new javax.swing.JTextField();
+        btnEnviarCorreo = new javax.swing.JButton();
         pnlContenedor = new javax.swing.JPanel();
         pnlPrincipal = new javax.swing.JPanel();
         pnlVentas = new javax.swing.JPanel();
@@ -444,6 +449,7 @@ public class IMenu extends javax.swing.JFrame {
         lbltotalVendidoDiario = new javax.swing.JLabel();
         lblIngresosBancosDiario = new javax.swing.JLabel();
         lblTotalExistenciaCajaDiario = new javax.swing.JLabel();
+        btnEnviarRD = new javax.swing.JButton();
         jPanel28 = new javax.swing.JPanel();
         jScrollPane13 = new javax.swing.JScrollPane();
         tblReporte = new javax.swing.JTable();
@@ -2275,6 +2281,58 @@ public class IMenu extends javax.swing.JFrame {
         addMasProducto.setText("Agregar mas");
         mnTablaFactura.add(addMasProducto);
 
+        EnviarRD.setTitle("Enviar Reporte por correo electrónico");
+
+        jPanel35.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel83.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel83.setText("Correo:");
+
+        txtCorreo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        btnEnviarCorreo.setBackground(new java.awt.Color(37, 186, 46));
+        btnEnviarCorreo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnEnviarCorreo.setForeground(new java.awt.Color(255, 255, 255));
+        btnEnviarCorreo.setText("Enviar");
+        btnEnviarCorreo.setBorder(null);
+        btnEnviarCorreo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout jPanel35Layout = new javax.swing.GroupLayout(jPanel35);
+        jPanel35.setLayout(jPanel35Layout);
+        jPanel35Layout.setHorizontalGroup(
+            jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel35Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel83)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEnviarCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel35Layout.setVerticalGroup(
+            jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel35Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel35Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel83)
+                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEnviarCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout EnviarRDLayout = new javax.swing.GroupLayout(EnviarRD.getContentPane());
+        EnviarRD.getContentPane().setLayout(EnviarRDLayout);
+        EnviarRDLayout.setHorizontalGroup(
+            EnviarRDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel35, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        EnviarRDLayout.setVerticalGroup(
+            EnviarRDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1310, 610));
         setMinimumSize(new java.awt.Dimension(1310, 610));
@@ -3131,6 +3189,16 @@ public class IMenu extends javax.swing.JFrame {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
+        btnEnviarRD.setBackground(new java.awt.Color(102, 102, 255));
+        btnEnviarRD.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnEnviarRD.setForeground(new java.awt.Color(255, 255, 255));
+        btnEnviarRD.setText("Enviar por correo");
+        btnEnviarRD.setBorder(null);
+        btnEnviarRD.setBorderPainted(false);
+        btnEnviarRD.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEnviarRD.setFocusPainted(false);
+        btnEnviarRD.setFocusable(false);
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -3145,16 +3213,17 @@ public class IMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
                         .addComponent(jLabel39)
                         .addGap(7, 7, 7)
                         .addComponent(jcFechaReporteDario, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addComponent(btnReporteDiario)
                         .addGap(15, 15, 15)
-                        .addComponent(btnImprimirReporteDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnImprimirReporteDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEnviarRD, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(228, 228, 228))
+                .addGap(279, 279, 279))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3163,15 +3232,17 @@ public class IMenu extends javax.swing.JFrame {
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel39))
                     .addComponent(jcFechaReporteDario, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnReporteDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnImprimirReporteDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                    .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnImprimirReporteDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEnviarRD, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -3741,7 +3812,6 @@ public class IMenu extends javax.swing.JFrame {
         jPanel1.add(btnActualizarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 100, 40));
 
         txtBuscarCliente.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        txtBuscarCliente.setBorder(null);
 
         jSeparator1.setForeground(new java.awt.Color(64, 64, 64));
         jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -4258,7 +4328,6 @@ public class IMenu extends javax.swing.JFrame {
 
         txtBuscarProducto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtBuscarProducto.setForeground(new java.awt.Color(60, 60, 60));
-        txtBuscarProducto.setBorder(null);
 
         jSeparator2.setForeground(new java.awt.Color(64, 64, 64));
 
@@ -5225,6 +5294,7 @@ public class IMenu extends javax.swing.JFrame {
     public javax.swing.JMenuItem EditarProducto;
     public javax.swing.JMenuItem EliminarCredito;
     public javax.swing.JMenuItem EliminarGasto;
+    public javax.swing.JDialog EnviarRD;
     public javax.swing.JDialog FacturasPorCreditos;
     public javax.swing.JMenuItem GenerarPago;
     private javax.swing.JPopupMenu Laboratorios;
@@ -5265,6 +5335,8 @@ public class IMenu extends javax.swing.JFrame {
     public javax.swing.JButton btnEditarFactura;
     public javax.swing.JButton btnEditarImpuesto;
     public javax.swing.JButton btnEliminarFilaFactura;
+    public javax.swing.JButton btnEnviarCorreo;
+    public javax.swing.JButton btnEnviarRD;
     public javax.swing.JButton btnGenerarReporteStock;
     public javax.swing.JButton btnGuardarApertura;
     public javax.swing.JButton btnGuardarCategoria;
@@ -5463,6 +5535,7 @@ public class IMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel82;
+    private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel86;
     private javax.swing.JLabel jLabel87;
     private javax.swing.JLabel jLabel88;
@@ -5506,6 +5579,7 @@ public class IMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel34;
+    private javax.swing.JPanel jPanel35;
     private javax.swing.JPanel jPanel4;
     public javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -5705,6 +5779,7 @@ public class IMenu extends javax.swing.JFrame {
     public javax.swing.JTextField txtCodBarraProducto;
     public javax.swing.JTextField txtCompraProducto;
     public javax.swing.JTextField txtCompradorFactura;
+    public javax.swing.JTextField txtCorreo;
     public javax.swing.JTextField txtCreditoFactura;
     public javax.swing.JTextField txtCreditoPago;
     public javax.swing.JTextField txtCreditosCierre;
